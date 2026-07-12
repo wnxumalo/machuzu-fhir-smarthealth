@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CarePlanActivityCreateDlg" widgetVar="CarePlanActivityCreateDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.CreateCarePlanActivityTitle}" styleClass="ui-fluid">
+            <h:form id="CarePlanActivityCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{carePlanActivityController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCarePlanActivityLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{carePlanActivityController.selected.id}" title="#{bundle.CreateCarePlanActivityTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateCarePlanActivityLabel_careplan}" for="careplan" />
+                        <p:inputText id="careplan" value="#{carePlanActivityController.selected.careplan}" title="#{bundle.CreateCarePlanActivityTitle_careplan}" />
+                        <p:outputLabel value="#{bundle.CreateCarePlanActivityLabel_outcomeCodeableConcept}" for="outcomeCodeableConcept" />
+                        <p:inputText id="outcomeCodeableConcept" value="#{carePlanActivityController.selected.outcomeCodeableConcept}" title="#{bundle.CreateCarePlanActivityTitle_outcomeCodeableConcept}" />
+                        <p:outputLabel value="#{bundle.CreateCarePlanActivityLabel_progress}" for="progress" />
+                        <p:inputText id="progress" value="#{carePlanActivityController.selected.progress}" title="#{bundle.CreateCarePlanActivityTitle_progress}" />
+                        <p:outputLabel value="#{bundle.CreateCarePlanActivityLabel_detailKind}" for="detailKind" />
+                        <p:inputText id="detailKind" value="#{carePlanActivityController.selected.detailKind}" title="#{bundle.CreateCarePlanActivityTitle_detailKind}" />
+                        <p:outputLabel value="#{bundle.CreateCarePlanActivityLabel_detailCode}" for="detailCode" />
+                        <p:inputText id="detailCode" value="#{carePlanActivityController.selected.detailCode}" title="#{bundle.CreateCarePlanActivityTitle_detailCode}" />
+                        <p:outputLabel value="#{bundle.CreateCarePlanActivityLabel_detailReasonCode}" for="detailReasonCode" />
+                        <p:inputText id="detailReasonCode" value="#{carePlanActivityController.selected.detailReasonCode}" title="#{bundle.CreateCarePlanActivityTitle_detailReasonCode}" />
+                        <p:outputLabel value="#{bundle.CreateCarePlanActivityLabel_status}" for="status" />
+                        <p:inputText id="status" value="#{carePlanActivityController.selected.status}" title="#{bundle.CreateCarePlanActivityTitle_status}" />
+                        <p:outputLabel value="#{bundle.CreateCarePlanActivityLabel_statusReason}" for="statusReason" />
+                        <p:inputText id="statusReason" value="#{carePlanActivityController.selected.statusReason}" title="#{bundle.CreateCarePlanActivityTitle_statusReason}" />
+                        <p:outputLabel value="#{bundle.CreateCarePlanActivityLabel_doNotPerform}" for="doNotPerform" />
+                        <p:selectBooleanCheckbox id="doNotPerform" value="#{carePlanActivityController.selected.doNotPerform}" />
+                        <p:outputLabel value="#{bundle.CreateCarePlanActivityLabel_scheduledPeriodFrom}" for="scheduledPeriodFrom" />
+                        <p:calendar id="scheduledPeriodFrom" pattern="MM/dd/yyyy" value="#{carePlanActivityController.selected.scheduledPeriodFrom}" title="#{bundle.EditCarePlanActivityTitle_scheduledPeriodFrom}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateCarePlanActivityLabel_scheduledPeriodTo}" for="scheduledPeriodTo" />
+                        <p:calendar id="scheduledPeriodTo" pattern="MM/dd/yyyy" value="#{carePlanActivityController.selected.scheduledPeriodTo}" title="#{bundle.EditCarePlanActivityTitle_scheduledPeriodTo}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateCarePlanActivityLabel_productCodeCodeableConcept}" for="productCodeCodeableConcept" />
+                        <p:inputText id="productCodeCodeableConcept" value="#{carePlanActivityController.selected.productCodeCodeableConcept}" title="#{bundle.CreateCarePlanActivityTitle_productCodeCodeableConcept}" />
+                        <p:outputLabel value="#{bundle.CreateCarePlanActivityLabel_productReference}" for="productReference" />
+                        <p:inputText id="productReference" value="#{carePlanActivityController.selected.productReference}" title="#{bundle.CreateCarePlanActivityTitle_productReference}" />
+                        <p:outputLabel value="#{bundle.CreateCarePlanActivityLabel_dailyAmount}" for="dailyAmount" />
+                        <p:inputText id="dailyAmount" value="#{carePlanActivityController.selected.dailyAmount}" title="#{bundle.CreateCarePlanActivityTitle_dailyAmount}" />
+                        <p:outputLabel value="#{bundle.CreateCarePlanActivityLabel_quantity}" for="quantity" />
+                        <p:inputText id="quantity" value="#{carePlanActivityController.selected.quantity}" title="#{bundle.CreateCarePlanActivityTitle_quantity}" />
+                        <p:outputLabel value="#{bundle.CreateCarePlanActivityLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{carePlanActivityController.selected.description}" title="#{bundle.CreateCarePlanActivityTitle_description}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{carePlanActivityController.create}" value="#{bundle.Save}" update="display,:CarePlanActivityListForm:datalist,:growl" oncomplete="handleSubmit(args,'CarePlanActivityCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CarePlanActivityCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

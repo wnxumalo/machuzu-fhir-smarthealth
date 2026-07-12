@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DoseAndRateViewDlg" widgetVar="DoseAndRateViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.ViewDoseAndRateTitle}" styleClass="ui-fluid">
+            <h:form id="DoseAndRateViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{doseAndRateController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDoseAndRateLabel_id}"/>
+                        <h:outputText value="#{doseAndRateController.selected.id}" title="#{bundle.ViewDoseAndRateTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewDoseAndRateLabel_dosage}"/>
+                        <h:outputText value="#{doseAndRateController.selected.dosage}" title="#{bundle.ViewDoseAndRateTitle_dosage}"/>
+                        <h:outputText value="#{bundle.ViewDoseAndRateLabel_DType}"/>
+                        <h:outputText value="#{doseAndRateController.selected.DType}" title="#{bundle.ViewDoseAndRateTitle_DType}"/>
+                        <h:outputText value="#{bundle.ViewDoseAndRateLabel_doseRangeLow}"/>
+                        <h:outputText value="#{doseAndRateController.selected.doseRangeLow}" title="#{bundle.ViewDoseAndRateTitle_doseRangeLow}"/>
+                        <h:outputText value="#{bundle.ViewDoseAndRateLabel_doseRangeHigh}"/>
+                        <h:outputText value="#{doseAndRateController.selected.doseRangeHigh}" title="#{bundle.ViewDoseAndRateTitle_doseRangeHigh}"/>
+                        <h:outputText value="#{bundle.ViewDoseAndRateLabel_doseQuantity}"/>
+                        <h:outputText value="#{doseAndRateController.selected.doseQuantity}" title="#{bundle.ViewDoseAndRateTitle_doseQuantity}"/>
+                        <h:outputText value="#{bundle.ViewDoseAndRateLabel_rateRatioNumerator}"/>
+                        <h:outputText value="#{doseAndRateController.selected.rateRatioNumerator}" title="#{bundle.ViewDoseAndRateTitle_rateRatioNumerator}"/>
+                        <h:outputText value="#{bundle.ViewDoseAndRateLabel_rateRatioDenominator}"/>
+                        <h:outputText value="#{doseAndRateController.selected.rateRatioDenominator}" title="#{bundle.ViewDoseAndRateTitle_rateRatioDenominator}"/>
+                        <h:outputText value="#{bundle.ViewDoseAndRateLabel_rateRangeLow}"/>
+                        <h:outputText value="#{doseAndRateController.selected.rateRangeLow}" title="#{bundle.ViewDoseAndRateTitle_rateRangeLow}"/>
+                        <h:outputText value="#{bundle.ViewDoseAndRateLabel_rateRangeHigh}"/>
+                        <h:outputText value="#{doseAndRateController.selected.rateRangeHigh}" title="#{bundle.ViewDoseAndRateTitle_rateRangeHigh}"/>
+                        <h:outputText value="#{bundle.ViewDoseAndRateLabel_rateRangeQty}"/>
+                        <h:outputText value="#{doseAndRateController.selected.rateRangeQty}" title="#{bundle.ViewDoseAndRateTitle_rateRangeQty}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DoseAndRateViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AccountViewDlg" widgetVar="AccountViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="View Account" styleClass="ui-fluid">
+            <h:form id="AccountViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="1" rendered="#{accountController.selected != null}">
+                        <p:panelGrid columns="2" rendered="#{accountController.selected != null}">
+                            <h:outputText value="Status"/>
+                            <h:outputText value="#{accountController.selected.status}" title="#{bundle.ViewAccountTitle_status}"/>
+                            <h:outputText value="Billing Status"/>
+                            <h:outputText value="#{accountController.selected.billingStatus}" title="#{bundle.ViewAccountTitle_billingStatus}"/>
+                            <h:outputText value="Type"/>
+                            <h:outputText value="#{accountController.selected.type}" title="#{bundle.ViewAccountTitle_type}"/>
+                            <h:outputText value="Name"/>
+                            <h:outputText value="#{accountController.selected.name}" title="#{bundle.ViewAccountTitle_name}"/>
+                            <h:outputText value="Service Valid From"/>
+                            <h:outputText value="#{accountController.selected.servicePeriodFrom}" title="#{bundle.ViewAccountTitle_servicePeriodFrom}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                            <h:outputText value="Service Valid To"/>
+                            <h:outputText value="#{accountController.selected.servicePeriodTo}" title="#{bundle.ViewAccountTitle_servicePeriodTo}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                            <h:outputText value="Description"/>
+                            <h:outputText value="#{accountController.selected.description}" title="#{bundle.ViewAccountTitle_description}"/>
+                            <h:outputText value="Owner"/>
+                            <h:outputText value="#{accountController.selected.owner}" title="#{bundle.ViewAccountTitle_owner}"/>
+                            <h:outputText value="Balance Aggregate"/>
+                            <h:outputText value="#{accountController.selected.balanceAggregate}" title="#{bundle.ViewAccountTitle_balanceAggregate}"/>
+                            <h:outputText value="Balance Term"/>
+                            <h:outputText value="#{accountController.selected.balanceTerm}" title="#{bundle.ViewAccountTitle_balanceTerm}"/>
+                            <h:outputText value="Balance Estimate"/>
+                            <h:outputText value="#{accountController.selected.balanceEstimate}" title="#{bundle.ViewAccountTitle_balanceEstimate}"/>
+                            <h:outputText value="Balance Amount"/>
+                            <h:outputText value="#{accountController.selected.balanceAmount}" title="#{bundle.ViewAccountTitle_balanceAmount}"/>
+                            <h:outputText value="Balance Calculated At"/>
+                            <h:outputText value="#{accountController.selected.balanceCalculatedAt}" title="#{bundle.ViewAccountTitle_balanceCalculatedAt}"/>
+                        </p:panelGrid>
+
+                        <p:panel header="Charge Items">
+                            <p:dataTable id="datalist" value="#{accountController.selected.chargeItem}" var="item"
+                                         selectionMode="single" selection="#{chargeItemController.selected}"
+                                         paginator="true"
+                                         rowKey="#{item.id}"
+                                         rows="10"
+                                         rowsPerPageTemplate="10,20,30,40,50"
+                                         >
+
+                                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                                <p:column filterBy="#{item.entereddate}" filterMatchMode="contains">
+                                    <f:facet name="header">
+                                        <h:outputText value="Entered Date"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.entereddate}"/>
+                                </p:column>
+                                <p:column filterBy="#{item.periodFrom}" filterMatchMode="contains">
+                                    <f:facet name="header">
+                                        <h:outputText value="From"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.periodFrom}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="To"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.periodTo}"/>
+                                </p:column>                                
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Status"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.CIStatus}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Code"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.CICode}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Body Site"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.bodySite}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Quantity"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.quantity}"/>
+                                </p:column>                                
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Unit Price"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.unitPriceComponent}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Total Price"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.totalPriceComponent}"/>
+                                </p:column>                               
+                                <f:facet name="footer">
+                                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{chargeItemController.prepareCreate}" oncomplete="PF('ChargeItemCreateDialog').show()"/>
+                                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" oncomplete="PF('ChargeItemViewDialog').show()" disabled="#{empty chargeItemController.selected}"/>
+                                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" oncomplete="PF('ChargeItemEditDialog').show()" disabled="#{empty chargeItemController.selected}"/>
+                                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{chargeItemController.destroy}" update=":growl,datalist" disabled="#{empty chargeItemController.selected}"/>
+                                </f:facet>
+                            </p:dataTable>
+                        </p:panel>
+                    </p:panelGrid>  
+                    <p:commandButton value="#{bundle.Close}" onclick="AccountViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

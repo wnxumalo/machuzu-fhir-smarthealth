@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CarePlanCreateDlg" widgetVar="CarePlanCreateDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.CreateCarePlanTitle}" styleClass="ui-fluid">
+            <h:form id="CarePlanCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{carePlanController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCarePlanLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{carePlanController.selected.id}" title="#{bundle.CreateCarePlanTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateCarePlanLabel_encounter}" for="encounter" />
+                        <p:inputText id="encounter" value="#{carePlanController.selected.encounter}" title="#{bundle.CreateCarePlanTitle_encounter}" />
+                        <p:outputLabel value="#{bundle.CreateCarePlanLabel_intent}" for="intent" />
+                        <p:inputText id="intent" value="#{carePlanController.selected.intent}" title="#{bundle.CreateCarePlanTitle_intent}" />
+                        <p:outputLabel value="#{bundle.CreateCarePlanLabel_category}" for="category" />
+                        <p:inputText id="category" value="#{carePlanController.selected.category}" title="#{bundle.CreateCarePlanTitle_category}" />
+                        <p:outputLabel value="#{bundle.CreateCarePlanLabel_title}" for="title" />
+                        <p:inputText id="title" value="#{carePlanController.selected.title}" title="#{bundle.CreateCarePlanTitle_title}" />
+                        <p:outputLabel value="#{bundle.CreateCarePlanLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{carePlanController.selected.description}" title="#{bundle.CreateCarePlanTitle_description}" />
+                        <p:outputLabel value="#{bundle.CreateCarePlanLabel_status}" for="status" />
+                        <p:inputText id="status" value="#{carePlanController.selected.status}" title="#{bundle.CreateCarePlanTitle_status}" />
+                        <p:outputLabel value="#{bundle.CreateCarePlanLabel_periodFrom}" for="periodFrom" />
+                        <p:calendar id="periodFrom" pattern="MM/dd/yyyy" value="#{carePlanController.selected.periodFrom}" title="#{bundle.EditCarePlanTitle_periodFrom}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateCarePlanLabel_periodTo}" for="periodTo" />
+                        <p:calendar id="periodTo" pattern="MM/dd/yyyy" value="#{carePlanController.selected.periodTo}" title="#{bundle.EditCarePlanTitle_periodTo}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateCarePlanLabel_created}" for="created" />
+                        <p:calendar id="created" pattern="MM/dd/yyyy" value="#{carePlanController.selected.created}" title="#{bundle.EditCarePlanTitle_created}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateCarePlanLabel_note}" for="note" />
+                        <p:inputText id="note" value="#{carePlanController.selected.note}" title="#{bundle.CreateCarePlanTitle_note}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{carePlanController.create}" value="#{bundle.Save}" update="display,:CarePlanListForm:datalist,:growl" oncomplete="handleSubmit(args,'CarePlanCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CarePlanCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

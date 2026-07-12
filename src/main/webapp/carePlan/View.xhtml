@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CarePlanViewDlg" widgetVar="CarePlanViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.ViewCarePlanTitle}" styleClass="ui-fluid">
+            <h:form id="CarePlanViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{carePlanController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCarePlanLabel_id}"/>
+                        <h:outputText value="#{carePlanController.selected.id}" title="#{bundle.ViewCarePlanTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewCarePlanLabel_encounter}"/>
+                        <h:outputText value="#{carePlanController.selected.encounter}" title="#{bundle.ViewCarePlanTitle_encounter}"/>
+                        <h:outputText value="#{bundle.ViewCarePlanLabel_intent}"/>
+                        <h:outputText value="#{carePlanController.selected.intent}" title="#{bundle.ViewCarePlanTitle_intent}"/>
+                        <h:outputText value="#{bundle.ViewCarePlanLabel_category}"/>
+                        <h:outputText value="#{carePlanController.selected.category}" title="#{bundle.ViewCarePlanTitle_category}"/>
+                        <h:outputText value="#{bundle.ViewCarePlanLabel_title}"/>
+                        <h:outputText value="#{carePlanController.selected.title}" title="#{bundle.ViewCarePlanTitle_title}"/>
+                        <h:outputText value="#{bundle.ViewCarePlanLabel_description}"/>
+                        <h:outputText value="#{carePlanController.selected.description}" title="#{bundle.ViewCarePlanTitle_description}"/>
+                        <h:outputText value="#{bundle.ViewCarePlanLabel_status}"/>
+                        <h:outputText value="#{carePlanController.selected.status}" title="#{bundle.ViewCarePlanTitle_status}"/>
+                        <h:outputText value="#{bundle.ViewCarePlanLabel_periodFrom}"/>
+                        <h:outputText value="#{carePlanController.selected.periodFrom}" title="#{bundle.ViewCarePlanTitle_periodFrom}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewCarePlanLabel_periodTo}"/>
+                        <h:outputText value="#{carePlanController.selected.periodTo}" title="#{bundle.ViewCarePlanTitle_periodTo}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewCarePlanLabel_created}"/>
+                        <h:outputText value="#{carePlanController.selected.created}" title="#{bundle.ViewCarePlanTitle_created}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewCarePlanLabel_note}"/>
+                        <h:outputText value="#{carePlanController.selected.note}" title="#{bundle.ViewCarePlanTitle_note}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CarePlanViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

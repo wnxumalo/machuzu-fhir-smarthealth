@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="StatusHistoryViewDlg" widgetVar="StatusHistoryViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewStatusHistoryTitle}">
+            <h:form id="StatusHistoryViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{statusHistoryController.selected != null}">
+                        <h:outputText value="#{bundle.ViewStatusHistoryLabel_id}"/>
+                        <h:outputText value="#{statusHistoryController.selected.id}" title="#{bundle.ViewStatusHistoryTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewStatusHistoryLabel_status}"/>
+                        <h:outputText value="#{statusHistoryController.selected.status}" title="#{bundle.ViewStatusHistoryTitle_status}"/>
+                        <h:outputText value="#{bundle.ViewStatusHistoryLabel_encounter}"/>
+                        <h:outputText value="#{statusHistoryController.selected.encounter}" title="#{bundle.ViewStatusHistoryTitle_encounter}"/>
+                        <h:outputText value="#{bundle.ViewStatusHistoryLabel_periodFrom}"/>
+                        <h:outputText value="#{statusHistoryController.selected.periodFrom}" title="#{bundle.ViewStatusHistoryTitle_periodFrom}"/>
+                        <h:outputText value="#{bundle.ViewStatusHistoryLabel_periodTo}"/>
+                        <h:outputText value="#{statusHistoryController.selected.periodTo}" title="#{bundle.ViewStatusHistoryTitle_periodTo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="StatusHistoryViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

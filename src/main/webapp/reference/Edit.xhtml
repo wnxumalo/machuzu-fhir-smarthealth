@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReferenceEditDlg" widgetVar="ReferenceEditDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.EditReferenceTitle}" styleClass="ui-fluid">
+            <h:form id="ReferenceEditForm">
+                <h:panelGroup id="editDisplay">
+                    <p:panelGrid columns="2" rendered="#{referenceController.selected != null}">
+                        <p:outputLabel value="Type" for="type" />
+                        <p:selectOneMenu id="type" value="#{referenceController.selected.type}" required="true" title="Type">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Patient" itemValue="Patient" />
+                            <f:selectItem itemLabel="Practitioner" itemValue="Practitioner" />
+                            <f:selectItem itemLabel="Organisation" itemValue="Organisation" />                            
+                            <f:selectItem itemLabel="Location" itemValue="Location" />                            
+                            <f:selectItem itemLabel="Device" itemValue="Device" />                            
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Reference (eg. website, other publication)" for="reference" />
+                        <p:inputText id="reference" value="#{referenceController.selected.objectReference}" title="#{bundle.CreateReferenceTitle_reference}" required="true"/>                        
+                        <p:outputLabel value="Other Description" for="identifier" />
+                        <p:inputText id="identifier" value="#{referenceController.selected.description}" title="#{bundle.CreateReferenceTitle_identifier}" />
+                        <p:outputLabel value="Alternative Description" for="display" />
+                        <p:inputText id="display" value="#{referenceController.selected.display}" title="#{bundle.CreateReferenceTitle_display}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{referenceController.update}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args, 'ReferenceEditDialog');"/>
+                    <!--p:commandButton value="#{bundle.Cancel}" onclick="ReferenceEditDialog.hide()"/-->
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

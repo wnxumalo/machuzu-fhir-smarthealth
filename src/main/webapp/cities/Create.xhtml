@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateCitiesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateCitiesLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{citiesController.selected.id}" title="#{bundle.CreateCitiesTitle_id}" />
+                    <h:outputLabel value="#{bundle.CreateCitiesLabel_city}" for="city" />
+                    <h:inputText id="city" value="#{citiesController.selected.city}" title="#{bundle.CreateCitiesTitle_city}" />
+                    <h:outputLabel value="#{bundle.CreateCitiesLabel_cityAscii}" for="cityAscii" />
+                    <h:inputText id="cityAscii" value="#{citiesController.selected.cityAscii}" title="#{bundle.CreateCitiesTitle_cityAscii}" />
+                    <h:outputLabel value="#{bundle.CreateCitiesLabel_lat}" for="lat" />
+                    <h:inputText id="lat" value="#{citiesController.selected.lat}" title="#{bundle.CreateCitiesTitle_lat}" />
+                    <h:outputLabel value="#{bundle.CreateCitiesLabel_lng}" for="lng" />
+                    <h:inputText id="lng" value="#{citiesController.selected.lng}" title="#{bundle.CreateCitiesTitle_lng}" />
+                    <h:outputLabel value="#{bundle.CreateCitiesLabel_country}" for="country" />
+                    <h:inputText id="country" value="#{citiesController.selected.country}" title="#{bundle.CreateCitiesTitle_country}" />
+                    <h:outputLabel value="#{bundle.CreateCitiesLabel_iso2}" for="iso2" />
+                    <h:inputText id="iso2" value="#{citiesController.selected.iso2}" title="#{bundle.CreateCitiesTitle_iso2}" />
+                    <h:outputLabel value="#{bundle.CreateCitiesLabel_iso3}" for="iso3" />
+                    <h:inputText id="iso3" value="#{citiesController.selected.iso3}" title="#{bundle.CreateCitiesTitle_iso3}" />
+                    <h:outputLabel value="#{bundle.CreateCitiesLabel_adminName}" for="adminName" />
+                    <h:inputText id="adminName" value="#{citiesController.selected.adminName}" title="#{bundle.CreateCitiesTitle_adminName}" />
+                    <h:outputLabel value="#{bundle.CreateCitiesLabel_capital}" for="capital" />
+                    <h:inputText id="capital" value="#{citiesController.selected.capital}" title="#{bundle.CreateCitiesTitle_capital}" />
+                    <h:outputLabel value="#{bundle.CreateCitiesLabel_population}" for="population" />
+                    <h:inputText id="population" value="#{citiesController.selected.population}" title="#{bundle.CreateCitiesTitle_population}" />
+                    <h:outputLabel value="#{bundle.CreateCitiesLabel_cityId}" for="cityId" />
+                    <h:inputText id="cityId" value="#{citiesController.selected.cityId}" title="#{bundle.CreateCitiesTitle_cityId}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{citiesController.create}" value="#{bundle.CreateCitiesSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{citiesController.prepareList}" value="#{bundle.CreateCitiesShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateCitiesIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

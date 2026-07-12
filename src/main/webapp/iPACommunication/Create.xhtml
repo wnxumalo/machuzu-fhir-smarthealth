@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IPACommunicationCreateDlg" widgetVar="IPACommunicationCreateDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.CreateIPACommunicationTitle}">
+            <h:form id="IPACommunicationCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{iPACommunicationController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateIPACommunicationLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{iPACommunicationController.selected.id}" title="#{bundle.CreateIPACommunicationTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateIPACommunicationLabel_patientId}" for="patientId" />
+                        <p:inputText id="patientId" value="#{iPACommunicationController.selected.patientId}" title="#{bundle.CreateIPACommunicationTitle_patientId}" />
+                        <p:outputLabel value="#{bundle.CreateIPACommunicationLabel_preferred}" for="preferred" />
+                        <p:inputText id="preferred" value="#{iPACommunicationController.selected.preferred}" title="#{bundle.CreateIPACommunicationTitle_preferred}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{iPACommunicationController.create}" value="#{bundle.Save}" update="display,:IPACommunicationListForm:apUserHome:datalist,:growl" oncomplete="handleSubmit(args,'IPACommunicationCreateDialog');"/>
+                    <!--p:commandButton value="#{bundle.Cancel}" onclick="IPACommunicationCreateDialog.hide()"/-->
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

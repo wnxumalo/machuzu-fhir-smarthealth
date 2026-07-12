@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition class="ui-fluid">
+
+        <p:dialog id="LabCreateDlg" widgetVar="LabCreateDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Create Lab" styleClass="ui-fluid">
+            <h:form id="LabCreateForm">
+                <h:panelGroup id="display">
+                    <p:outputLabel value="Date" for="labdate" />
+                    <p:calendar id="labdate" value="#{labController.selected.labDate}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Onset Date" />
+                    <p:panelGrid columns="4" rendered="#{labController.selected != null}">
+                        <p:panel header="Hematology">
+                            <h:panelGrid columns="4">
+                                <p:outputLabel value="Blood Group and Rh" for="hmBloodGroupRh" />
+                                <p:selectBooleanCheckbox id="hmBloodGroupRh" value="#{labController.selected.hmBloodGroupRh}" />
+                                <p:outputLabel value="FBC" for="hmFBC" />
+                                <p:selectBooleanCheckbox id="hmFBC" value="#{labController.selected.hmFBC}" />
+                                <p:outputLabel value="Malaria" for="hmMalaria" />
+                                <p:selectBooleanCheckbox id="hmMalaria" value="#{labController.selected.hmMalaria}" />
+                                <p:outputLabel value="Coombs Test" for="hmCoombsTest" />
+                                <p:selectBooleanCheckbox id="hmCoombsTest" value="#{labController.selected.hmCoombsTest}" />
+                                <p:outputLabel value="ESR" for="hmESR" />
+                                <p:selectBooleanCheckbox id="hmESR" value="#{labController.selected.hmESR}" />
+                                <p:outputLabel value="D Dimer" for="hmDDimer" />
+                                <p:selectBooleanCheckbox id="hmDDimer" value="#{labController.selected.hmDDimer}" />
+                                <p:outputLabel value="PT/INR" for="hmPTINR" />
+                                <p:selectBooleanCheckbox id="hmPTINR" value="#{labController.selected.hmPTINR}" />
+                                <p:outputLabel value="Hemoglobin" for="hmHemoglobin" />
+                                <p:selectBooleanCheckbox id="hmHemoglobin" value="#{labController.selected.hmHemoglobin}" />
+                                <p:outputLabel value="CD4" for="hmCD4" />
+                                <p:selectBooleanCheckbox id="hmCD4" value="#{labController.selected.hmCD4}" />
+                                <p:outputLabel value="CD4/CD8/CD3" for="hmCD4CD8CD3" />
+                                <p:selectBooleanCheckbox id="hmCD4CD8CD3" value="#{labController.selected.hmCD4CD8CD3}" />
+                            </h:panelGrid>
+                        </p:panel>
+                        <p:panel header="Chemistry Profiles">
+                            <h:panelGrid columns="4">
+                                <p:outputLabel value="Liquid Profile" for="cpLiquidProfile" />
+                                <p:selectBooleanCheckbox id="cpLiquidProfile" value="#{labController.selected.cpLiquidProfile}" />
+                                <p:outputLabel value="LFT" for="cpLFT" />
+                                <p:selectBooleanCheckbox id="cpLFT" value="#{labController.selected.cpLFT}" />
+                                <p:outputLabel value="KFT" for="cpKFT" />
+                                <p:selectBooleanCheckbox id="cpKFT" value="#{labController.selected.cpKFT}" />
+                                <p:outputLabel value="Cardiac Profile" for="cpCardiacProfile" />
+                                <p:selectBooleanCheckbox id="cpCardiacProfile" value="#{labController.selected.cpCardiacProfile}" />
+                                <p:outputLabel value="ART Profile" for="cpARTPRofile" />
+                                <p:selectBooleanCheckbox id="cpARTPRofile" value="#{labController.selected.cpARTPRofile}" />
+                                <p:outputLabel value="UECA Profile" for="cpUECAProfile" />
+                                <p:selectBooleanCheckbox id="cpUECAProfile" value="#{labController.selected.cpUECAProfile}" />
+                                <p:outputLabel value="CSF Analysis" for="cpCSFAnalysis" />
+                                <p:selectBooleanCheckbox id="cpCSFAnalysis" value="#{labController.selected.cpCSFAnalysis}" />
+                            </h:panelGrid>
+                        </p:panel>
+                        <p:panel header="Endicronology">
+                            <h:panelGrid columns="4">
+                                <p:outputLabel value="BHCG" for="eyBHCG" />
+                                <p:selectBooleanCheckbox id="eyBHCG" value="#{labController.selected.eyBHCG}" />
+                                <p:outputLabel value="T4" for="eyT4" />
+                                <p:selectBooleanCheckbox id="eyT4" value="#{labController.selected.eyT4}" />
+                                <p:outputLabel value="TSH" for="eyTSH" />
+                                <p:selectBooleanCheckbox id="eyTSH" value="#{labController.selected.eyTSH}" />
+                                <p:outputLabel value="Cortisol" for="eyCortisol" />
+                                <p:selectBooleanCheckbox id="eyCortisol" value="#{labController.selected.eyCortisol}" />
+                                <p:outputLabel value="HBsAg" for="eyHBsAg" />
+                                <p:selectBooleanCheckbox id="eyHBsAg" value="#{labController.selected.eyHBsAg}" />
+                                <p:outputLabel value="Urine" for="eyUrine" />
+                                <p:selectBooleanCheckbox id="eyUrine" value="#{labController.selected.eyUrine}" />
+                                <p:outputLabel value="Blood" for="eyBlood" />
+                                <p:selectBooleanCheckbox id="eyBlood" value="#{labController.selected.eyBlood}" />
+                            </h:panelGrid>
+                        </p:panel>
+                        <p:panel header="Serology">
+                            <h:panelGrid columns="2">                        
+                                <p:outputLabel value="Syphilis RPR" for="syphilisRPR" />
+                                <p:selectBooleanCheckbox id="syphilisRPR" value="#{labController.selected.syphilisRPR}" />
+                                <p:outputLabel value="Crag LFA" for="cragLFA" />
+                                <p:selectBooleanCheckbox id="cragLFA" value="#{labController.selected.cragLFA}" />
+                                <p:outputLabel value="HIV 12" for="HIV12" />
+                                <p:selectBooleanCheckbox id="HIV12" value="#{labController.selected.HIV12}" />
+                                <p:outputLabel value="RDT" for="RDT" />
+                                <p:selectBooleanCheckbox id="RDT" value="#{labController.selected.RDT}" />
+                                <p:outputLabel value="PCR" for="PCR" />
+                                <p:selectBooleanCheckbox id="PCR" value="#{labController.selected.PCR}" />
+                                <p:outputLabel value="Viral Load" for="viralLoad" />
+                                <p:selectBooleanCheckbox id="viralLoad" value="#{labController.selected.viralLoad}" />
+                            </h:panelGrid>
+                        </p:panel>
+                        <p:panel header="Specific Chemistries">
+                            <h:panelGrid columns="8">                        
+                                <p:outputLabel value="Ceruloplasmin" for="ceruloplasmin" />
+                                <p:selectBooleanCheckbox id="ceruloplasmin" value="#{labController.selected.ceruloplasmin}" />
+                                <p:outputLabel value="ALT" for="ALT" />
+                                <p:selectBooleanCheckbox id="ALT" value="#{labController.selected.ALT}" />
+                                <p:outputLabel value="AST" for="AST" />
+                                <p:selectBooleanCheckbox id="AST" value="#{labController.selected.AST}" />
+                                <p:outputLabel value="Albumin" for="albumin" />
+                                <p:selectBooleanCheckbox id="albumin" value="#{labController.selected.albumin}" />
+                                <p:outputLabel value="ALP" for="ALP" />
+                                <p:selectBooleanCheckbox id="ALP" value="#{labController.selected.ALP}" />
+                                <p:outputLabel value="Ammonia" for="ammonia" />
+                                <p:selectBooleanCheckbox id="ammonia" value="#{labController.selected.ammonia}" />
+                                <p:outputLabel value="Amylase" for="amylase" />
+                                <p:selectBooleanCheckbox id="amylase" value="#{labController.selected.amylase}" />
+                                <p:outputLabel value="Bilirubin" for="bilirubin" />
+                                <p:selectBooleanCheckbox id="bilirubin" value="#{labController.selected.bilirubin}" />
+                                <p:outputLabel value="Direct" for="direct" />
+                                <p:selectBooleanCheckbox id="direct" value="#{labController.selected.direct}" />
+                                <p:outputLabel value="Total" for="total" />
+                                <p:selectBooleanCheckbox id="total" value="#{labController.selected.total}" />
+                                <p:outputLabel value="Calcium" for="calcium" />
+                                <p:selectBooleanCheckbox id="calcium" value="#{labController.selected.calcium}" />
+                                <p:outputLabel value="CO2" for="CO2" />
+                                <p:selectBooleanCheckbox id="CO2" value="#{labController.selected.CO2}" />
+                                <p:outputLabel value="Phosphorus" for="phosphorus" />
+                                <p:selectBooleanCheckbox id="phosphorus" value="#{labController.selected.phosphorus}" />
+                                <p:outputLabel value="Cholesterol" for="cholesterol" />
+                                <p:selectBooleanCheckbox id="cholesterol" value="#{labController.selected.cholesterol}" />
+                                <p:outputLabel value="Cholinesterase" for="cholinesterase" />
+                                <p:selectBooleanCheckbox id="cholinesterase" value="#{labController.selected.cholinesterase}" />
+                                <p:outputLabel value="Haptoglobin" for="haptoglobin" />
+                                <p:selectBooleanCheckbox id="haptoglobin" value="#{labController.selected.haptoglobin}" />
+                                <p:outputLabel value="Creatinine" for="creatinine" />
+                                <p:selectBooleanCheckbox id="creatinine" value="#{labController.selected.creatinine}" />
+                                <p:outputLabel value="Creatinine Kinase" for="creatinineKinase" />
+                                <p:selectBooleanCheckbox id="creatinineKinase" value="#{labController.selected.creatinineKinase}" />
+                                <p:outputLabel value="GGT" for="GGT" />
+                                <p:selectBooleanCheckbox id="GGT" value="#{labController.selected.GGT}" />
+                                <p:outputLabel value="Glucose" for="glucose" />
+                                <p:selectBooleanCheckbox id="glucose" value="#{labController.selected.glucose}" />
+                                <p:outputLabel value="HDL Cholesterol" for="HDLCholesterol" />
+                                <p:selectBooleanCheckbox id="HDLCholesterol" value="#{labController.selected.HDLCholesterol}" />
+                                <p:outputLabel value="LDL Cholesterol" for="LDLCholesterol" />
+                                <p:selectBooleanCheckbox id="LDLCholesterol" value="#{labController.selected.LDLCholesterol}" />
+                                <p:outputLabel value="Lipase" for="lipase" />
+                                <p:selectBooleanCheckbox id="lipase" value="#{labController.selected.lipase}" />
+                                <p:outputLabel value="Total Iron Binding Capacity" for="totalIronBindingCapacity" />
+                                <p:selectBooleanCheckbox id="totalIronBindingCapacity" value="#{labController.selected.totalIronBindingCapacity}" />
+                                <p:outputLabel value="Iron" for="iron" />
+                                <p:selectBooleanCheckbox id="iron" value="#{labController.selected.iron}" />
+                                <p:outputLabel value="LDH" for="LDH" />
+                                <p:selectBooleanCheckbox id="LDH" value="#{labController.selected.LDH}" />
+                                <p:outputLabel value="Chloride" for="chloride" />
+                                <p:selectBooleanCheckbox id="chloride" value="#{labController.selected.chloride}" />
+                                <p:outputLabel value="Potassium" for="potassium" />
+                                <p:selectBooleanCheckbox id="potassium" value="#{labController.selected.potassium}" />
+                                <p:outputLabel value="Sodium" for="sodium" />
+                                <p:selectBooleanCheckbox id="sodium" value="#{labController.selected.sodium}" />
+                                <p:outputLabel value="Magnesium" for="magnesium" />
+                                <p:selectBooleanCheckbox id="magnesium" value="#{labController.selected.magnesium}" />
+                                <p:outputLabel value="Urine Biochemistry" for="urineBiochemistry" />
+                                <p:selectBooleanCheckbox id="urineBiochemistry" value="#{labController.selected.urineBiochemistry}" />
+                                <p:outputLabel value="Drug Abuse Toxicology" for="drugAbuseToxicology" />
+                                <p:selectBooleanCheckbox id="drugAbuseToxicology" value="#{labController.selected.drugAbuseToxicology}" />
+                                <p:outputLabel value="Total Protein" for="totalProtein" />
+                                <p:selectBooleanCheckbox id="totalProtein" value="#{labController.selected.totalProtein}" />
+                                <p:outputLabel value="PSA" for="PSA" />
+                                <p:selectBooleanCheckbox id="PSA" value="#{labController.selected.PSA}" />
+                                <p:outputLabel value="Uric Acid" for="uricAcid" />
+                                <p:selectBooleanCheckbox id="uricAcid" value="#{labController.selected.uricAcid}" />
+                                <p:outputLabel value="TotslIgE" for="totslIgE" />
+                                <p:selectBooleanCheckbox id="totslIgE" value="#{labController.selected.totslIgE}" />
+                                <p:outputLabel value="Aldolase" for="aldolase" />
+                                <p:selectBooleanCheckbox id="aldolase" value="#{labController.selected.aldolase}" />
+                                <p:outputLabel value="Triglycerides" for="triglycerides" />
+                                <p:selectBooleanCheckbox id="triglycerides" value="#{labController.selected.triglycerides}" />
+                                <p:outputLabel value="HbA1c" for="hbA1c" />
+                                <p:selectBooleanCheckbox id="hbA1c" value="#{labController.selected.hbA1c}" />
+                                <p:outputLabel value="CKMB" for="CKMB" />
+                                <p:selectBooleanCheckbox id="CKMB" value="#{labController.selected.CKMB}" />
+                                <p:outputLabel value="Lactate" for="lactate" />
+                                <p:selectBooleanCheckbox id="lactate" value="#{labController.selected.lactate}" />
+                                <p:outputLabel value="Myoglobin" for="myoglobin" />
+                                <p:selectBooleanCheckbox id="myoglobin" value="#{labController.selected.myoglobin}" />
+                                <p:outputLabel value="TroponinI" for="troponinI" />
+                                <p:selectBooleanCheckbox id="troponinI" value="#{labController.selected.troponinI}" />
+                                <p:outputLabel value="ProBNP" for="ntProBNP" />
+                                <p:selectBooleanCheckbox id="ntProBNP" value="#{labController.selected.ntProBNP}" />
+                                <p:outputLabel value="Ferritin" for="ferritin" />
+                                <p:selectBooleanCheckbox id="ferritin" value="#{labController.selected.ferritin}" />
+                            </h:panelGrid>
+                        </p:panel>
+                        <p:panel header="Tumor Markers">
+                            <h:panelGrid columns="2">
+                                <p:outputLabel value="CA125" for="CA125" />
+                                <p:selectBooleanCheckbox id="CA125" value="#{labController.selected.CA125}" />
+                                <p:outputLabel value="CA153" for="CA153" />                        
+                                <p:selectBooleanCheckbox id="CA153" value="#{labController.selected.CA153}" />
+                                <p:outputLabel value="CA199" for="CA199" />
+                                <p:selectBooleanCheckbox id="CA199" value="#{labController.selected.CA199}" />
+                            </h:panelGrid>
+                        </p:panel>
+                        <p:panel header="Microbiology">
+                            <h:panelGrid columns="2">
+                                <p:outputLabel value="Culture Sense" for="cultureSense" />
+                                <p:selectBooleanCheckbox id="cultureSense" value="#{labController.selected.cultureSense}" />
+                                <p:outputLabel value="Blood Culture" for="bloodCulture" />
+                                <p:selectBooleanCheckbox id="bloodCulture" value="#{labController.selected.bloodCulture}" />
+                                <p:outputLabel value="AFB Microscopy" for="AFBMicroscopy" />
+                                <p:selectBooleanCheckbox id="AFBMicroscopy" value="#{labController.selected.AFBMicroscopy}" />
+                                <p:outputLabel value="Urine Microscopy" for="urineMicroscopy" />
+                                <p:selectBooleanCheckbox id="urineMicroscopy" value="#{labController.selected.urineMicroscopy}" />
+                            </h:panelGrid>
+                        </p:panel>
+                        <p:panel header="Molecular (Genomics)">
+                            <h:panelGrid columns="2">                                
+                                <p:outputLabel value="DNA Paternity Test" for="DNAPaternityTest" />
+                                <p:selectBooleanCheckbox id="DNAPaternityTest" value="#{labController.selected.DNAPaternityTest}" />
+                                <p:outputLabel value="DNA Kinship Test}" for="DNAKinshipTest" />
+                                <p:selectBooleanCheckbox id="DNAKinshipTest" value="#{labController.selected.DNAKinshipTest}" />
+                                <p:outputLabel value="DNA Siblingship Test" for="DNASiblingshipTest" />
+                                <p:selectBooleanCheckbox id="DNASiblingshipTest" value="#{labController.selected.DNASiblingshipTest}" />
+                                <p:outputLabel value="HIV Drug Resistance Test" for="HIVDrugResistanceTest" />
+                                <p:selectBooleanCheckbox id="HIVDrugResistanceTest" value="#{labController.selected.HIVDrugResistanceTest}" />
+                            </h:panelGrid>
+                        </p:panel>
+                        <p:panel header="Ultrasound">
+                            <h:panelGrid columns="2">
+                                <p:outputLabel value="Abdomen" for="abdomen" />
+                                <p:selectBooleanCheckbox id="abdomen" value="#{labController.selected.abdomen}" />
+                                <p:outputLabel value="Pelvis" for="pelvis" />
+                                <p:selectBooleanCheckbox id="pelvis" value="#{labController.selected.pelvis}" />
+                                <p:outputLabel value="Renal" for="renal" />
+                                <p:selectBooleanCheckbox id="renal" value="#{labController.selected.renal}" />
+                                <p:outputLabel value="Testicular" for="testicular" />
+                                <p:selectBooleanCheckbox id="testicular" value="#{labController.selected.testicular}" />
+                                <p:outputLabel value="Thyroid" for="thyroid" />
+                                <p:selectBooleanCheckbox id="thyroid" value="#{labController.selected.thyroid}" />
+                                <p:outputLabel value="Vascular" for="vascular" />
+                                <p:selectBooleanCheckbox id="vascular" value="#{labController.selected.vascular}" />
+                                <p:outputLabel value="Obstetrics" for="obstetrics" />
+                                <p:selectBooleanCheckbox id="obstetrics" value="#{labController.selected.obstetrics}" />
+                                <p:outputLabel value="Lung" for="lung" />
+                                <p:selectBooleanCheckbox id="lung" value="#{labController.selected.lung}" />
+                                <p:outputLabel value="Musculoskeletal" for="musculoskeletal" />
+                                <p:selectBooleanCheckbox id="musculoskeletal" value="#{labController.selected.musculoskeletal}" />
+                                <p:outputLabel value="Breast" for="breast" />
+                                <p:selectBooleanCheckbox id="breast" value="#{labController.selected.breast}" />
+                                <p:outputLabel value="Cerebrovascular" for="cerebrovascular" />
+                                <p:selectBooleanCheckbox id="cerebrovascular" value="#{labController.selected.cerebrovascular}" />
+                                <p:outputLabel value="Orthopedic" for="orthopedic" />
+                                <p:selectBooleanCheckbox id="orthopedic" value="#{labController.selected.orthopedic}" />
+                                <p:outputLabel value="Cardiac" for="cardiac" />
+                                <p:selectBooleanCheckbox id="cardiac" value="#{labController.selected.cardiac}" />
+                                <p:outputLabel value="Gynecology" for="gynecology" />
+                                <p:selectBooleanCheckbox id="gynecology" value="#{labController.selected.gynecology}" />
+                                <p:outputLabel value="Prostrate" for="prostrate" />
+                                <p:selectBooleanCheckbox id="prostrate" value="#{labController.selected.prostrate}" />
+                                <p:outputLabel value="Urology" for="urology" />
+                                <p:selectBooleanCheckbox id="urology" value="#{labController.selected.urology}" />
+                            </h:panelGrid>
+                        </p:panel>
+                        <p:panel header="Specific Proteins">
+                            <p:outputLabel value="CRP" for="CRP" />
+                            <p:selectBooleanCheckbox id="CRP" value="#{labController.selected.CRP}" />
+                            <p:outputLabel value="Rheumatoid Factor" for="rheumatoidFactor" />
+                            <p:selectBooleanCheckbox id="rheumatoidFactor" value="#{labController.selected.rheumatoidFactor}" />
+                        </p:panel>
+                        <p:panel header="Pharmacology">
+                            <p:outputLabel value="Carbamazepine" for="carbamazepine" />
+                            <p:selectBooleanCheckbox id="carbamazepine" value="#{labController.selected.carbamazepine}" />
+                            <p:outputLabel value="Digoxin" for="digoxin" />
+                            <p:selectBooleanCheckbox id="digoxin" value="#{labController.selected.digoxin}" />
+                            <p:outputLabel value="Phenobarbital" for="phenobarbital" />
+                            <p:selectBooleanCheckbox id="phenobarbital" value="#{labController.selected.phenobarbital}" />
+                            <p:outputLabel value="Amikacin" for="amikacin" />
+                            <p:selectBooleanCheckbox id="amikacin" value="#{labController.selected.amikacin}" />
+                            <p:outputLabel value="Vancomycin" for="vancomycin" />
+                            <p:selectBooleanCheckbox id="vancomycin" value="#{labController.selected.vancomycin}" />
+                            <p:outputLabel value="Gentamicin" for="gentamicin" />
+                            <p:selectBooleanCheckbox id="gentamicin" value="#{labController.selected.gentamicin}" />
+                            <p:outputLabel value="Phenytoin" for="phenytoin" />
+                            <p:selectBooleanCheckbox id="phenytoin" value="#{labController.selected.phenytoin}" />
+                            <p:outputLabel value="Theophylline" for="theophylline" />
+                            <p:selectBooleanCheckbox id="theophylline" value="#{labController.selected.theophylline}" />
+                        </p:panel>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{labController.create}" value="#{bundle.Save}" update="display,:LabListForm:datalistLabs,:growl" oncomplete="handleSubmit(args,'LabCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LabCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TimingCreateDlg" widgetVar="TimingCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTimingTitle}">
+            <h:form id="TimingCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="#{bundle.CreateTimingLabel_repeat}" for="repeat" />
+                        <p:inputText id="repeat" value="#{timingController.selected.repeat}" title="#{bundle.CreateTimingTitle_repeat}" />
+                        <p:outputLabel value="#{bundle.CreateTimingLabel_boundsDuration}" for="boundsDuration" />
+                        <p:inputText id="boundsDuration" value="#{timingController.selected.boundsDuration}" title="#{bundle.CreateTimingTitle_boundsDuration}" />
+                        <p:outputLabel value="#{bundle.CreateTimingLabel_boundsRange}" for="boundsRange" />
+                        <p:inputText id="boundsRange" value="#{timingController.selected.boundsRange}" title="#{bundle.CreateTimingTitle_boundsRange}" />
+                        <p:outputLabel value="#{bundle.CreateTimingLabel_boundsPeriodFrom}" for="boundsPeriodFrom" />
+                        <p:inputText id="boundsPeriodFrom" value="#{timingController.selected.boundsPeriodFrom}" title="#{bundle.CreateTimingTitle_boundsPeriodFrom}" />
+                        <p:outputLabel value="#{bundle.CreateTimingLabel_batchExpirationDate}" for="batchExpirationDate" />
+                        <p:inputText id="batchExpirationDate" value="#{timingController.selected.batchExpirationDate}" title="#{bundle.CreateTimingTitle_batchExpirationDate}" />
+                        <p:outputLabel value="#{bundle.CreateTimingLabel_count}" for="count" />
+                        <p:inputText id="count" value="#{timingController.selected.count}" title="#{bundle.CreateTimingTitle_count}" />
+                        <p:outputLabel value="#{bundle.CreateTimingLabel_countMax}" for="countMax" />
+                        <p:inputText id="countMax" value="#{timingController.selected.countMax}" title="#{bundle.CreateTimingTitle_countMax}" />
+                        <p:outputLabel value="#{bundle.CreateTimingLabel_duration}" for="duration" />
+                        <p:inputText id="duration" value="#{timingController.selected.duration}" title="#{bundle.CreateTimingTitle_duration}" />
+                        <p:outputLabel value="#{bundle.CreateTimingLabel_durationMax}" for="durationMax" />
+                        <p:inputText id="durationMax" value="#{timingController.selected.durationMax}" title="#{bundle.CreateTimingTitle_durationMax}" />
+                        <p:outputLabel value="#{bundle.CreateTimingLabel_durationUnit}" for="durationUnit" />
+                        <p:inputText id="durationUnit" value="#{timingController.selected.durationUnit}" title="#{bundle.CreateTimingTitle_durationUnit}" />
+                        <p:outputLabel value="#{bundle.CreateTimingLabel_frequency}" for="frequency" />
+                        <p:inputText id="frequency" value="#{timingController.selected.frequency}" title="#{bundle.CreateTimingTitle_frequency}" />
+                        <p:outputLabel value="#{bundle.CreateTimingLabel_frequencyMax}" for="frequencyMax" />
+                        <p:inputText id="frequencyMax" value="#{timingController.selected.frequencyMax}" title="#{bundle.CreateTimingTitle_frequencyMax}" />
+                        <p:outputLabel value="#{bundle.CreateTimingLabel_periodLow}" for="periodLow" />
+                        <p:inputText id="periodLow" value="#{timingController.selected.periodLow}" title="#{bundle.CreateTimingTitle_periodLow}" />
+                        <p:outputLabel value="#{bundle.CreateTimingLabel_periodMax}" for="periodMax" />
+                        <p:inputText id="periodMax" value="#{timingController.selected.periodMax}" title="#{bundle.CreateTimingTitle_periodMax}" />
+                        <p:outputLabel value="#{bundle.CreateTimingLabel_periodUnit}" for="periodUnit" />
+                        <p:inputText id="periodUnit" value="#{timingController.selected.periodUnit}" title="#{bundle.CreateTimingTitle_periodUnit}" />
+                        <p:outputLabel value="#{bundle.CreateTimingLabel_dayOfWeek}" for="dayOfWeek" />
+                        <p:inputText id="dayOfWeek" value="#{timingController.selected.dayOfWeek}" title="#{bundle.CreateTimingTitle_dayOfWeek}" />
+                        <p:outputLabel value="#{bundle.CreateTimingLabel_timeOfDay}" for="timeOfDay" />
+                        <p:inputText id="timeOfDay" value="#{timingController.selected.timeOfDay}" title="#{bundle.CreateTimingTitle_timeOfDay}" />
+                        <p:outputLabel value="#{bundle.CreateTimingLabel_RPTWhen}" for="RPTWhen" />
+                        <p:inputText id="RPTWhen" value="#{timingController.selected.RPTWhen}" title="#{bundle.CreateTimingTitle_RPTWhen}" />
+                        <p:outputLabel value="#{bundle.CreateTimingLabel_RPTOffset}" for="RPTOffset" />
+                        <p:inputText id="RPTOffset" value="#{timingController.selected.RPTOffset}" title="#{bundle.CreateTimingTitle_RPTOffset}" />
+                        <p:outputLabel value="#{bundle.CreateTimingLabel_TCode}" for="TCode" />
+                        <p:inputText id="TCode" value="#{timingController.selected.TCode}" title="#{bundle.CreateTimingTitle_TCode}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{timingController.create}" value="#{bundle.Save}" update="display" oncomplete="handleSubmit(args,'TimingCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TimingCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="HumanNameViewDlg" widgetVar="HumanNameViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="View Human Name" styleClass="ui-fluid">
+            <h:form id="HumanNameViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{humanNameController.selected != null}">
+                        <h:outputText value="Use"/>
+                        <h:outputText value="#{humanNameController.selected.use}" title="#{bundle.ViewHumanNameTitle_use}"/>
+                        <h:outputText value="Text"/>
+                        <h:outputText value="#{humanNameController.selected.text}" title="#{bundle.ViewHumanNameTitle_text}"/>
+                        <h:outputText value="Family"/>
+                        <h:outputText value="#{humanNameController.selected.family}" title="#{bundle.ViewHumanNameTitle_family}"/>
+                        <h:outputText value="Given"/>
+                        <h:outputText value="#{humanNameController.selected.given}" title="#{bundle.ViewHumanNameTitle_given}"/>
+                        <h:outputText value="Prefix"/>
+                        <h:outputText value="#{humanNameController.selected.prefix}" title="#{bundle.ViewHumanNameTitle_prefix}"/>
+                        <h:outputText value="Sufix"/>
+                        <h:outputText value="#{humanNameController.selected.sufix}" title="#{bundle.ViewHumanNameTitle_sufix}"/>
+                        <h:outputText value="Valid From"/>
+                        <h:outputText value="#{humanNameController.selected.periodFrom}" title="#{bundle.ViewHumanNameTitle_period}"/>
+                        <h:outputText value="Valid To"/>
+                        <h:outputText value="#{humanNameController.selected.periodTo}" title="#{bundle.ViewHumanNameTitle_period}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="HumanNameViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

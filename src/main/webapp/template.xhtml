@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputScript library="js" name="jsfcrud.js"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+
+    <h:body styleClass="ui-fluid">
+        <p:growl id="doctorGrowl" showDetail="true" showSummary="true">
+                <p:autoUpdate/>
+            </p:growl>
+        <div id="dialog"></div>
+
+        <div id="body">
+            <ui:insert name="body">
+                <h:panelGrid columns="2" width="100%">
+                    <h:form>
+                        <p:commandLink action="/iPA/UserHome1"><h1>International Patient Access (IPA)</h1></p:commandLink>
+                    </h:form>
+                    <h:form>
+                        <p:commandButton value="Logout" actionListener="#{iPAController.Logout(session)}" action="#{administrationController.Logout(session)}" update="doctorGrowl" />
+                    </h:form>
+                </h:panelGrid>
+            </ui:insert>
+        </div>
+        
+        <div>
+            <div id="content" class="left_content">
+                <ui:insert name="content">Content</ui:insert>
+            </div>
+        </div>
+        <div id="bottom">
+            <ui:insert name="bottom">Copyright &copy; 2024</ui:insert>
+        </div>
+        
+        <p:ajaxStatus style="display:block;margin-bottom:2em;height:24px;">
+            <f:facet name="default">
+                <h:outputText value="" />
+            </f:facet>
+
+        </p:ajaxStatus>
+
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+            <img src="/images/ajax-loader.gif" />
+        </p:dialog>
+        
+        
+    </h:body>
+
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IllnessViewDlg" widgetVar="IllnessViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewIllnessTitle}">
+            <h:form id="IllnessViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{illnessController.selected != null}">
+                        <h:outputText value="#{bundle.ViewIllnessLabel_id}"/>
+                        <h:outputText value="#{illnessController.selected.id}" title="#{bundle.ViewIllnessTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewIllnessLabel_encounter}"/>
+                        <h:outputText value="#{illnessController.selected.encounter}" title="#{bundle.ViewIllnessTitle_encounter}"/>
+                        <h:outputText value="#{bundle.ViewIllnessLabel_clinicalStatus}"/>
+                        <h:outputText value="#{illnessController.selected.clinicalStatus}" title="#{bundle.ViewIllnessTitle_clinicalStatus}"/>
+                        <h:outputText value="#{bundle.ViewIllnessLabel_verificationStatus}"/>
+                        <h:outputText value="#{illnessController.selected.verificationStatus}" title="#{bundle.ViewIllnessTitle_verificationStatus}"/>
+                        <h:outputText value="#{bundle.ViewIllnessLabel_serviceType}"/>
+                        <h:outputText value="#{illnessController.selected.serviceType}" title="#{bundle.ViewIllnessTitle_serviceType}"/>
+                        <h:outputText value="#{bundle.ViewIllnessLabel_severity}"/>
+                        <h:outputText value="#{illnessController.selected.severity}" title="#{bundle.ViewIllnessTitle_severity}"/>
+                        <h:outputText value="#{bundle.ViewIllnessLabel_code}"/>
+                        <h:outputText value="#{illnessController.selected.code}" title="#{bundle.ViewIllnessTitle_code}"/>
+                        <h:outputText value="#{bundle.ViewIllnessLabel_bodySite}"/>
+                        <h:outputText value="#{illnessController.selected.bodySite}" title="#{bundle.ViewIllnessTitle_bodySite}"/>
+                        <h:outputText value="#{bundle.ViewIllnessLabel_recordedDate}"/>
+                        <h:outputText value="#{illnessController.selected.recordedDate}" title="#{bundle.ViewIllnessTitle_recordedDate}"/>
+                        <h:outputText value="#{bundle.ViewIllnessLabel_note}"/>
+                        <h:outputText value="#{illnessController.selected.note}" title="#{bundle.ViewIllnessTitle_note}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="IllnessViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

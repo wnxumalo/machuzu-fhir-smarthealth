@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="List Procedures"></h:outputText>
+        </ui:define>
+
+        <ui:define name="content">
+            
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+                
+            <p:growl id="growl">
+                <p:autoUpdate/>
+            </p:growl>
+            
+            <h:form id="ProcedureListForm">
+                
+                <p:panel id="pnlUserHome" header="Identifier" styleClass="ui-fluid">
+                    <h:panelGrid columns="10" rendered="#{!empty identifierController.selected}" cellspacing="10px;" style="width:100%;" >
+                        <h:outputText value="ID" style="font-weight: bold;"/>
+                        <h:outputText value="#{identifierController.selected.id}"/>                    
+                        <h:outputText value="USE" style="font-weight: bold;"/>
+                        <h:outputText value="#{identifierController.selected.use}"/>                                            
+                        <h:outputText value="VALUE" style="font-weight: bold;"/>
+                        <h:outputText value="#{identifierController.selected.value}"/>                    
+                        <h:outputText value="TYPE" style="font-weight: bold;"/>
+                        <h:outputText value="#{identifierController.selected.IType}"/>
+                    </h:panelGrid>
+                </p:panel>
+
+                <p:panel header="List Procedures" styleClass="ui-fluid">
+                    <p:dataTable id="datalist" value="#{procedureController.items}" var="item"
+                                 selectionMode="single" selection="#{procedureController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Procedure Status"/>
+                            </f:facet>
+                            <h:outputText value="#{item.procedureStatus}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Status Reason"/>
+                            </f:facet>
+                            <h:outputText value="#{item.statusReason}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Category"/>
+                            </f:facet>
+                            <h:outputText value="#{item.category}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Performed Period To"/>
+                            </f:facet>
+                            <h:outputText value="#{item.performedPeriodTo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Performed String"/>
+                            </f:facet>
+                            <h:outputText value="#{item.performedString}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Performed Age"/>
+                            </f:facet>
+                            <h:outputText value="#{item.performedAge}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Performed Range"/>
+                            </f:facet>
+                            <h:outputText value="#{item.performedRange}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Reason Code"/>
+                            </f:facet>
+                            <h:outputText value="#{item.reasonCode}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Body Site"/>
+                            </f:facet>
+                            <h:outputText value="#{item.bodySite}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Outcome"/>
+                            </f:facet>
+                            <h:outputText value="#{item.outcome}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Complication"/>
+                            </f:facet>
+                            <h:outputText value="#{item.complication}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Follow Up}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.followUp}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Note"/>
+                            </f:facet>
+                            <h:outputText value="#{item.note}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{procedureController.prepareCreate}" update=":ProcedureCreateForm" oncomplete="PF('ProcedureCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ProcedureViewForm" oncomplete="PF('ProcedureViewDialog').show()" disabled="#{empty procedureController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ProcedureEditForm" oncomplete="PF('ProcedureEditDialog').show()" disabled="#{empty procedureController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{procedureController.destroy}" update=":growl,datalist" disabled="#{empty procedureController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

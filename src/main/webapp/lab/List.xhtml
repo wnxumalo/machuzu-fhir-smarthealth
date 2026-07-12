@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="Labs"></h:outputText>
+        </ui:define>
+
+        <ui:define name="content">
+            
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+            
+            <ui:include src="/labResult/Create.xhtml"/>
+                
+            <p:growl id="growl">
+                <p:autoUpdate/>
+            </p:growl>
+
+            <h3>Labs</h3>
+            <h:form id="LabListForm">
+                <p:panel id="pnlUserHome" header="Identifier" styleClass="ui-fluid">
+                    <h:panelGrid columns="10" rendered="#{!empty identifierController.selected}" cellspacing="10px;" style="width:100%;" >
+                        <h:outputText value="ID" style="font-weight: bold;"/>
+                        <h:outputText value="#{identifierController.selected.id}"/>                    
+                        <h:outputText value="USE" style="font-weight: bold;"/>
+                        <h:outputText value="#{identifierController.selected.use}"/>                                            
+                        <h:outputText value="VALUE" style="font-weight: bold;"/>
+                        <h:outputText value="#{identifierController.selected.value}"/>                    
+                        <h:outputText value="TYPE" style="font-weight: bold;"/>
+                        <h:outputText value="#{identifierController.selected.IType}"/>
+                    </h:panelGrid>
+                </p:panel>
+
+                <p:panel header="Labs" styleClass="ui-fluid">
+
+                    <p:dataTable id="datalistLabs" value="#{labController.items}" var="item"
+                                 selectionMode="single" selection="#{labController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton resultsButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton resultsButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Date"/>
+                            </f:facet>
+                            <h:outputText value="#{item.labDate}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Ordered"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.ordered}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Results"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.results}" disabled="true"/>
+                        </p:column>
+
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{labController.prepareCreate}" update=":LabCreateForm" oncomplete="PF('LabCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":LabViewForm" oncomplete="PF('LabViewDialog').show()" disabled="#{empty labController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":LabEditForm" oncomplete="PF('LabEditDialog').show()" disabled="#{empty labController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{labController.destroy}" update=":growl,datalistLabs" disabled="#{empty labController.selected}"/>
+                            <p:commandButton id="resultsButton" value="Results" actionListener="#{labResultController.prepareCreate()}" update=":growl" oncomplete="PF('LabResultCreateDialog').show()" disabled="#{empty labController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+            
+        </ui:define>
+    </ui:composition>
+
+</html>

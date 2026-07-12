@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DoseAndRateEditDlg" widgetVar="DoseAndRateEditDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.EditDoseAndRateTitle}" styleClass="ui-fluid">
+            <h:form id="DoseAndRateEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{doseAndRateController.selected != null}">
+                        <p:outputLabel value="Type" for="DType" />
+                        <p:selectOneMenu id="DType" value="#{doseAndRateController.selected.DType}" title="Type">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Calculated" itemValue="calculated" />
+                            <f:selectItem itemLabel="Ordered" itemValue="ordered" />                            
+                        </p:selectOneMenu>                                                   
+                        <p:outputLabel value="Dose Range Low" for="doseRangeLow" />
+                        <p:inputText id="doseRangeLow" value="#{doseAndRateController.selected.doseRangeLow}" title="#{bundle.CreateDoseAndRateTitle_doseRangeLow}" />
+                        <p:outputLabel value="Dose Range High" for="doseRangeHigh" />
+                        <p:inputText id="doseRangeHigh" value="#{doseAndRateController.selected.doseRangeHigh}" title="#{bundle.CreateDoseAndRateTitle_doseRangeHigh}" />
+                        <p:outputLabel value="Dose Quantity" for="doseQuantity" />
+                        <p:inputText id="doseQuantity" value="#{doseAndRateController.selected.doseQuantity}" title="#{bundle.CreateDoseAndRateTitle_doseQuantity}" />
+                        <p:outputLabel value="Rate Ratio Numerator" for="rateRatioNumerator" />
+                        <p:inputText id="rateRatioNumerator" value="#{doseAndRateController.selected.rateRatioNumerator}" title="#{bundle.CreateDoseAndRateTitle_rateRatioNumerator}" />
+                        <p:outputLabel value="Rate Ratio Denominator" for="rateRatioDenominator" />
+                        <p:inputText id="rateRatioDenominator" value="#{doseAndRateController.selected.rateRatioDenominator}" title="#{bundle.CreateDoseAndRateTitle_rateRatioDenominator}" />
+                        <p:outputLabel value="Rate Range Low" for="rateRangeLow" />
+                        <p:inputText id="rateRangeLow" value="#{doseAndRateController.selected.rateRangeLow}" title="#{bundle.CreateDoseAndRateTitle_rateRangeLow}" />
+                        <p:outputLabel value="Rate Range High" for="rateRangeHigh" />
+                        <p:inputText id="rateRangeHigh" value="#{doseAndRateController.selected.rateRangeHigh}" title="#{bundle.CreateDoseAndRateTitle_rateRangeHigh}" />
+                        <p:outputLabel value="Rate Range Qty" for="rateRangeQty" />
+                        <p:inputText id="rateRangeQty" value="#{doseAndRateController.selected.rateRangeQty}" title="#{bundle.CreateDoseAndRateTitle_rateRangeQty}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{doseAndRateController.update}" value="#{bundle.Save}" update="display" oncomplete="handleSubmit(args, 'DoseAndRateEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DoseAndRateEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LabResultViewDlg" widgetVar="LabResultViewDialog" modal="true" resizable="false" appendTo="@(content)" header="#{bundle.ViewLabResultTitle}" styleClass="ui-fluid">
+            <h:form id="LabResultViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{labResultController.selected != null}">
+                        <h:outputText value="#{bundle.ViewLabResultLabel_id}"/>
+                        <h:outputText value="#{labResultController.selected.id}" title="#{bundle.ViewLabResultTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewLabResultLabel_lab}"/>
+                        <h:outputText value="#{labResultController.selected.lab}" title="#{bundle.ViewLabResultTitle_lab}"/>
+                        <h:outputText value="#{bundle.ViewLabResultLabel_confirmTestDescription}"/>
+                        <h:outputText value="#{labResultController.selected.confirmTestDescription}" title="#{bundle.ViewLabResultTitle_confirmTestDescription}"/>
+                        <h:outputText value="#{bundle.ViewLabResultLabel_labResult}"/>
+                        <h:outputText value="#{labResultController.selected.labResult}" title="#{bundle.ViewLabResultTitle_labResult}"/>
+                        <h:outputText value="#{bundle.ViewLabResultLabel_code}"/>
+                        <h:outputText value="#{labResultController.selected.code}" title="#{bundle.ViewLabResultTitle_code}"/>
+                        <h:outputText value="#{bundle.ViewLabResultLabel_category}"/>
+                        <h:outputText value="#{labResultController.selected.category}" title="#{bundle.ViewLabResultTitle_category}"/>
+                        <h:outputText value="#{bundle.ViewLabResultLabel_reference}"/>
+                        <h:outputText value="#{labResultController.selected.reference}" title="#{bundle.ViewLabResultTitle_reference}"/>
+                        <h:outputText value="#{bundle.ViewLabResultLabel_status}"/>
+                        <h:outputText value="#{labResultController.selected.status}" title="#{bundle.ViewLabResultTitle_status}"/>
+                        <h:outputText value="#{bundle.ViewLabResultLabel_issued}"/>
+                        <h:outputText value="#{labResultController.selected.issued}" title="#{bundle.ViewLabResultTitle_issued}"/>
+                        <h:outputText value="#{bundle.ViewLabResultLabel_conclusion}"/>
+                        <h:outputText value="#{labResultController.selected.conclusion}" title="#{bundle.ViewLabResultTitle_conclusion}"/>
+                        <h:outputText value="#{bundle.ViewLabResultLabel_conclusionCode}"/>
+                        <h:outputText value="#{labResultController.selected.conclusionCode}" title="#{bundle.ViewLabResultTitle_conclusionCode}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="LabResultViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

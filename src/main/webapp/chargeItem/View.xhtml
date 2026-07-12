@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ChargeItemViewDlg" widgetVar="ChargeItemViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.ViewChargeItemTitle}" styleClass="ui-fluid">
+            <h:form id="ChargeItemViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{chargeItemController.selected != null}">
+                        <h:outputText value="#{bundle.ViewChargeItemLabel_id}"/>
+                        <h:outputText value="#{chargeItemController.selected.id}" title="#{bundle.ViewChargeItemTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewChargeItemLabel_accounts}"/>
+                        <h:outputText value="#{chargeItemController.selected.accounts}" title="#{bundle.ViewChargeItemTitle_accounts}"/>
+                        <h:outputText value="#{bundle.ViewChargeItemLabel_encounter}"/>
+                        <h:outputText value="#{chargeItemController.selected.encounter}" title="#{bundle.ViewChargeItemTitle_encounter}"/>
+                        <h:outputText value="#{bundle.ViewChargeItemLabel_definitionUri}"/>
+                        <h:outputText value="#{chargeItemController.selected.definitionUri}" title="#{bundle.ViewChargeItemTitle_definitionUri}"/>
+                        <h:outputText value="#{bundle.ViewChargeItemLabel_definitionCanonical}"/>
+                        <h:outputText value="#{chargeItemController.selected.definitionCanonical}" title="#{bundle.ViewChargeItemTitle_definitionCanonical}"/>
+                        <h:outputText value="#{bundle.ViewChargeItemLabel_CIStatus}"/>
+                        <h:outputText value="#{chargeItemController.selected.CIStatus}" title="#{bundle.ViewChargeItemTitle_CIStatus}"/>
+                        <h:outputText value="#{bundle.ViewChargeItemLabel_CICode}"/>
+                        <h:outputText value="#{chargeItemController.selected.CICode}" title="#{bundle.ViewChargeItemTitle_CICode}"/>
+                        <h:outputText value="#{bundle.ViewChargeItemLabel_periodFrom}"/>
+                        <h:outputText value="#{chargeItemController.selected.periodFrom}" title="#{bundle.ViewChargeItemTitle_periodFrom}"/>
+                        <h:outputText value="#{bundle.ViewChargeItemLabel_periodTo}"/>
+                        <h:outputText value="#{chargeItemController.selected.periodTo}" title="#{bundle.ViewChargeItemTitle_periodTo}"/>
+                        <h:outputText value="#{bundle.ViewChargeItemLabel_quantity}"/>
+                        <h:outputText value="#{chargeItemController.selected.quantity}" title="#{bundle.ViewChargeItemTitle_quantity}"/>
+                        <h:outputText value="#{bundle.ViewChargeItemLabel_bodySite}"/>
+                        <h:outputText value="#{chargeItemController.selected.bodySite}" title="#{bundle.ViewChargeItemTitle_bodySite}"/>
+                        <h:outputText value="#{bundle.ViewChargeItemLabel_unitPriceComponent}"/>
+                        <h:outputText value="#{chargeItemController.selected.unitPriceComponent}" title="#{bundle.ViewChargeItemTitle_unitPriceComponent}"/>
+                        <h:outputText value="#{bundle.ViewChargeItemLabel_totalPriceComponent}"/>
+                        <h:outputText value="#{chargeItemController.selected.totalPriceComponent}" title="#{bundle.ViewChargeItemTitle_totalPriceComponent}"/>
+                        <h:outputText value="#{bundle.ViewChargeItemLabel_overridereason}"/>
+                        <h:outputText value="#{chargeItemController.selected.overridereason}" title="#{bundle.ViewChargeItemTitle_overridereason}"/>
+                        <h:outputText value="#{bundle.ViewChargeItemLabel_entereddate}"/>
+                        <h:outputText value="#{chargeItemController.selected.entereddate}" title="#{bundle.ViewChargeItemTitle_entereddate}"/>
+                        <h:outputText value="#{bundle.ViewChargeItemLabel_reason}"/>
+                        <h:outputText value="#{chargeItemController.selected.reason}" title="#{bundle.ViewChargeItemTitle_reason}"/>
+                        <h:outputText value="#{bundle.ViewChargeItemLabel_CIService}"/>
+                        <h:outputText value="#{chargeItemController.selected.CIService}" title="#{bundle.ViewChargeItemTitle_CIService}"/>
+                        <h:outputText value="#{bundle.ViewChargeItemLabel_product}"/>
+                        <h:outputText value="#{chargeItemController.selected.product}" title="#{bundle.ViewChargeItemTitle_product}"/>
+                        <h:outputText value="#{bundle.ViewChargeItemLabel_note}"/>
+                        <h:outputText value="#{chargeItemController.selected.note}" title="#{bundle.ViewChargeItemTitle_note}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ChargeItemViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

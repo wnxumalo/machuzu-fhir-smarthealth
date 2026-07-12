@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProcedureViewDlg" widgetVar="ProcedureViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="View Procedure" styleClass="ui-fluid">
+            <h:form id="ProcedureViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{procedureController.selected != null}">
+                        <h:outputText value="Status"/>
+                        <h:outputText value="#{procedureController.selected.procedureStatus}" title="#{bundle.ViewProcedureTitle_procedureStatus}"/>
+                        <h:outputText value="Status Reason"/>
+                        <h:outputText value="#{procedureController.selected.statusReason}" title="#{bundle.ViewProcedureTitle_statusReason}"/>
+                        <h:outputText value="Category"/>
+                        <h:outputText value="#{procedureController.selected.category}" title="#{bundle.ViewProcedureTitle_category}"/>
+                        <h:outputText value="Period From"/>
+                        <h:outputText value="#{procedureController.selected.performedPeriodTo}" title="#{bundle.ViewProcedureTitle_performedPeriodTo}"/>                        
+                        <h:outputText value="Performed Period To"/>
+                        <h:outputText value="#{procedureController.selected.performedPeriodTo}" title="#{bundle.ViewProcedureTitle_performedPeriodTo}"/>
+                        <h:outputText value="Performed String"/>
+                        <h:outputText value="#{procedureController.selected.performedString}" title="#{bundle.ViewProcedureTitle_performedString}"/>
+                        <h:outputText value="Performed Age"/>
+                        <h:outputText value="#{procedureController.selected.performedAge}" title="#{bundle.ViewProcedureTitle_performedAge}"/>
+                        <h:outputText value="Performed Range"/>
+                        <h:outputText value="#{procedureController.selected.performedRange}" title="#{bundle.ViewProcedureTitle_performedRange}"/>
+                        <h:outputText value="Reason Code"/>
+                        <h:outputText value="#{procedureController.selected.reasonCode}" title="#{bundle.ViewProcedureTitle_reasonCode}"/>
+                        <h:outputText value="Body Site"/>
+                        <h:outputText value="#{procedureController.selected.bodySite}" title="#{bundle.ViewProcedureTitle_bodySite}"/>
+                        <h:outputText value="Outcome"/>
+                        <h:outputText value="#{procedureController.selected.outcome}" title="#{bundle.ViewProcedureTitle_outcome}"/>
+                        <h:outputText value="Complication"/>
+                        <h:outputText value="#{procedureController.selected.complication}" title="#{bundle.ViewProcedureTitle_complication}"/>
+                        <h:outputText value="Follow Up"/>
+                        <h:outputText value="#{procedureController.selected.followUp}" title="#{bundle.ViewProcedureTitle_followUp}"/>
+                        <h:outputText value="Note"/>
+                        <h:outputText value="#{procedureController.selected.note}" title="#{bundle.ViewProcedureTitle_note}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ProcedureViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

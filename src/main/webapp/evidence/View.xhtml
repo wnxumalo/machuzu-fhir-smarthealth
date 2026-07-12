@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EvidenceViewDlg" widgetVar="EvidenceViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="View Evidence" styleClass="ui-fluid">
+            <h:form id="EvidenceViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{evidenceController.selected != null}">
+                        <h:outputText value="Id"/>
+                        <h:outputText value="#{evidenceController.selected.id}" title="#{bundle.ViewEvidenceTitle_id}"/>
+                        <h:outputText value="Problem"/>
+                        <h:outputText value="#{evidenceController.selected.problem}" title="#{bundle.ViewEvidenceTitle_problem}"/>
+                        <h:outputText value="Code"/>
+                        <h:outputText value="#{evidenceController.selected.code}" title="#{bundle.ViewEvidenceTitle_code}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="EvidenceViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

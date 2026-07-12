@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ChargeItemCreateDlg" widgetVar="ChargeItemCreateDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Create Charge Item" styleClass="ui-fluid">
+            <h:form id="ChargeItemCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{chargeItemController.selected != null}">
+                        <p:outputLabel value="Definition Uri" for="definitionUri" />
+                        <p:inputText id="definitionUri" value="#{chargeItemController.selected.definitionUri}" title="#{bundle.CreateChargeItemTitle_definitionUri}" />
+                        <p:outputLabel value="Definition Canonical" for="definitionCanonical" />
+                        <p:inputText id="definitionCanonical" value="#{chargeItemController.selected.definitionCanonical}" title="#{bundle.CreateChargeItemTitle_definitionCanonical}" />
+                        <p:outputLabel value="Status" for="CIStatus" />
+                        <p:selectOneMenu id="CIStatus" value="#{chargeItemController.selected.CIStatus}" title="Status">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Planned" itemValue="planned" />
+                            <f:selectItem itemLabel="Billable" itemValue="billable" />
+                            <f:selectItem itemLabel="Not billable" itemValue="not-billable" />
+                            <f:selectItem itemLabel="aborted" itemValue="Aborted" />
+                            <f:selectItem itemLabel="billed" itemValue="Billed" />
+                            <f:selectItem itemLabel="Entered in Error" itemValue="entered-in-error" />
+                            <f:selectItem itemLabel="Unknown" itemValue="unknown" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Code" for="CICode" />
+                        <p:selectOneMenu id="CICode" value="#{chargeItemController.selected.CICode}" title="Code">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Unvorhergesehene Inanspruchnahme" itemValue="1100" />
+                            <f:selectItem itemLabel="Notfallpauschale" itemValue="1210" />
+                            <f:selectItem itemLabel="Grundpauschale" itemValue="1320" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Charge From" for="periodFrom" />
+                        <p:calendar id="periodFrom" value="#{chargeItemController.selected.periodFrom}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="From" />
+                        <p:outputLabel value="Charge To" for="periodTo" />
+                        <p:calendar id="periodTo" value="#{chargeItemController.selected.periodTo}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="To" />
+                        <p:outputLabel value="Quantity" for="quantity" />
+                        <p:inputText id="quantity" value="#{chargeItemController.selected.quantity}" title="#{bundle.CreateChargeItemTitle_quantity}" />
+                        <p:outputLabel value="Body Site" for="bodySite" />
+                        <p:selectOneMenu id="bodySite" value="#{chargeItemController.selected.bodySite}" title="Code">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Distal phalanx of hallux" itemValue="53075003 " />
+                            <f:selectItem itemLabel="Distal phalanx of second toe" itemValue="76986006" />
+                            <f:selectItem itemLabel="Distal phalanx of third toe" itemValue="65258003" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Unit Price" for="unitPriceComponent" />
+                        <p:inputText id="unitPriceComponent" value="#{chargeItemController.selected.unitPriceComponent}" title="#{bundle.CreateChargeItemTitle_unitPriceComponent}" />
+                        <p:outputLabel value="Total Price" for="totalPriceComponent" />
+                        <p:inputText id="totalPriceComponent" value="#{chargeItemController.selected.totalPriceComponent}" title="#{bundle.CreateChargeItemTitle_totalPriceComponent}" />
+                        <p:outputLabel value="Override Reason" for="overridereason" />
+                        <p:inputText id="overridereason" value="#{chargeItemController.selected.overridereason}" title="#{bundle.CreateChargeItemTitle_overridereason}" />
+                        <p:outputLabel value="Entered Date" for="entereddate" />
+                        <p:calendar id="entereddate" value="#{chargeItemController.selected.entereddate}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Entered Date" />
+                        <p:outputLabel value="Reason" for="reason" />
+                        <p:selectOneMenu id="reason" value="#{chargeItemController.selected.reason}" title="Reason">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Certain infectious and parasitic diseases" itemValue="I" />
+                            <f:selectItem itemLabel="Intestinal infectious diseases" itemValue="A00-A09" />
+                            <f:selectItem itemLabel="Cholera" itemValue="A00" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Service" for="CIService" />
+                        <p:inputText id="CIService" value="#{chargeItemController.selected.CIService}" title="#{bundle.CreateChargeItemTitle_CIService}" />
+                        <p:outputLabel value="Product" for="product" />
+                        <p:selectOneMenu id="product" value="#{chargeItemController.selected.product}" title="Product">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Blood Pressure Cuff" itemValue="528391" />
+                            <f:selectItem itemLabel="Body Composition Analyzer" itemValue="528404" />
+                            <f:selectItem itemLabel="Cardiovascular Device" itemValue="528425" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Note" for="note" />
+                        <p:inputText id="note" value="#{chargeItemController.selected.note}" title="#{bundle.CreateChargeItemTitle_note}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{chargeItemController.create(accountController.selected.id, encounterController.selected.id)}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args,'ChargeItemCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ChargeItemCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

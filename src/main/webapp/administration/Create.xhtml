@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AdministrationCreateDlg" widgetVar="AdministrationCreateDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.CreateAdministrationTitle}" styleClass="ui-fluid">
+            <h:form id="AdministrationCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{administrationController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAdministrationLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{administrationController.selected.id}" title="#{bundle.CreateAdministrationTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateAdministrationLabel_employeeNo}" for="employeeNo" />
+                        <p:inputText id="employeeNo" value="#{administrationController.selected.employeeNo}" title="#{bundle.CreateAdministrationTitle_employeeNo}" />
+                        <p:outputLabel value="#{bundle.CreateAdministrationLabel_idNumber}" for="idNumber" />
+                        <p:inputText id="idNumber" value="#{administrationController.selected.idNumber}" title="#{bundle.CreateAdministrationTitle_idNumber}" />
+                        <p:outputLabel value="#{bundle.CreateAdministrationLabel_employmentDate}" for="employmentDate" />
+                        <p:calendar id="employmentDate" pattern="MM/dd/yyyy" value="#{administrationController.selected.employmentDate}" title="#{bundle.EditAdministrationTitle_employmentDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateAdministrationLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{administrationController.selected.name}" title="#{bundle.CreateAdministrationTitle_name}" />
+                        <p:outputLabel value="#{bundle.CreateAdministrationLabel_surname}" for="surname" />
+                        <p:inputText id="surname" value="#{administrationController.selected.surname}" title="#{bundle.CreateAdministrationTitle_surname}" />
+                        <p:outputLabel value="#{bundle.CreateAdministrationLabel_gender}" for="gender" />
+                        <p:inputText id="gender" value="#{administrationController.selected.gender}" title="#{bundle.CreateAdministrationTitle_gender}" />
+                        <p:outputLabel value="#{bundle.CreateAdministrationLabel_startDay}" for="startDay" />
+                        <p:calendar id="startDay" pattern="MM/dd/yyyy" value="#{administrationController.selected.startDay}" title="#{bundle.EditAdministrationTitle_startDay}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateAdministrationLabel_lastDay}" for="lastDay" />
+                        <p:calendar id="lastDay" pattern="MM/dd/yyyy" value="#{administrationController.selected.lastDay}" title="#{bundle.EditAdministrationTitle_lastDay}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateAdministrationLabel_contact}" for="contact" />
+                        <p:inputText id="contact" value="#{administrationController.selected.contact}" title="#{bundle.CreateAdministrationTitle_contact}" />
+                        <p:outputLabel value="#{bundle.CreateAdministrationLabel_designation}" for="designation" />
+                        <p:inputText id="designation" value="#{administrationController.selected.designation}" title="#{bundle.CreateAdministrationTitle_designation}" />
+                        <p:outputLabel value="#{bundle.CreateAdministrationLabel_department}" for="department" />
+                        <p:inputText id="department" value="#{administrationController.selected.department}" title="#{bundle.CreateAdministrationTitle_department}" />
+                        <p:outputLabel value="#{bundle.CreateAdministrationLabel_section}" for="section" />
+                        <p:inputText id="section" value="#{administrationController.selected.section}" title="#{bundle.CreateAdministrationTitle_section}" />
+                        <p:outputLabel value="#{bundle.CreateAdministrationLabel_level}" for="level" />
+                        <p:inputText id="level" value="#{administrationController.selected.level}" title="#{bundle.CreateAdministrationTitle_level}" />
+                        <p:outputLabel value="#{bundle.CreateAdministrationLabel_status}" for="status" />
+                        <p:inputText id="status" value="#{administrationController.selected.status}" title="#{bundle.CreateAdministrationTitle_status}" />
+                        <p:outputLabel value="#{bundle.CreateAdministrationLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{administrationController.selected.email}" title="#{bundle.CreateAdministrationTitle_email}" />
+                        <p:outputLabel value="#{bundle.CreateAdministrationLabel_password}" for="password" />
+                        <p:inputText id="password" value="#{administrationController.selected.password}" title="#{bundle.CreateAdministrationTitle_password}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{administrationController.create}" value="#{bundle.Save}" update="display,:AdministrationListForm:datalist,:growl" oncomplete="handleSubmit(args,'AdministrationCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AdministrationCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

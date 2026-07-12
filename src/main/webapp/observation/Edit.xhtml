@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ObservationEditDlg" widgetVar="ObservationEditDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Edit Observation" styleClass="ui-fluid">
+            <h:form id="ObservationEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{observationController.selected != null}">
+                        <p:outputLabel value="Id" for="id" />
+                        <p:inputText id="id" value="#{observationController.selected.id}" title="#{bundle.EditObservationTitle_id}" />
+                        <p:outputLabel value="Status" for="OStatus" />
+                        <p:inputText id="OStatus" value="#{observationController.selected.OStatus}" title="#{bundle.EditObservationTitle_OStatus}" />
+                        <p:outputLabel value="Category" for="category" />
+                        <p:inputText id="category" value="#{observationController.selected.category}" title="#{bundle.EditObservationTitle_category}" />
+                        <p:outputLabel value="Code" for="OCode" />
+                        <p:inputText id="OCode" value="#{observationController.selected.OCode}" title="#{bundle.EditObservationTitle_OCode}" />
+                        <p:outputLabel value="Occurence String" for="occurenceString" />
+                        <p:inputText id="occurenceString" value="#{observationController.selected.occurenceString}" title="#{bundle.EditObservationTitle_occurenceString}" />
+                        <p:outputLabel value="Effective Date" for="effectiveDate" />
+                        <p:calendar id="effectiveDate" pattern="MM/dd/yyyy" value="#{observationController.selected.effectiveDate}" title="#{bundle.EditObservationTitle_effectiveDate}"  showOn="button"/>
+                        <p:outputLabel value="Issued" for="issued" />
+                        <p:calendar id="issued" pattern="MM/dd/yyyy" value="#{observationController.selected.issued}" title="#{bundle.EditObservationTitle_issued}"  showOn="button"/>
+                        <p:outputLabel value="Interpretation" for="interpretation" />
+                        <p:inputText id="interpretation" value="#{observationController.selected.interpretation}" title="#{bundle.EditObservationTitle_interpretation}" />
+                        <p:outputLabel value="Body Site" for="bodySite" />
+                        <p:inputText id="bodySite" value="#{observationController.selected.bodySite}" title="#{bundle.EditObservationTitle_bodySite}" />
+                        <p:outputLabel value="Method" for="OMethod" />
+                        <p:inputText id="OMethod" value="#{observationController.selected.OMethod}" title="#{bundle.EditObservationTitle_OMethod}" />
+                        <p:outputLabel value="Note" for="note" />
+                        <p:inputText id="note" value="#{observationController.selected.note}" title="#{bundle.EditObservationTitle_note}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{observationController.update}" value="#{bundle.Save}" update="display,:ObservationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ObservationEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ObservationEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

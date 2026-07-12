@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CPTCSMProceduresEditDlg" widgetVar="CPTCSMProceduresEditDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.EditCPTCSMProceduresTitle}" styleClass="ui-fluid">
+            <h:form id="CPTCSMProceduresEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cPTCSMProceduresController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCPTCSMProceduresLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{cPTCSMProceduresController.selected.id}" title="#{bundle.EditCPTCSMProceduresTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditCPTCSMProceduresLabel_CHClass}" for="CHClass" />
+                        <p:inputText id="CHClass" value="#{cPTCSMProceduresController.selected.CHClass}" title="#{bundle.EditCPTCSMProceduresTitle_CHClass}" />
+                        <p:outputLabel value="#{bundle.EditCPTCSMProceduresLabel_periodFrom}" for="periodFrom" />
+                        <p:inputText id="periodFrom" value="#{cPTCSMProceduresController.selected.periodFrom}" title="#{bundle.EditCPTCSMProceduresTitle_periodFrom}" />
+                        <p:outputLabel value="#{bundle.EditCPTCSMProceduresLabel_periodTo}" for="periodTo" />
+                        <p:inputText id="periodTo" value="#{cPTCSMProceduresController.selected.periodTo}" title="#{bundle.EditCPTCSMProceduresTitle_periodTo}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{cPTCSMProceduresController.update}" value="#{bundle.Save}" update="display,:CPTCSMProceduresListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CPTCSMProceduresEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CPTCSMProceduresEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

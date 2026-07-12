@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DosageViewDlg" widgetVar="DosageViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.ViewDosageTitle}" styleClass="ui-fluid">
+            <h:form id="DosageViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{dosageController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDosageLabel_sequence}"/>
+                        <h:outputText value="#{dosageController.selected.sequence}" title="#{bundle.ViewDosageTitle_sequence}"/>
+                        <h:outputText value="#{bundle.ViewDosageLabel_text}"/>
+                        <h:outputText value="#{dosageController.selected.text}" title="#{bundle.ViewDosageTitle_text}"/>
+                        <h:outputText value="#{bundle.ViewDosageLabel_additionalInstruction}"/>
+                        <h:outputText value="#{dosageController.selected.additionalInstruction}" title="#{bundle.ViewDosageTitle_additionalInstruction}"/>
+                        <h:outputText value="#{bundle.ViewDosageLabel_patientInstruction}"/>
+                        <h:outputText value="#{dosageController.selected.patientInstruction}" title="#{bundle.ViewDosageTitle_patientInstruction}"/>
+                        <h:outputText value="#{bundle.ViewDosageLabel_timing}"/>
+                        <h:outputText value="#{dosageController.selected.timing}" title="#{bundle.ViewDosageTitle_timing}"/>
+                        <h:outputText value="#{bundle.ViewDosageLabel_asNeeded}"/>
+                        <p:selectBooleanCheckbox value="#{dosageController.selected.asNeeded}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewDosageLabel_site}"/>
+                        <h:outputText value="#{dosageController.selected.site}" title="#{bundle.ViewDosageTitle_site}"/>
+                        <h:outputText value="#{bundle.ViewDosageLabel_route}"/>
+                        <h:outputText value="#{dosageController.selected.route}" title="#{bundle.ViewDosageTitle_route}"/>
+                        <h:outputText value="#{bundle.ViewDosageLabel_method}"/>
+                        <h:outputText value="#{dosageController.selected.method}" title="#{bundle.ViewDosageTitle_method}"/>
+                        <h:outputText value="#{bundle.ViewDosageLabel_maxDosePerPeriodNumerator}"/>
+                        <h:outputText value="#{dosageController.selected.maxDosePerPeriodNumerator}" title="#{bundle.ViewDosageTitle_maxDosePerPeriodNumerator}"/>
+                        <h:outputText value="#{bundle.ViewDosageLabel_maxDosePerPeriodDenominator}"/>
+                        <h:outputText value="#{dosageController.selected.maxDosePerPeriodDenominator}" title="#{bundle.ViewDosageTitle_maxDosePerPeriodDenominator}"/>
+                        <h:outputText value="#{bundle.ViewDosageLabel_maxDosePerLifetime}"/>
+                        <h:outputText value="#{dosageController.selected.maxDosePerLifetime}" title="#{bundle.ViewDosageTitle_maxDosePerLifetime}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DosageViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

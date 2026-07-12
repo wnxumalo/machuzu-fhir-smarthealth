@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AllergyViewDlg" widgetVar="AllergyViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="View Allergy" styleClass="ui-fluid">
+            <h:form id="AllergyViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{allergyController.selected != null}">
+                        <h:outputText value="Clinical Status"/>
+                        <p:selectBooleanCheckbox value="#{allergyController.selected.clinicalStatus}" disabled="true"/>
+                        <h:outputText value="Verification Status"/>
+                        <h:outputText value="#{allergyController.selected.verificationStatus}" title="#{bundle.ViewAllergyTitle_verificationStatus}"/>
+                        <h:outputText value="Type"/>
+                        <h:outputText value="#{allergyController.selected.type}" title="#{bundle.ViewAllergyTitle_type}"/>
+                        <h:outputText value="Category"/>
+                        <h:outputText value="#{allergyController.selected.category}" title="#{bundle.ViewAllergyTitle_category}"/>
+                        <h:outputText value="Criticality"/>
+                        <h:outputText value="#{allergyController.selected.criticality}" title="#{bundle.ViewAllergyTitle_criticality}"/>
+                        <h:outputText value="Code"/>
+                        <h:outputText value="#{allergyController.selected.ACode}" title="#{bundle.ViewAllergyTitle_code}"/>
+                        <h:outputText value="Onset Date"/>
+                        <h:outputText value="#{allergyController.selected.onsetDateTime}" title="#{bundle.ViewAllergyTitle_onsetDateTime}"/>
+                        <h:outputText value="Onset Age"/>
+                        <h:outputText value="#{allergyController.selected.onsetAge}" title="#{bundle.ViewAllergyTitle_onsetAge}"/>
+                        <h:outputText value="Onset Period From"/>
+                        <h:outputText value="#{allergyController.selected.onsetPeriodFrom}" title="#{bundle.ViewAllergyTitle_onsetPeriodFrom}"/>
+                        <h:outputText value="Onset Period To"/>
+                        <h:outputText value="#{allergyController.selected.onsetPeriodTo}" title="#{bundle.ViewAllergyTitle_onsetPeriodTo}"/>
+                        <h:outputText value="Onset Range"/>
+                        <h:outputText value="#{allergyController.selected.onsetRange}" title="#{bundle.ViewAllergyTitle_onsetRange}"/>
+                        <h:outputText value="Onset String"/>
+                        <h:outputText value="#{allergyController.selected.onsetString}" title="#{bundle.ViewAllergyTitle_onsetString}"/>
+                        <h:outputText value="Recorded Date"/>
+                        <h:outputText value="#{allergyController.selected.recordedDate}" title="#{bundle.ViewAllergyTitle_recordedDate}"/>
+                        <h:outputText value="Last Occurrence"/>
+                        <h:outputText value="#{allergyController.selected.lastOccurrence}" title="#{bundle.ViewAllergyTitle_lastOccurrence}"/>
+                        <h:outputText value="Note"/>
+                        <h:outputText value="#{allergyController.selected.note}" title="#{bundle.ViewAllergyTitle_note}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AllergyViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

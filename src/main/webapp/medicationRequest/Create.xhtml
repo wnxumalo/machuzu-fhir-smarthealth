@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MedicationRequestCreateDlg" widgetVar="MedicationRequestCreateDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Create Medication Request" styleClass="ui-fluid">
+            <h:form id="MedicationRequestCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Status" for="MStatus" />
+                        <p:selectOneMenu id="MStatus" value="#{medicationRequestController.selected.medStatus}" title="Status">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="active" itemValue="active" />
+                            <f:selectItem itemLabel="on-hold" itemValue="on-hold" />
+                            <f:selectItem itemLabel="cancelled" itemValue="cancelled" />
+                            <f:selectItem itemLabel="completed" itemValue="completed" />
+                            <f:selectItem itemLabel="entered-in-error" itemValue="entered-in-error" />
+                            <f:selectItem itemLabel="stopped" itemValue="stopped" />
+                            <f:selectItem itemLabel="draft" itemValue="draft" />
+                            <f:selectItem itemLabel="unknown" itemValue="unknown" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Status Reason" for="statusReason" />
+                        <p:selectOneMenu id="statusReason" value="#{medicationRequestController.selected.statusReason}" title="Reason">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Try another treatment first" itemValue="altchoice" />
+                            <f:selectItem itemLabel="Prescription requires clarification" itemValue="clarif" />
+                            <f:selectItem itemLabel="Drug level too high" itemValue="drughigh" />
+                            <f:selectItem itemLabel="Admission to hospital" itemValue="hospadm" />
+                            <f:selectItem itemLabel="Lab interference issues" itemValue="labint" />
+                            <f:selectItem itemLabel="Patient not available" itemValue="non-avail" />
+                            <f:selectItem itemLabel="Parent is pregnant/breast feeding" itemValue="preg" />
+                            <f:selectItem itemLabel="Allergy" itemValue="salg" />
+                            <f:selectItem itemLabel="Drug interacts with another drug" itemValue="sddi" />
+                            <f:selectItem itemLabel="Duplicate therapy" itemValue="sdupther" />
+                            <f:selectItem itemLabel="Suspected intolerance" itemValue="sintol" />
+                            <f:selectItem itemLabel="Patient scheduled for surgery." itemValue="surg" />
+                            <f:selectItem itemLabel="Waiting for old drug to wash out" itemValue="washout" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Category" for="category" />
+                        <p:selectOneMenu id="category" value="#{medicationRequestController.selected.category}" title="Category">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Inpatient" itemValue="inpatient" />
+                            <f:selectItem itemLabel="Outpatient" itemValue="outpatient" />
+                            <f:selectItem itemLabel="Community" itemValue="community" />
+                            <f:selectItem itemLabel="Discharge" itemValue="discharge" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Intent" for="intent" />
+                        <p:selectOneMenu id="intent" value="#{medicationRequestController.selected.intent}" title="Intent">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Proposal" itemValue="proposal" />
+                            <f:selectItem itemLabel="Plan" itemValue="plan" />
+                            <f:selectItem itemLabel="Order" itemValue="order" />
+                            <f:selectItem itemLabel="Original Order" itemValue="original-order" />
+                            <f:selectItem itemLabel="Reflex Order" itemValue="reflex-order" />
+                            <f:selectItem itemLabel="Filler Order" itemValue="filler-order" />
+                            <f:selectItem itemLabel="Instance Order" itemValue="instance-order" />
+                            <f:selectItem itemLabel="Option" itemValue="option" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Priority" for="priority" />
+                        <p:selectOneMenu id="priority" value="#{medicationRequestController.selected.priority}" title="Priority">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Routine" itemValue="routine" />
+                            <f:selectItem itemLabel="Urgent" itemValue="urgent" />
+                            <f:selectItem itemLabel="ASAP" itemValue="asap" />
+                            <f:selectItem itemLabel="STAT" itemValue="stat" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Do Not Perform" for="doNotPerform" />
+                        <p:selectBooleanCheckbox id="doNotPerform" value="#{medicationRequestController.selected.doNotPerform}" />
+                        <p:outputLabel value="Authored On" for="authoredOn" />
+                        <p:calendar id="authoredOn" pattern="MM/dd/yyyy" value="#{medicationRequestController.selected.authoredOn}" yearRange="c-100:c+100" title="Authored On"  showOn="button"/>
+                        <p:outputLabel value="Perform Type" for="performType" />
+                        <p:selectOneMenu id="performType" value="#{medicationRequestController.selected.performType}" title="Performer Type">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Specialized surgeon" itemValue="1421009" />
+                            <f:selectItem itemLabel="Radiation therapist" itemValue="3430008" />
+                            <f:selectItem itemLabel="Chiropractor" itemValue="3842006" />
+                            <f:selectItem itemLabel="Dental assistant" itemValue="4162009" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Course Of Therapy Type" for="courseOfTherapyType" />
+                        <p:selectOneMenu id="courseOfTherapyType" value="#{medicationRequestController.selected.courseOfTherapyType}" title="Performer Type">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Continuous long term therapy" itemValue="continuous" />
+                            <f:selectItem itemLabel="Short course (acute) therapy" itemValue="acute" />
+                            <f:selectItem itemLabel="Seasonal" itemValue="seasonal" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Reason Code" for="reasonCode" />
+                        <p:selectOneMenu id="reasonCode" value="#{medicationRequestController.selected.intent}" title="Intent">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Anxiety disorder of childhood OR adolescence" itemValue="109006" />
+                            <f:selectItem itemLabel="Choroidal hemorrhage" itemValue="122003" />
+                            <f:selectItem itemLabel="Spontaneous abortion with laceration of cervix" itemValue="127009" />
+                            <f:selectItem itemLabel="Homoiothermia" itemValue="129007" />
+                            <f:selectItem itemLabel="Decreased hair growth" itemValue="134006" />
+                            <f:selectItem itemLabel="Chronic pharyngitis" itemValue="140004" />
+                            <f:selectItem itemLabel="Normal peripheral vision" itemValue="144008" />
+                            <f:selectItem itemLabel="Superficial foreign body of scrotum without major open wound but with infection" itemValue="147001" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Note" for="note" />
+                        <p:inputText id="note" value="#{medicationRequestController.selected.note}" title="#{bundle.CreateMedicationRequestTitle_note}" />
+                    </p:panelGrid>
+                    <p:commandButton action="#{medicationRequestController.create(encounterController.selected.id, medicationAdministrationController.selected.id)}" actionListener="#{medicationController.prepareCreate()}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args,'MedicationRequestCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MedicationRequestCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

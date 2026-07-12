@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="List Organisations"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+            
+            <p:growl id="growl">
+                <p:autoUpdate/>
+            </p:growl>
+            <h:form id="OrganisationListForm">
+                <p:panel header="#{bundle.ListOrganisationTitle}" styleClass="ui-fluid">
+                    <p:panelGrid columns="2">
+
+                        <p:panelGrid columns="2">
+                        <h:outputText value="Active"/>
+                        <h:outputText value="#{organisationController.selected.active}" title="#{bundle.ViewOrganisationTitle_active}"/>
+                        <h:outputText value="Type"/>
+                        <h:outputText value="#{organisationController.selected.orgType}" title="#{bundle.ViewOrganisationTitle_type}"/>
+                        <h:outputText value="Name"/>
+                        <h:outputText value="#{organisationController.selected.name}" title="#{bundle.ViewOrganisationTitle_name}"/>
+                        <h:outputText value="Alias"/>
+                        <h:outputText value="#{organisationController.selected.alias}" title="#{bundle.ViewOrganisationTitle_alias}"/>
+                        <h:outputText value=Address"/>
+                        <h:outputText value="#{organisationController.selected.address}" title="#{bundle.ViewOrganisationTitle_address}"/>
+                        <h:outputText value="Part Of"/>
+                        <h:outputText value="#{organisationController.selected.partOf}" title="#{bundle.ViewOrganisationTitle_partOf}"/>
+                        <h:outputText value="Contact"/>
+                        <h:outputText value="#{organisationController.selected.contact}" title="#{bundle.ViewOrganisationTitle_contact}"/>
+                        <h:outputText value="End Point"/>
+                        <h:outputText value="#{organisationController.selected.endPoint}" title="#{bundle.ViewOrganisationTitle_endPoint}"/>
+                    </p:panelGrid>
+
+                    </p:panelGrid>
+                </p:panel>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

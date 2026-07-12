@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConditionViewDlg" widgetVar="ConditionViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="View Condition" styleClass="ui-fluid">
+            <h:form id="ConditionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{conditionController.selected != null}">
+                        <h:outputText value="Clinical Status"/>
+                        <p:selectBooleanCheckbox value="#{conditionController.selected.clinicalStatus}" disabled="true"/>
+                        <h:outputText value="Verification Status"/>
+                        <h:outputText value="#{conditionController.selected.verificationStatus}" title="#{bundle.ViewConditionTitle_verificationStatus}"/>
+                        <h:outputText value="Category"/>
+                        <h:outputText value="#{conditionController.selected.category}" title="#{bundle.ViewConditionTitle_category}"/>
+                        <h:outputText value="Severity"/>
+                        <h:outputText value="#{conditionController.selected.severity}" title="#{bundle.ViewConditionTitle_severity}"/>
+                        <h:outputText value="Code"/>
+                        <h:outputText value="#{conditionController.selected.ACode}" title="#{bundle.ViewConditionTitle_ACode}"/>
+                        <h:outputText value="Body Site"/>
+                        <h:outputText value="#{conditionController.selected.bodySite}" title="#{bundle.ViewConditionTitle_bodySite}"/>
+                        <h:outputText value="Onset Date"/>
+                        <h:outputText value="#{conditionController.selected.onsetDateTime}" title="#{bundle.ViewConditionTitle_onsetDateTime}"/>
+                        <h:outputText value="Onset Age"/>
+                        <h:outputText value="#{conditionController.selected.onsetAge}" title="#{bundle.ViewConditionTitle_onsetAge}"/>
+                        <h:outputText value="Onset Period From"/>
+                        <h:outputText value="#{conditionController.selected.onsetPeriodFrom}" title="#{bundle.ViewConditionTitle_onsetPeriodFrom}"/>
+                        <h:outputText value="Onset Period To"/>
+                        <h:outputText value="#{conditionController.selected.onsetPeriodTo}" title="#{bundle.ViewConditionTitle_onsetPeriodTo}"/>
+                        <h:outputText value="Onset Range"/>
+                        <h:outputText value="#{conditionController.selected.onsetRange}" title="#{bundle.ViewConditionTitle_onsetRange}"/>
+                        <h:outputText value="Onset String"/>
+                        <h:outputText value="#{conditionController.selected.onsetString}" title="#{bundle.ViewConditionTitle_onsetString}"/>
+                        <h:outputText value="Abatement Date"/>
+                        <h:outputText value="#{conditionController.selected.abatementDateTime}" title="#{bundle.ViewConditionTitle_abatementDateTime}"/>
+                        <h:outputText value="Abatement Age"/>
+                        <h:outputText value="#{conditionController.selected.abatementAge}" title="#{bundle.ViewConditionTitle_abatementAge}"/>
+                        <h:outputText value="Abatement Period From"/>
+                        <h:outputText value="#{conditionController.selected.abatementPeriodFrom}" title="#{bundle.ViewConditionTitle_abatementPeriodFrom}"/>
+                        <h:outputText value="Abatement Period To"/>
+                        <h:outputText value="#{conditionController.selected.abatementPeriodTo}" title="#{bundle.ViewConditionTitle_abatementPeriodTo}"/>
+                        <h:outputText value="Abatement Range"/>
+                        <h:outputText value="#{conditionController.selected.abatementRange}" title="#{bundle.ViewConditionTitle_abatementRange}"/>
+                        <h:outputText value="Abatement String"/>
+                        <h:outputText value="#{conditionController.selected.abatementString}" title="#{bundle.ViewConditionTitle_abatementString}"/>
+                        <h:outputText value="Recorded Date"/>
+                        <h:outputText value="#{conditionController.selected.recordedDate}" title="#{bundle.ViewConditionTitle_recordedDate}"/>
+                        <h:outputText value="Note"/>
+                        <h:outputText value="#{conditionController.selected.note}" title="#{bundle.ViewConditionTitle_note}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ConditionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

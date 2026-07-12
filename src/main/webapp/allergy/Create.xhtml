@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AllergyCreateDlg" widgetVar="AllergyCreateDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Create Allergy" styleClass="ui-fluid">
+            <h:form id="AllergyCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{allergyController.selected != null}">
+                        <p:outputLabel value="Description" for="note" />
+                        <p:inputText id="note" value="#{allergyController.selected.note}" title="#{bundle.CreateAllergyTitle_note}" />
+                        <p:outputLabel value="Clinical Status" for="clinicalStatus" />
+                        <p:selectOneMenu id="clinicalStatus" value="#{allergyController.selected.clinicalStatus}" title="Clinical Status">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="active" itemValue="active" />
+                            <f:selectItem itemLabel="inactive" itemValue="inactive" />
+                            <f:selectItem itemLabel="resolved" itemValue="resolved" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Verification Status" for="verificationStatus" />
+                        <p:selectOneMenu id="verificationStatus" value="#{allergyController.selected.verificationStatus}" title="Verification Status">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="unconfirmed" itemValue="unconfirmed" />
+                            <f:selectItem itemLabel="confirmed" itemValue="confirmed" />
+                            <f:selectItem itemLabel="refuted" itemValue="refuted" />
+                            <f:selectItem itemLabel="entered-in-error" itemValue="entered-in-error" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Type" for="type" />                        
+                        <p:selectOneMenu id="type" value="#{allergyController.selected.type}" title="Type">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="allergy" itemValue="allergy" />
+                            <f:selectItem itemLabel="intolerance - Underlying mechanism" itemValue="intolerance - Underlying mechanism" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Category" for="category" />
+                        <p:selectOneMenu id="category" value="#{allergyController.selected.category}" title="Category">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="food" itemValue="food" />
+                            <f:selectItem itemLabel="medication" itemValue="medication" />
+                            <f:selectItem itemLabel="environment" itemValue="environment" />
+                            <f:selectItem itemLabel="biologic" itemValue="biologic" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Criticality" for="criticality" />
+                        <p:selectOneMenu id="criticality" value="#{allergyController.selected.criticality}" title="Criticality">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="low" itemValue="low" />
+                            <f:selectItem itemLabel="high" itemValue="high" />
+                            <f:selectItem itemLabel="unable-to-assess" itemValue="unable-to-assess" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Code" for="code" />
+                        <p:selectOneMenu id="code" value="#{allergyController.selected.ACode}" title="Code">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Hemoglobin Okaloosa" itemValue="102002" />
+                            <f:selectItem itemLabel="Ornithine racemase" itemValue="120006" />
+                            <f:selectItem itemLabel="Ferrous sulfate Fe^59^" itemValue="125001" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Onset Date" for="onsetDateTime" />
+                        <p:calendar id="onsetDateTime" value="#{allergyController.selected.onsetDateTime}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Onset Date" />
+                        <p:outputLabel value="Onset Age" for="onsetAge" />
+                        <p:inputText id="onsetAge" value="#{allergyController.selected.onsetAge}" title="#{bundle.CreateAllergyTitle_onsetAge}" />
+                        <p:outputLabel value="Onset From" for="onsetPeriodFrom" />
+                        <p:calendar id="onsetPeriodFrom" value="#{allergyController.selected.onsetPeriodFrom}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Onset From" />
+                        <p:outputLabel value="Onset To" for="onsetPeriodTo" />
+                        <p:calendar id="onsetPeriodTo" value="#{allergyController.selected.onsetPeriodTo}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Onset To" />
+                        <p:outputLabel value="Onset Range Low" for="onsetRange" />
+                        <p:inputText id="onsetRange" value="#{allergyController.selected.onsetRange}" title="#{bundle.CreateAllergyTitle_onsetRange}" />
+                        <p:outputLabel value="Onset String" for="onsetString" />
+                        <p:inputText id="onsetString" value="#{allergyController.selected.onsetString}" title="#{bundle.CreateAllergyTitle_onsetString}" />
+                        <p:outputLabel value="Recorded Date" for="recordedDate" />
+                        <p:calendar id="recordedDate" value="#{allergyController.selected.recordedDate}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Recorded Date" />
+                        <p:outputLabel value="Last Occurrence" for="lastOccurrence" />
+                        <p:calendar id="lastOccurrence" value="#{allergyController.selected.lastOccurrence}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Last Occurrence" />                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{allergyController.create(encounterController.selected.id)}" value="Save" update="display,:AllergyListForm:datalist,:growl" oncomplete="handleSubmit(args,'AllergyCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AllergyCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

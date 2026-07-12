@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="title">
+            <h:outputText value="List Care Plan"></h:outputText>
+        </ui:define>
+
+        <ui:define name="content">
+            
+            <p:growl id="growl">
+                <p:autoUpdate/>
+            </p:growl>
+
+            <h3>Care Plan</h3>
+            
+            <h:form id="CarePlanListForm">
+                
+                <p:panel id="pnlUserHome" header="Identifier" styleClass="ui-fluid">
+                    <h:panelGrid columns="10" rendered="#{!empty identifierController.selected}" cellspacing="10px;" style="width:100%;" >
+                        <h:outputText value="ID" style="font-weight: bold;"/>
+                        <h:outputText value="#{identifierController.selected.id}"/>                    
+                        <h:outputText value="USE" style="font-weight: bold;"/>
+                        <h:outputText value="#{identifierController.selected.use}"/>                                            
+                        <h:outputText value="VALUE" style="font-weight: bold;"/>
+                        <h:outputText value="#{identifierController.selected.value}"/>                    
+                        <h:outputText value="TYPE" style="font-weight: bold;"/>
+                        <h:outputText value="#{identifierController.selected.IType}"/>
+                    </h:panelGrid>
+                </p:panel>
+
+                <p:panel header="#{bundle.ListCarePlanTitle}" styleClass="ui-fluid">
+                    <p:dataTable id="datalist" value="#{carePlanController.items}" var="item"
+                                 selectionMode="single" selection="#{carePlanController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCarePlanTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCarePlanTitle_encounter}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.encounter}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCarePlanTitle_intent}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.intent}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCarePlanTitle_category}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.category}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCarePlanTitle_title}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.title}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCarePlanTitle_description}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.description}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCarePlanTitle_status}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.status}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCarePlanTitle_periodFrom}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.periodFrom}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCarePlanTitle_periodTo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.periodTo}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCarePlanTitle_created}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.created}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCarePlanTitle_note}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.note}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{carePlanController.prepareCreate}" update=":CarePlanCreateForm" oncomplete="PF('CarePlanCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CarePlanViewForm" oncomplete="PF('CarePlanViewDialog').show()" disabled="#{empty carePlanController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CarePlanEditForm" oncomplete="PF('CarePlanEditDialog').show()" disabled="#{empty carePlanController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{carePlanController.destroy}" update=":growl,datalist" disabled="#{empty carePlanController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

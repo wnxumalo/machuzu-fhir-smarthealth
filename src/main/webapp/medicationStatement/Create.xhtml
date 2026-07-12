@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MedicationStatementCreateDlg" widgetVar="MedicationStatementCreateDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Create Medication Statement" styleClass="ui-fluid">
+            <h:form id="MedicationStatementCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Status" for="MStatus" />
+                        <p:selectOneMenu id="MStatus" value="#{medicationStatementController.selected.MStatus}" title="Status">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="active" itemValue="active" />
+                            <f:selectItem itemLabel="completed" itemValue="completed" />
+                            <f:selectItem itemLabel="entered-in-error" itemValue="entered-in-error" />
+                            <f:selectItem itemLabel="intended" itemValue="intended" />
+                            <f:selectItem itemLabel="stopped" itemValue="stopped" />
+                            <f:selectItem itemLabel="on-hold" itemValue="on-hold" />
+                            <f:selectItem itemLabel="unknown" itemValue="unknown" />
+                            <f:selectItem itemLabel="not-taken" itemValue="not-taken" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Status Reason" for="statusReason" />
+                        <p:selectOneMenu id="statusReason" value="#{medicationStatementController.selected.MStatus}" title="Reason">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Try another treatment first" itemValue="altchoice" />
+                            <f:selectItem itemLabel="Prescription requires clarification" itemValue="clarif" />
+                            <f:selectItem itemLabel="Drug level too high" itemValue="drughigh" />
+                            <f:selectItem itemLabel="Admission to hospital" itemValue="hospadm" />
+                            <f:selectItem itemLabel="Lab interference issues" itemValue="labint" />
+                            <f:selectItem itemLabel="Patient not available" itemValue="non-avail" />
+                            <f:selectItem itemLabel="Parent is pregnant/breast feeding" itemValue="preg" />
+                            <f:selectItem itemLabel="Allergy" itemValue="salg" />
+                            <f:selectItem itemLabel="Drug interacts with another drug" itemValue="sddi" />
+                            <f:selectItem itemLabel="Duplicate therapy" itemValue="sdupther" />
+                            <f:selectItem itemLabel="Suspected intolerance" itemValue="sintol" />
+                            <f:selectItem itemLabel="Patient scheduled for surgery." itemValue="surg" />
+                            <f:selectItem itemLabel="Waiting for old drug to wash out" itemValue="washout" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Category" for="category" />
+                        <p:selectOneMenu id="category" value="#{medicationStatementController.selected.category}" title="Category">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Inpatient" itemValue="inpatient" />
+                            <f:selectItem itemLabel="Outpatient" itemValue="outpatient" />
+                            <f:selectItem itemLabel="Community" itemValue="community" />
+                            <f:selectItem itemLabel="Discharge" itemValue="discharge" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Effective Date" for="effectiveDate" />
+                        <p:calendar id="effectiveDate" pattern="MM/dd/yyyy" value="#{medicationStatementController.selected.effectiveDate}" title="#{bundle.EditMedicationStatementTitle_effectiveDate}"  showOn="button"/>
+                        <p:outputLabel value="Effective Period From" for="effectivePeriodFrom" />
+                        <p:calendar id="effectivePeriodFrom" pattern="MM/dd/yyyy" value="#{medicationStatementController.selected.effectivePeriodFrom}" title="#{bundle.EditMedicationStatementTitle_effectivePeriodFrom}"  showOn="button"/>
+                        <p:outputLabel value="Effective Period To" for="effectivePeriodTo" />
+                        <p:calendar id="effectivePeriodTo" pattern="MM/dd/yyyy" value="#{medicationStatementController.selected.effectivePeriodTo}" title="#{bundle.EditMedicationStatementTitle_effectivePeriodTo}"  showOn="button"/>
+                        <p:outputLabel value="Date Asserted" for="dateAsserted" />
+                        <p:calendar id="dateAsserted" pattern="MM/dd/yyyy" value="#{medicationStatementController.selected.dateAsserted}" title="#{bundle.EditMedicationStatementTitle_effectivePeriodTo}"  showOn="button"/>
+                        <p:outputLabel value="Reason Code" for="reasonCode" />
+                        <p:inputText id="reasonCode" value="#{medicationStatementController.selected.reasonCode}" title="#{bundle.CreateMedicationStatementTitle_reasonCode}" />
+                        <p:outputLabel value="Note" for="note" />
+                        <p:inputText id="note" value="#{medicationStatementController.selected.note}" title="#{bundle.CreateMedicationStatementTitle_note}" />
+                    </p:panelGrid>
+                    <p:commandButton action="#{medicationStatementController.create(encounterController.selected.id)}" actionListener="#{dosageController.prepareCreate()}" value="#{bundle.Save}" update="display,:MedicationStatementListForm:datalist,:growl" oncomplete="handleSubmit(args,'MedicationStatementCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MedicationStatementCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

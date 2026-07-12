@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MedicationStatementViewDlg" widgetVar="MedicationStatementViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="View Medication Statement" styleClass="ui-fluid">
+            <h:form id="MedicationStatementViewForm">
+                <p:panelGrid columns="2">
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2" rendered="#{medicationStatementController.selected != null}">
+                            <h:outputText value="Id"/>
+                            <h:outputText value="#{medicationStatementController.selected.id}" title="#{bundle.ViewMedicationStatementTitle_id}"/>
+                            <h:outputText value="Status"/>
+                            <h:outputText value="#{medicationStatementController.selected.MStatus}" title="#{bundle.ViewMedicationStatementTitle_MStatus}"/>
+                            <h:outputText value="Status Reason"/>
+                            <h:outputText value="#{medicationStatementController.selected.statusReason}" title="#{bundle.ViewMedicationStatementTitle_statusReason}"/>
+                            <h:outputText value="Category"/>
+                            <h:outputText value="#{medicationStatementController.selected.category}" title="#{bundle.ViewMedicationStatementTitle_category}"/>
+                            <h:outputText value="Effective Date"/>
+                            <h:outputText value="#{medicationStatementController.selected.effectiveDate}" title="#{bundle.ViewMedicationStatementTitle_effectiveDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                            <h:outputText value="Effective Period From"/>
+                            <h:outputText value="#{medicationStatementController.selected.effectivePeriodFrom}" title="#{bundle.ViewMedicationStatementTitle_effectivePeriodFrom}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                            <h:outputText value="Effective Period To"/>
+                            <h:outputText value="#{medicationStatementController.selected.effectivePeriodTo}" title="#{bundle.ViewMedicationStatementTitle_effectivePeriodTo}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                            <h:outputText value="Medication"/>
+                            <h:outputText value="#{medicationStatementController.selected.medication}" title="#{bundle.ViewMedicationStatementTitle_medication}"/>                            
+                            <h:outputText value="Date Asserted"/>
+                            <h:outputText value="#{medicationStatementController.selected.dateAsserted}" title="#{bundle.ViewMedicationStatementTitle_dateAsserted}"/>
+                            <h:outputText value="Reason Code"/>
+                            <h:outputText value="#{medicationStatementController.selected.reasonCode}" title="#{bundle.ViewMedicationStatementTitle_reasonCode}"/>
+                            <h:outputText value="Note"/>
+                            <h:outputText value="#{medicationStatementController.selected.note}" title="#{bundle.ViewMedicationStatementTitle_note}"/>
+                        </p:panelGrid>
+                        <p:commandButton value="#{bundle.Close}" onclick="MedicationStatementViewDialog.hide()"/>
+                    </h:panelGroup>
+
+                    <!--ui:repeat var="dsgsi" value="#{medicationStatementController.selected.dosages}">
+                        <h4>Dosage Instructions</h4>
+                        <p:panelGrid columns="2">
+                            <h:outputText value="Id"/>
+                            <h:outputText value="#{dsgsi.id}"/>
+                            <h:outputText value="Sequence"/>
+                            <h:outputText value="#{dsgsi.sequence}"/>
+                            <h:outputText value="Text"/>
+                            <h:outputText value="#{dsgsi.text}"/>
+                            <h:outputText value="Additional Instruction"/>
+                            <h:outputText value="#{dsgsi.additionalInstruction}"/>
+                            <h:outputText value="Patient Instruction"/>
+                            <h:outputText value="#{dsgsi.patientInstruction}"/>
+                            <h:outputText value="Timing"/>
+                            <h:outputText value="#{dsgsi.timing}"/>
+                            <h:outputText value="As Needed"/>
+                            <p:selectBooleanCheckbox value="#{dsgsi.asNeeded}" disabled="true"/>
+                            <h:outputText value="Site"/>
+                            <h:outputText value="#{dsgsi.site}"/>
+                            <h:outputText value="Route"/>
+                            <h:outputText value="#{dsgsi.route}"/>
+                            <h:outputText value="Method"/>
+                            <h:outputText value="#{dsgsi.method}"/>
+                            <h:outputText value="Max Dose Per Period Numerator"/>
+                            <h:outputText value="#{dsgsi.maxDosePerPeriodNumerator}"/>
+                            <h:outputText value="Max Dose Per Period Denominator"/>
+                            <h:outputText value="#{dsgsi.maxDosePerPeriodDenominator}"/>
+                            <h:outputText value="Max Dose Per Lifetime"/>
+                            <h:outputText value="#{dsgsi.maxDosePerLifetime}"/>
+                        </p:panelGrid>
+                    </ui:repeat-->
+
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

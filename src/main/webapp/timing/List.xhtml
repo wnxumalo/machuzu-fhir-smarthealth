@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTimingTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="TimingListForm">
+                <p:panel header="#{bundle.ListTimingTitle}">
+                    <p:dataTable id="datalist" value="#{timingController.items}" var="item"
+                                 selectionMode="single" selection="#{timingController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_dosage}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dosage}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_repeat}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.repeat}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_boundsDuration}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.boundsDuration}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_boundsRange}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.boundsRange}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_boundsPeriodFrom}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.boundsPeriodFrom}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_batchExpirationDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.batchExpirationDate}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_count}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.count}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_countMax}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.countMax}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_duration}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.duration}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_durationMax}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.durationMax}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_durationUnit}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.durationUnit}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_frequency}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.frequency}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_frequencyMax}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.frequencyMax}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_periodLow}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.periodLow}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_periodMax}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.periodMax}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_periodUnit}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.periodUnit}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_dayOfWeek}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dayOfWeek}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_timeOfDay}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.timeOfDay}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_RPTWhen}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.RPTWhen}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_RPTOffset}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.RPTOffset}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTimingTitle_TCode}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.TCode}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{timingController.prepareCreate}" update=":TimingCreateForm" oncomplete="PF('TimingCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TimingViewForm" oncomplete="PF('TimingViewDialog').show()" disabled="#{empty timingController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TimingEditForm" oncomplete="PF('TimingEditDialog').show()" disabled="#{empty timingController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{timingController.destroy}" update=":growl,datalist" disabled="#{empty timingController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

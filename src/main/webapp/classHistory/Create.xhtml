@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ClassHistoryCreateDlg" widgetVar="ClassHistoryCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateClassHistoryTitle}">
+            <h:form id="ClassHistoryCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{classHistoryController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateClassHistoryLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{classHistoryController.selected.id}" title="#{bundle.CreateClassHistoryTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateClassHistoryLabel_coding}" for="coding" />
+                        <p:inputText id="coding" value="#{classHistoryController.selected.coding}" title="#{bundle.CreateClassHistoryTitle_coding}" />
+                        <p:outputLabel value="#{bundle.CreateClassHistoryLabel_encounter}" for="encounter" />
+                        <p:inputText id="encounter" value="#{classHistoryController.selected.encounter}" title="#{bundle.CreateClassHistoryTitle_encounter}" />
+                        <p:outputLabel value="#{bundle.CreateClassHistoryLabel_periodFrom}" for="periodFrom" />
+                        <p:inputText id="periodFrom" value="#{classHistoryController.selected.periodFrom}" title="#{bundle.CreateClassHistoryTitle_periodFrom}" />
+                        <p:outputLabel value="#{bundle.CreateClassHistoryLabel_periodTo}" for="periodTo" />
+                        <p:inputText id="periodTo" value="#{classHistoryController.selected.periodTo}" title="#{bundle.CreateClassHistoryTitle_periodTo}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{classHistoryController.create}" value="#{bundle.Save}" update="display,:ClassHistoryListForm:datalist,:growl" oncomplete="handleSubmit(args,'ClassHistoryCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ClassHistoryCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

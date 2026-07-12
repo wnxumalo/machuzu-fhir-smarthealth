@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LabResultCreateDlg" widgetVar="LabResultCreateDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Add Result" styleClass="ui-fluid">
+            <h:form id="LabResultCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Date" for="labdate" />
+                        <p:calendar id="labdate" value="#{labResultController.selected.labResultDate}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Onset Date" />
+                        <p:outputLabel value="Status" for="status" />
+                        <p:selectOneMenu id="status" value="#{labResultController.selected.status}" required="true" title="Gender">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Registered" itemValue="registered" />
+                            <f:selectItem itemLabel="Partial" itemValue="partial" />
+                            <f:selectItem itemLabel="Preliminary" itemValue="preliminary" />                            
+                            <f:selectItem itemLabel="Final" itemValue="final" />
+                            <f:selectItem itemLabel="Amended" itemValue="amended" />
+                            <f:selectItem itemLabel="Corrected" itemValue="corrected" />
+                            <f:selectItem itemLabel="Appended" itemValue="appended" />
+                            <f:selectItem itemLabel="Cancelled" itemValue="cancelled" />
+                            <f:selectItem itemLabel="Entered in Error" itemValue="entered-in-error" />
+                            <f:selectItem itemLabel="Unknown" itemValue="unknown" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Code" for="code" />
+                        <p:selectOneMenu id="code" value="#{labResultController.selected.code}" required="true" title="Code">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Acyclovir [Susceptibility]" itemValue="Acyclovir [Susceptibility]" />
+                            <f:selectItem itemLabel="R wave duration in lead V2" itemValue="R wave amplitude in lead V2" />
+                            <f:selectItem itemLabel="T wave amplitude in lead V2" itemValue="T wave amplitude in lead V2" />                                                        
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Category" for="category" />
+                        <p:selectOneMenu id="category" value="#{labResultController.selected.category}" required="true" title="Category">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Audiology" itemValue="audiology" />
+                            <f:selectItem itemLabel="Blood Gases" itemValue="blood-gases" />
+                            <f:selectItem itemLabel="Blood Bank" itemValue="blood-bank" />                                                        
+                        </p:selectOneMenu>                        
+                        <p:outputLabel value="Confirm Test Description" for="confirmTestDescription" />
+                        <p:inputText id="confirmTestDescription" value="#{labResultController.selected.confirmTestDescription}" title="#{bundle.CreateLabResultTitle_confirmTestDescription}" />
+                        <p:outputLabel value="Lab Result" for="labResult" />
+                        <p:inputText id="labResult" value="#{labResultController.selected.labResult}" title="#{bundle.CreateLabResultTitle_labResult}" />                        
+                        <p:outputLabel value="Reference" for="reference" />
+                        <p:inputText id="reference" value="#{labResultController.selected.reference}" title="#{bundle.CreateLabResultTitle_reference}" />                                                
+                        <p:outputLabel value="Issued" for="issued" />
+                        <p:inputText id="issued" value="#{labResultController.selected.issued}" title="#{bundle.CreateLabResultTitle_issued}" />
+                        <p:outputLabel value="Conclusion" for="conclusion" />
+                        <p:inputText id="conclusion" value="#{labResultController.selected.conclusion}" title="#{bundle.CreateLabResultTitle_conclusion}" />
+                        <p:outputLabel value="Conclusion Code" for="conclusionCode" />
+                        <p:selectOneMenu id="conclusionCode" value="#{labResultController.selected.category}" required="true" title="Conclusion Code">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Decreased hair growth" itemValue="Decreased hair growth" />
+                            <f:selectItem itemLabel="Meningitis due to gonococcus" itemValue="Meningitis due to gonococcus" />
+                            <f:selectItem itemLabel="Lucio phenomenon" itemValue="Lucio phenomenon" />                                                        
+                        </p:selectOneMenu>                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{labResultController.create(labController.selected.id)}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args,'LabResultCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LabResultCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

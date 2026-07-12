@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VitalsEditDlg" widgetVar="VitalsEditDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Edit Vitals" styleClass="ui-fluid">
+            <h:form id="VitalsEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vitalsController.selected != null}">
+                        <p:outputLabel value="BP" for="bp" />
+                        <p:inputText id="bp" value="#{vitalsController.selected.bp}" title="#{bundle.CreateVitalsTitle_bp}" />
+                        <p:outputLabel value="Temp" for="temp" />
+                        <p:inputText id="temp" value="#{vitalsController.selected.temp}" title="#{bundle.CreateVitalsTitle_temp}" />
+                        <p:outputLabel value="Pulse" for="pulse" />
+                        <p:inputText id="pulse" value="#{vitalsController.selected.pulse}" title="#{bundle.CreateVitalsTitle_pulse}" />
+                        <p:outputLabel value="Resp" for="resp" />
+                        <p:inputText id="resp" value="#{vitalsController.selected.resp}" title="#{bundle.CreateVitalsTitle_resp}" />
+                        <p:outputLabel value="Weight" for="weight" />
+                        <p:inputText id="weight" value="#{vitalsController.selected.weight}" title="#{bundle.CreateVitalsTitle_weight}" />
+                        <p:outputLabel value="Height" for="height" />
+                        <p:inputText id="height" value="#{vitalsController.selected.height}" title="#{bundle.CreateVitalsTitle_height}" />
+                        <p:outputLabel value="Spo2" for="spo2" />
+                        <p:inputText id="spo2" value="#{vitalsController.selected.spo2}" title="#{bundle.CreateVitalsTitle_spo2}" />
+                        <p:outputLabel value="BMI" for="bmi" />
+                        <p:inputText id="bmi" value="#{vitalsController.selected.bmi}" title="#{bundle.CreateVitalsTitle_bmi}" />
+                        <p:outputLabel value="BSA" for="bsa" />
+                        <p:inputText id="bsa" value="#{vitalsController.selected.bsa}" title="#{bundle.CreateVitalsTitle_bsa}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{vitalsController.update}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args, 'VitalsEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VitalsEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

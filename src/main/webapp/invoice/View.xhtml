@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InvoiceViewDlg" widgetVar="InvoiceViewDialog" modal="true" resizable="false" appendTo="@(content)" header="#{bundle.ViewInvoiceTitle}" styleClass="ui-fluid">
+            <h:form id="InvoiceViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{invoiceController.selected != null}">
+                        <h:outputText value="#{bundle.ViewInvoiceLabel_id}"/>
+                        <h:outputText value="#{invoiceController.selected.id}" title="#{bundle.ViewInvoiceTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewInvoiceLabel_account}"/>
+                        <h:outputText value="#{invoiceController.selected.account}" title="#{bundle.ViewInvoiceTitle_account}"/>
+                        <h:outputText value="#{bundle.ViewInvoiceLabel_encounter}"/>
+                        <h:outputText value="#{invoiceController.selected.encounter}" title="#{bundle.ViewInvoiceTitle_encounter}"/>
+                        <h:outputText value="#{bundle.ViewInvoiceLabel_status}"/>
+                        <h:outputText value="#{invoiceController.selected.status}" title="#{bundle.ViewInvoiceTitle_status}"/>
+                        <h:outputText value="#{bundle.ViewInvoiceLabel_cancelledReason}"/>
+                        <h:outputText value="#{invoiceController.selected.cancelledReason}" title="#{bundle.ViewInvoiceTitle_cancelledReason}"/>
+                        <h:outputText value="#{bundle.ViewInvoiceLabel_type}"/>
+                        <h:outputText value="#{invoiceController.selected.type}" title="#{bundle.ViewInvoiceTitle_type}"/>
+                        <h:outputText value="#{bundle.ViewInvoiceLabel_IPA}"/>
+                        <h:outputText value="#{invoiceController.selected.IPA}" title="#{bundle.ViewInvoiceTitle_IPA}"/>
+                        <h:outputText value="#{bundle.ViewInvoiceLabel_recipient}"/>
+                        <h:outputText value="#{invoiceController.selected.recipient}" title="#{bundle.ViewInvoiceTitle_recipient}"/>
+                        <h:outputText value="#{bundle.ViewInvoiceLabel_date}"/>
+                        <h:outputText value="#{invoiceController.selected.date}" title="#{bundle.ViewInvoiceTitle_date}"/>
+                        <h:outputText value="#{bundle.ViewInvoiceLabel_creationDate}"/>
+                        <h:outputText value="#{invoiceController.selected.creationDate}" title="#{bundle.ViewInvoiceTitle_creationDate}"/>
+                        <h:outputText value="#{bundle.ViewInvoiceLabel_billingPeriodFrom}"/>
+                        <h:outputText value="#{invoiceController.selected.billingPeriodFrom}" title="#{bundle.ViewInvoiceTitle_billingPeriodFrom}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewInvoiceLabel_billingPeriodTo}"/>
+                        <h:outputText value="#{invoiceController.selected.billingPeriodTo}" title="#{bundle.ViewInvoiceTitle_billingPeriodTo}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewInvoiceLabel_periodFrom}"/>
+                        <h:outputText value="#{invoiceController.selected.periodFrom}" title="#{bundle.ViewInvoiceTitle_periodFrom}"/>
+                        <h:outputText value="#{bundle.ViewInvoiceLabel_periodTo}"/>
+                        <h:outputText value="#{invoiceController.selected.periodTo}" title="#{bundle.ViewInvoiceTitle_periodTo}"/>
+                        <h:outputText value="#{bundle.ViewInvoiceLabel_priceComponent}"/>
+                        <h:outputText value="#{invoiceController.selected.priceComponent}" title="#{bundle.ViewInvoiceTitle_priceComponent}"/>
+                        <h:outputText value="#{bundle.ViewInvoiceLabel_totalPriceComponent}"/>
+                        <h:outputText value="#{invoiceController.selected.totalPriceComponent}" title="#{bundle.ViewInvoiceTitle_totalPriceComponent}"/>
+                        <h:outputText value="#{bundle.ViewInvoiceLabel_totalNet}"/>
+                        <h:outputText value="#{invoiceController.selected.totalNet}" title="#{bundle.ViewInvoiceTitle_totalNet}"/>
+                        <h:outputText value="#{bundle.ViewInvoiceLabel_totalGross}"/>
+                        <h:outputText value="#{invoiceController.selected.totalGross}" title="#{bundle.ViewInvoiceTitle_totalGross}"/>
+                        <h:outputText value="#{bundle.ViewInvoiceLabel_paymentTerms}"/>
+                        <h:outputText value="#{invoiceController.selected.paymentTerms}" title="#{bundle.ViewInvoiceTitle_paymentTerms}"/>
+                        <h:outputText value="#{bundle.ViewInvoiceLabel_note}"/>
+                        <h:outputText value="#{invoiceController.selected.note}" title="#{bundle.ViewInvoiceTitle_note}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="InvoiceViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

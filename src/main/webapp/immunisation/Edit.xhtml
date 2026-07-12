@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ImmunisationEditDlg" widgetVar="ImmunisationEditDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Edit Immunisation" styleClass="ui-fluid">
+            <h:form id="ImmunisationEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{immunisationController.selected != null}">
+                        <p:outputLabel value="Status" for="IStatus" />
+                        <p:selectOneMenu id="IStatus" value="#{immunisationController.selected.IStatus}" title="Status">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="completed" itemValue="completed" />
+                            <f:selectItem itemLabel="entered-in-error" itemValue="entered-in-error" />
+                            <f:selectItem itemLabel="not-done" itemValue="not-done" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Status Reason" for="statusReason" />
+                        <p:selectOneMenu id="statusReason" value="#{immunisationController.selected.statusReason}" title="Status Reason">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="immunity" itemValue="IMMUNE" />
+                            <f:selectItem itemLabel="medical precaution" itemValue="MEDPREC" />
+                            <f:selectItem itemLabel="product out of stock" itemValue="OSTOCK" />
+                            <f:selectItem itemLabel="patient objection" itemValue="PATOBJ" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Vaccine Code" for="vaccineCode" />
+                        <p:selectOneMenu id="vaccineCode" value="#{immunisationController.selected.vaccineCode}" title="Vaccine Code">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Adenovirus types 4 and 7" itemValue="143" />
+                            <f:selectItem itemLabel="adenovirus, type 4" itemValue="54" />
+                            <f:selectItem itemLabel="adenovirus, type 7" itemValue="55" />
+                            <f:selectItem itemLabel="adenovirus, unspecified formulation" itemValue="82" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Occurence Date" for="occurenceDate" />
+                        <p:calendar id="occurenceDate" value="#{immunisationController.selected.occurenceDate}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Recorded Date" />
+                        <p:outputLabel value="Occurence String" for="occurenceString" />
+                        <p:inputText id="occurenceString" value="#{immunisationController.selected.occurenceString}" title="#{bundle.CreateImmunisationTitle_occurenceString}" />
+                        <p:outputLabel value="Recorded" for="recorded" />
+                        <p:calendar id="recorded" value="#{immunisationController.selected.recorded}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Recorded Date" />
+                        <p:outputLabel value="Primary Source" for="primarySource" />
+                        <p:selectBooleanCheckbox id="primarySource" value="#{immunisationController.selected.primarySource}" />
+                        <p:outputLabel value="Report Origin" for="reportOrigin" />
+                        <p:selectOneMenu id="reportOrigin" value="#{immunisationController.selected.reportOrigin}" title="Report Origin">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Other Provider" itemValue="provider" />
+                            <f:selectItem itemLabel="Written Record" itemValue="record" />
+                            <f:selectItem itemLabel="Parent/Guardian/Patient Recall" itemValue="recall" />
+                            <f:selectItem itemLabel="School Record" itemValue="school" />
+                        </p:selectOneMenu>                        
+                        <p:outputLabel value="Lot Number" for="lotNumber" />
+                        <p:inputText id="lotNumber" value="#{immunisationController.selected.lotNumber}" title="#{bundle.CreateImmunisationTitle_lotNumber}" />
+                        <p:outputLabel value="Expiration Date" for="expirationDate" />                        
+                        <p:calendar id="expirationDate" value="#{immunisationController.selected.expirationDate}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Recorded Date" />
+                        <p:outputLabel value="Site" for="site" />
+                        <p:selectOneMenu id="site" value="#{immunisationController.selected.reportOrigin}" title="Report Origin">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Left arm" itemValue="LA" />
+                            <f:selectItem itemLabel="Right arm" itemValue="RA" />                            
+                        </p:selectOneMenu>                        
+                        <p:outputLabel value="Route" for="route" />
+                        <p:selectOneMenu id="route" value="#{immunisationController.selected.route}" title="Route">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Injection, intradermal" itemValue="IDINJ" />
+                            <f:selectItem itemLabel="Injection, intramuscular" itemValue="IM" />
+                            <f:selectItem itemLabel="Inhalation, nasal" itemValue="NASINHLC" />
+                            <f:selectItem itemLabel="Injection, intravenous" itemValue="IVINJ" />
+                            <f:selectItem itemLabel="Swallow, oral" itemValue="PO" />
+                            <f:selectItem itemLabel="Injection, subcutaneous" itemValue="SQ" />
+                            <f:selectItem itemLabel="Transdermal" itemValue="TRNSDERM" />
+                        </p:selectOneMenu>                        
+                        <p:outputLabel value="Dose Quantity" for="doseQuantity" />
+                        <p:inputText id="doseQuantity" value="#{immunisationController.selected.doseQuantity}" title="#{bundle.CreateImmunisationTitle_doseQuantity}" />
+                        <p:outputLabel value="Note" for="note" />
+                        <p:inputText id="note" value="#{immunisationController.selected.note}" title="#{bundle.CreateImmunisationTitle_note}" />
+                        <p:outputLabel value="Reason Code" for="reasonCode" />
+                        <p:selectOneMenu id="reasonCode" value="#{immunisationController.selected.reasonCode}" title="Reason Code">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Procedure to meet occupational requirement" itemValue="429060002" />
+                            <f:selectItem itemLabel="Travel vaccinations" itemValue="281657000" />
+                        </p:selectOneMenu>                        
+                        <p:outputLabel value="Subpotent" for="isSubpotent" />
+                        <p:selectBooleanCheckbox id="isSubpotent" value="#{immunisationController.selected.isSubpotent}" />
+                        <p:outputLabel value="Subpotent Reason" for="subpotentReason" />
+                        <p:selectOneMenu id="subpotentReason" value="#{immunisationController.selected.subpotentReason}" title="Subpotent Reason">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Partial Dose" itemValue="partial" />
+                            <f:selectItem itemLabel="Cold Chain Break" itemValue="coldchainbreak" />
+                            <f:selectItem itemLabel="Manufacturer Recall" itemValue="recall" />                            
+                        </p:selectOneMenu>                        
+                        <p:outputLabel value="Program Eligibility" for="programEligibility" />
+                        <p:selectOneMenu id="programEligibility" value="#{immunisationController.selected.programEligibility}" title="Program Eligibility">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Not Eligible" itemValue="ineligible" />
+                            <f:selectItem itemLabel="Uninsured" itemValue="uninsured" />
+                        </p:selectOneMenu>                        
+                        <p:outputLabel value="Funding Source" for="fundingSource" />
+                        <p:selectOneMenu id="fundingSource" value="#{immunisationController.selected.fundingSource}" title="Funding Source">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Private" itemValue="private" />
+                            <f:selectItem itemLabel="Public" itemValue="public" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Reaction Date" for="reactionDate" />
+                        <p:calendar id="reactionDate" value="#{immunisationController.selected.reactionDate}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Reaction Date" />
+                        <p:outputLabel value="Reaction Detail" for="reactionDetail" />
+                        <p:inputText id="reactionDetail" value="#{immunisationController.selected.reactionDetail}" title="#{bundle.CreateImmunisationTitle_reactionDetail}" />
+                        <p:outputLabel value="Reaction Reported" for="reactionReported" />
+                        <p:selectBooleanCheckbox id="reactionReported" value="#{immunisationController.selected.reactionReported}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{immunisationController.update}" value="#{bundle.Save}" update="display,:ImmunisationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ImmunisationEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ImmunisationEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

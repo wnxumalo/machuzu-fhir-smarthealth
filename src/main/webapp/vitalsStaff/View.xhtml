@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VitalsViewDlg" widgetVar="VitalsViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="View Vitals" styleClass="ui-fluid">
+            <h:form id="VitalsViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vitalsController.selected != null}">
+                        <h:outputText value="BP"/>
+                        <h:outputText value="#{vitalsController.selected.bp}" title="#{bundle.ViewVitalsTitle_bp}"/>
+                        <h:outputText value="Temp"/>
+                        <h:outputText value="#{vitalsController.selected.temp}" title="#{bundle.ViewVitalsTitle_temp}"/>
+                        <h:outputText value="Pulse"/>
+                        <h:outputText value="#{vitalsController.selected.pulse}" title="#{bundle.ViewVitalsTitle_pulse}"/>
+                        <h:outputText value="Resp"/>
+                        <h:outputText value="#{vitalsController.selected.resp}" title="#{bundle.ViewVitalsTitle_resp}"/>
+                        <h:outputText value="Weight"/>
+                        <h:outputText value="#{vitalsController.selected.weight}" title="#{bundle.ViewVitalsTitle_weight}"/>
+                        <h:outputText value="Height"/>
+                        <h:outputText value="#{vitalsController.selected.height}" title="#{bundle.ViewVitalsTitle_height}"/>
+                        <h:outputText value="Spo2"/>
+                        <h:outputText value="#{vitalsController.selected.spo2}" title="#{bundle.ViewVitalsTitle_spo2}"/>
+                        <h:outputText value="BMI"/>
+                        <h:outputText value="#{vitalsController.selected.bmi}" title="#{bundle.ViewVitalsTitle_bmi}"/>
+                        <h:outputText value="BSA"/>
+                        <h:outputText value="#{vitalsController.selected.bsa}" title="#{bundle.ViewVitalsTitle_bsa}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="VitalsViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

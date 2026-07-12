@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MedicationAdministrationEditDlg" widgetVar="MedicationAdministrationEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMedicationAdministrationTitle}">
+            <h:form id="MedicationAdministrationEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{medicationAdministrationController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditMedicationAdministrationLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{medicationAdministrationController.selected.id}" title="#{bundle.EditMedicationAdministrationTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditMedicationAdministrationLabel_encounter}" for="encounter" />
+                        <p:inputText id="encounter" value="#{medicationAdministrationController.selected.encounter}" title="#{bundle.EditMedicationAdministrationTitle_encounter}" />
+                        <p:outputLabel value="#{bundle.EditMedicationAdministrationLabel_intent}" for="intent" />
+                        <p:inputText id="intent" value="#{medicationAdministrationController.selected.intent}" title="#{bundle.EditMedicationAdministrationTitle_intent}" />
+                        <p:outputLabel value="#{bundle.EditMedicationAdministrationLabel_category}" for="category" />
+                        <p:inputText id="category" value="#{medicationAdministrationController.selected.category}" title="#{bundle.EditMedicationAdministrationTitle_category}" />
+                        <p:outputLabel value="#{bundle.EditMedicationAdministrationLabel_title}" for="title" />
+                        <p:inputText id="title" value="#{medicationAdministrationController.selected.title}" title="#{bundle.EditMedicationAdministrationTitle_title}" />
+                        <p:outputLabel value="#{bundle.EditMedicationAdministrationLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{medicationAdministrationController.selected.description}" title="#{bundle.EditMedicationAdministrationTitle_description}" />
+                        <p:outputLabel value="#{bundle.EditMedicationAdministrationLabel_status}" for="status" />
+                        <p:inputText id="status" value="#{medicationAdministrationController.selected.status}" title="#{bundle.EditMedicationAdministrationTitle_status}" />
+                        <p:outputLabel value="#{bundle.EditMedicationAdministrationLabel_periodFrom}" for="periodFrom" />
+                        <p:inputText id="periodFrom" value="#{medicationAdministrationController.selected.periodFrom}" title="#{bundle.EditMedicationAdministrationTitle_periodFrom}" />
+                        <p:outputLabel value="#{bundle.EditMedicationAdministrationLabel_periodTo}" for="periodTo" />
+                        <p:inputText id="periodTo" value="#{medicationAdministrationController.selected.periodTo}" title="#{bundle.EditMedicationAdministrationTitle_periodTo}" />
+                        <p:outputLabel value="#{bundle.EditMedicationAdministrationLabel_reasonCode}" for="reasonCode" />
+                        <p:inputText id="reasonCode" value="#{medicationAdministrationController.selected.reasonCode}" title="#{bundle.EditMedicationAdministrationTitle_reasonCode}" />
+                        <p:outputLabel value="#{bundle.EditMedicationAdministrationLabel_note}" for="note" />
+                        <p:inputText id="note" value="#{medicationAdministrationController.selected.note}" title="#{bundle.EditMedicationAdministrationTitle_note}" />
+                        <p:outputLabel value="#{bundle.EditMedicationAdministrationLabel_dosage}" for="dosage" />
+                        <p:selectOneMenu id="dosage" value="#{medicationAdministrationController.selected.dosage}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{dosageController.itemsAvailableSelectOne}"
+                                           var="dosageItem"
+                                           itemValue="#{dosageItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{medicationAdministrationController.update}" value="#{bundle.Save}" update="display,:MedicationAdministrationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MedicationAdministrationEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MedicationAdministrationEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

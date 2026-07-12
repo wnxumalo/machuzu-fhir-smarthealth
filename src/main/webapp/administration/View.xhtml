@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AdministrationViewDlg" widgetVar="AdministrationViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAdministrationTitle}" styleClass="ui-fluid">
+            <h:form id="AdministrationViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{administrationController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAdministrationLabel_id}"/>
+                        <h:outputText value="#{administrationController.selected.id}" title="#{bundle.ViewAdministrationTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewAdministrationLabel_employeeNo}"/>
+                        <h:outputText value="#{administrationController.selected.employeeNo}" title="#{bundle.ViewAdministrationTitle_employeeNo}"/>
+                        <h:outputText value="#{bundle.ViewAdministrationLabel_idNumber}"/>
+                        <h:outputText value="#{administrationController.selected.idNumber}" title="#{bundle.ViewAdministrationTitle_idNumber}"/>
+                        <h:outputText value="#{bundle.ViewAdministrationLabel_employmentDate}"/>
+                        <h:outputText value="#{administrationController.selected.employmentDate}" title="#{bundle.ViewAdministrationTitle_employmentDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewAdministrationLabel_name}"/>
+                        <h:outputText value="#{administrationController.selected.name}" title="#{bundle.ViewAdministrationTitle_name}"/>
+                        <h:outputText value="#{bundle.ViewAdministrationLabel_surname}"/>
+                        <h:outputText value="#{administrationController.selected.surname}" title="#{bundle.ViewAdministrationTitle_surname}"/>
+                        <h:outputText value="#{bundle.ViewAdministrationLabel_gender}"/>
+                        <h:outputText value="#{administrationController.selected.gender}" title="#{bundle.ViewAdministrationTitle_gender}"/>
+                        <h:outputText value="#{bundle.ViewAdministrationLabel_startDay}"/>
+                        <h:outputText value="#{administrationController.selected.startDay}" title="#{bundle.ViewAdministrationTitle_startDay}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewAdministrationLabel_lastDay}"/>
+                        <h:outputText value="#{administrationController.selected.lastDay}" title="#{bundle.ViewAdministrationTitle_lastDay}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewAdministrationLabel_contact}"/>
+                        <h:outputText value="#{administrationController.selected.contact}" title="#{bundle.ViewAdministrationTitle_contact}"/>
+                        <h:outputText value="#{bundle.ViewAdministrationLabel_designation}"/>
+                        <h:outputText value="#{administrationController.selected.designation}" title="#{bundle.ViewAdministrationTitle_designation}"/>
+                        <h:outputText value="#{bundle.ViewAdministrationLabel_department}"/>
+                        <h:outputText value="#{administrationController.selected.department}" title="#{bundle.ViewAdministrationTitle_department}"/>
+                        <h:outputText value="#{bundle.ViewAdministrationLabel_section}"/>
+                        <h:outputText value="#{administrationController.selected.section}" title="#{bundle.ViewAdministrationTitle_section}"/>
+                        <h:outputText value="#{bundle.ViewAdministrationLabel_level}"/>
+                        <h:outputText value="#{administrationController.selected.level}" title="#{bundle.ViewAdministrationTitle_level}"/>
+                        <h:outputText value="#{bundle.ViewAdministrationLabel_status}"/>
+                        <h:outputText value="#{administrationController.selected.status}" title="#{bundle.ViewAdministrationTitle_status}"/>
+                        <h:outputText value="#{bundle.ViewAdministrationLabel_email}"/>
+                        <h:outputText value="#{administrationController.selected.email}" title="#{bundle.ViewAdministrationTitle_email}"/>
+                        <h:outputText value="#{bundle.ViewAdministrationLabel_password}"/>
+                        <h:outputText value="#{administrationController.selected.password}" title="#{bundle.ViewAdministrationTitle_password}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AdministrationViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CarePlanEditDlg" widgetVar="CarePlanEditDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.EditCarePlanTitle}" styleClass="ui-fluid">
+            <h:form id="CarePlanEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{carePlanController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCarePlanLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{carePlanController.selected.id}" title="#{bundle.EditCarePlanTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditCarePlanLabel_encounter}" for="encounter" />
+                        <p:inputText id="encounter" value="#{carePlanController.selected.encounter}" title="#{bundle.EditCarePlanTitle_encounter}" />
+                        <p:outputLabel value="#{bundle.EditCarePlanLabel_intent}" for="intent" />
+                        <p:inputText id="intent" value="#{carePlanController.selected.intent}" title="#{bundle.EditCarePlanTitle_intent}" />
+                        <p:outputLabel value="#{bundle.EditCarePlanLabel_category}" for="category" />
+                        <p:inputText id="category" value="#{carePlanController.selected.category}" title="#{bundle.EditCarePlanTitle_category}" />
+                        <p:outputLabel value="#{bundle.EditCarePlanLabel_title}" for="title" />
+                        <p:inputText id="title" value="#{carePlanController.selected.title}" title="#{bundle.EditCarePlanTitle_title}" />
+                        <p:outputLabel value="#{bundle.EditCarePlanLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{carePlanController.selected.description}" title="#{bundle.EditCarePlanTitle_description}" />
+                        <p:outputLabel value="#{bundle.EditCarePlanLabel_status}" for="status" />
+                        <p:inputText id="status" value="#{carePlanController.selected.status}" title="#{bundle.EditCarePlanTitle_status}" />
+                        <p:outputLabel value="#{bundle.EditCarePlanLabel_periodFrom}" for="periodFrom" />
+                        <p:calendar id="periodFrom" pattern="MM/dd/yyyy" value="#{carePlanController.selected.periodFrom}" title="#{bundle.EditCarePlanTitle_periodFrom}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditCarePlanLabel_periodTo}" for="periodTo" />
+                        <p:calendar id="periodTo" pattern="MM/dd/yyyy" value="#{carePlanController.selected.periodTo}" title="#{bundle.EditCarePlanTitle_periodTo}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditCarePlanLabel_created}" for="created" />
+                        <p:calendar id="created" pattern="MM/dd/yyyy" value="#{carePlanController.selected.created}" title="#{bundle.EditCarePlanTitle_created}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditCarePlanLabel_note}" for="note" />
+                        <p:inputText id="note" value="#{carePlanController.selected.note}" title="#{bundle.EditCarePlanTitle_note}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{carePlanController.update}" value="#{bundle.Save}" update="display,:CarePlanListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CarePlanEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CarePlanEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

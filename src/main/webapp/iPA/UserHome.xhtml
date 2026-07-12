@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="title">
+            <h:outputText value="International Patient Access (IPA)"></h:outputText>
+        </ui:define>
+
+        <ui:define name="dialog"></ui:define>
+
+        <ui:define name="content">
+            <p:growl id="growl" showDetail="true" showSummary="true">
+                <p:autoUpdate/>
+            </p:growl>
+            
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+
+            <ui:include src="/humanName/Create.xhtml"/>
+            <ui:include src="/humanName/Edit.xhtml"/>
+            <ui:include src="/humanName/View.xhtml"/>
+
+            <ui:include src="/identifier/Create.xhtml"/>
+            <ui:include src="/identifier/Edit.xhtml"/>
+            <ui:include src="/identifier/View.xhtml"/>
+
+            <ui:include src="/reference/Create.xhtml"/>
+            <ui:include src="/reference/Edit.xhtml"/>
+            <ui:include src="/reference/View.xhtml"/>
+
+            <ui:include src="/address/Create.xhtml"/>
+            <ui:include src="/address/Edit.xhtml"/>
+            <ui:include src="/address/View.xhtml"/>
+
+            <ui:include src="/contact/Create.xhtml"/>
+            <ui:include src="/contact/Edit.xhtml"/>
+            <ui:include src="/contact/View.xhtml"/>
+
+            <ui:include src="/contactPoint/Create.xhtml"/>
+            <ui:include src="/contactPoint/Edit.xhtml"/>
+            <ui:include src="/contactPoint/View.xhtml"/>
+            
+            <ui:include src="/organisation/Create.xhtml"/>
+            <ui:include src="/organisation/Edit.xhtml"/>
+            <ui:include src="/organisation/View.xhtml"/>
+
+            <ui:include src="/practitioner/Create.xhtml"/>
+            <ui:include src="/practitioner/Edit.xhtml"/>
+            <ui:include src="/practitioner/View.xhtml"/>
+
+            <h:form id="IPAListForm"> 
+                <p:panel id="pnlUserHome" header="Main Profile" styleClass="ui-fluid">
+                    <h:panelGrid columns="10" rendered="#{!empty iPAController.selected}" cellspacing="10px;" style="width:100%;" >
+                        <h:outputText value="UID" style="font-weight: bold;"/>
+                        <h:outputText value="#{iPAController.selected.UUID}"/>                    
+                        <h:outputText value="ACTIVE" style="font-weight: bold;"/>
+                        <h:outputText value="#{iPAController.selected.active}"/>                                            
+                        <h:outputText value="EMAIL" style="font-weight: bold;"/>
+                        <h:outputText value="#{iPAController.selected.email}"/>                    
+                        <h:outputText value="GENDER" style="font-weight: bold;"/>
+                        <h:outputText value="#{iPAController.selected.gender}"/>
+                        <h:outputText value="BIRTH DATE" style="font-weight: bold;"/>
+                        <h:outputText value="#{iPAController.selected.birthDate}"/>                        
+                    </h:panelGrid>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus" value="#{bundle.Create}" actionListener="#{iPAController.prepareCreate}" update=":IPACreateForm" oncomplete="PF('IPACreateDialog').show()" disabled="#{!empty iPAController.selected}"/>
+                        <p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":IPAViewForm" oncomplete="PF('IPAViewDialog').show()" disabled="#{empty iPAController.selected}"/>
+                        <p:commandButton id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" update=":IPAEditForm" oncomplete="PF('IPAEditDialog').show()" disabled="#{empty iPAController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{iPAController.destroy}" update=":growl" disabled="#{empty iPAController.selected}"/>
+                    </f:facet>
+                </p:panel>
+                
+                <p:accordionPanel multiple="true" widgetVar="options" id="apUserHome" styleClass="ui-fluid">
+                    <p:tab title="IDENTIFIERS">
+
+                        <f:facet name="options">
+                            <p:menu>
+                                <p:submenu label="Options">
+                                    <p:menuitem value="Select all" url="#" icon="pi pi-clone" onclick="PF('options').selectAll()" />
+                                    <p:menuitem value="Unselect all" url="#" icon="pi pi-times" onclick="PF('options').unselectAll()" />
+                                </p:submenu>
+                            </p:menu>
+                        </f:facet>
+                        <p class="m-0">
+
+                            <p:dataTable id="identifierDatalist" value="#{iPAController.selected.identifier}" var="item"
+                                         selectionMode="single" selection="#{identifierController.selected}"
+                                         paginator="true"
+                                         rowKey="#{item.id}"
+                                         rows="10"
+                                         rowsPerPageTemplate="10,20,30,40,50"
+                                         >
+
+                                <p:ajax event="rowSelect" update="createIdentityButton viewIdentityButton editIdentityButton deleteIdentityButton"/>
+                                <p:ajax event="rowUnselect" update="createIdentityButton viewIdentityButton editIdentityButton deleteIdentityButton"/>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Id"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.id}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Use"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.use}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Type"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.IType}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="System"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.system}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Value"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.value}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Period From"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.periodFrom}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Period To"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.periodTo}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Assigner"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.objectReference.description}"/>
+                                </p:column>
+                                <f:facet name="footer">
+                                    <p:commandButton id="createIdentityButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{identifierController.prepareCreate}" update=":IdentifierCreateForm" oncomplete="PF('IdentifierCreateDialog').show()" disabled="#{!empty identifierController.selected}"/>
+                                    <p:commandButton id="viewIdentityButton"   icon="ui-icon-search" value="#{bundle.View}" update=":IdentifierViewForm" oncomplete="PF('IdentifierViewDialog').show()" disabled="#{empty identifierController.selected}"/>
+                                    <p:commandButton id="editIdentityButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":IdentifierEditForm" oncomplete="PF('IdentifierEditDialog').show()" disabled="#{empty identifierController.selected}"/>
+                                    <p:commandButton id="deleteIdentityButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{identifierController.destroy}" update=":growl,:IPAListForm:apUserHome:identifierDatalist" disabled="#{empty identifierController.selected}"/>                        
+                                    <p:commandButton id="createButton" icon="ui-icon-plus" value="New Assigner" actionListener="#{referenceController.prepareCreate}" update=":ReferenceCreateForm" oncomplete="PF('ReferenceCreateDialog').show()" style="width: 100%; height: 100%; background-color: cornflowerblue"/>
+                                </f:facet>
+                            </p:dataTable>                    
+
+                        </p>
+                    </p:tab>
+                    <p:tab title="MANAGING ORGANISATION">
+                        <f:facet name="actions">
+                            <p:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default">
+                                <h:outputText styleClass="ui-icon pi pi-question" />
+                            </p:commandLink>
+                            <p:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default">
+                                <h:outputText styleClass="ui-icon pi pi-star" />
+                            </p:commandLink>
+                        </f:facet>
+                        <p class="m-0">
+                            <p:dataTable id="datalistOrgs" value="#{iPAController.selected.organisation}" var="org"
+                                 selectionMode="single" selection="#{organisationController.selected}"
+                                 paginator="true"
+                                 rowKey="#{org.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id"/>
+                            </f:facet>
+                            <h:outputText value="#{org.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Name"/>
+                            </f:facet>
+                            <h:outputText value="#{org.name}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Contact"/>
+                            </f:facet>
+                            <h:outputText value="#{org.contact}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Address"/>
+                            </f:facet>
+                            <h:outputText value="#{org.address}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Type"/>
+                            </f:facet>
+                            <h:outputText value="#{org.orgType}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Part Of"/>
+                            </f:facet>
+                            <h:outputText value="#{org.partOf}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Alias"/>
+                            </f:facet>
+                            <h:outputText value="#{org.alias}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="End Point"/>
+                            </f:facet>
+                            <h:outputText value="#{org.endPoint}"/>
+                        </p:column>
+                                
+                        <f:facet name="footer">
+                            <p:commandButton id="createOrgButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{organisationController.prepareCreate}" update=":IPAListForm" oncomplete="PF('OrganisationCreateDialog').show()" disabled="#{!empty organisationController.selected}"/>
+                            <p:commandButton id="editOrgButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":OrganisationEditForm" oncomplete="PF('OrganisationEditDialog').show()"/>
+                            <p:commandButton id="deleteOrgButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{organisationController.destroy}" update=":growl"/>
+                        </f:facet>
+                        
+                    
+                        </p:dataTable>
+
+                        </p>
+                    </p:tab>
+                    <p:tab title="HUMAN NAME">
+                        <f:facet name="actions">
+                            <p:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default">
+                                <h:outputText styleClass="ui-icon pi pi-question" />
+                            </p:commandLink>
+                            <p:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default">
+                                <h:outputText styleClass="ui-icon pi pi-star" />
+                            </p:commandLink>
+                        </f:facet>
+                        <p class="m-0">                    
+                            <p:dataTable id="datalistHumanName" value="#{iPAController.selected.humanName}" var="item"
+                                         selectionMode="single" selection="#{humanNameController.selected}"
+                                         paginator="true"
+                                         rowKey="#{item.id}"
+                                         rows="10"
+                                         rowsPerPageTemplate="10,20,30,40,50"
+                                         rendered="#{!empty iPAController.selected}"
+                                         >
+
+                                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Use"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.use}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Prefix"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.prefix}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Fullname"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.text}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Other names"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.given}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Surname"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.family}"/>
+                                </p:column>                                                
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Sufix"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.sufix}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Period From"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.periodFrom}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Period To"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.periodTo}"/>
+                                </p:column>
+                                <f:facet name="footer">
+                                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{humanNameController.prepareCreate}" update=":HumanNameCreateForm" oncomplete="PF('HumanNameCreateDialog').show()" disabled="#{!empty humanNameController.selected}"/>
+                                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":HumanNameViewForm" oncomplete="PF('HumanNameViewDialog').show()" disabled="#{empty humanNameController.selected}"/>
+                                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":HumanNameEditForm" oncomplete="PF('HumanNameEditDialog').show()" disabled="#{empty humanNameController.selected}"/>
+                                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{humanNameController.destroy}" update=":growl,:IPAListForm:apUserHome:datalistHumanName" disabled="#{empty humanNameController.selected}"/>
+                                </f:facet>
+                            </p:dataTable>
+                        </p>
+                    </p:tab>
+                    
+                    <p:tab title="TELECOM">
+                        <p class="m-0">
+                            <p:dataTable id="datalistContactPoint" value="#{iPAController.selected.IPATelecoms}" var="item"
+                                         selectionMode="single" selection="#{contactPointController.selected}"
+                                         paginator="true"
+                                         rowKey="#{item.id}"
+                                         rows="10"
+                                         rowsPerPageTemplate="10,20,30,40,50"
+                                         rendered="#{!empty iPAController.selected}"
+                                         >
+
+                                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Use"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.telecomUse}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="System"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.telecomSystem}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Rank"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.telecomRank}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Value"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.telecomValue}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Valid From"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.telecomPeriodFrom}"/>
+                                </p:column>                                                
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Valid To"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.telecomPeriodTo}"/>
+                                </p:column>
+                                <f:facet name="footer">
+                                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{contactPointController.prepareCreate}" update=":ContactPointCreateForm" oncomplete="PF('ContactPointCreateDialog').show()" disabled="#{!empty contactPointController.selected}"/>
+                                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ContactPointViewForm" oncomplete="PF('ContactPointViewDialog').show()" disabled="#{empty contactPointController.selected}"/>
+                                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ContactPointEditForm" oncomplete="PF('ContactPointEditDialog').show()" disabled="#{empty contactPointController.selected}"/>
+                                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{contactPointController.destroy}" update=":growl,:IPAListForm:apUserHome:datalistContactPoint" disabled="#{empty contactPointController.selected}"/>
+                                </f:facet>
+                            </p:dataTable>
+                        </p>
+                    </p:tab>
+                    <p:tab title="ADDRESS">
+                        <p class="m-0">
+                            <p:dataTable id="datalistAddress" value="#{iPAController.selected.IPAAddress}" var="item"
+                                         selectionMode="single" selection="#{addressController.selected}"
+                                         paginator="true"
+                                         rowKey="#{item.id}"
+                                         rows="10"
+                                         rowsPerPageTemplate="10,20,30,40,50"
+                                         rendered="#{!empty iPAController.selected}"
+                                         >
+
+                                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Use"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.use}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Type"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.type}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Description"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.text}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Further Details"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.line}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="City"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.city}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="District"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.district}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Postal Code"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.postalCode}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Country"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.country}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Valid From"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.periodFrom}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Valid To"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.periodTo}"/>
+                                </p:column>
+                                <f:facet name="footer">
+                                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{addressController.prepareCreate}" update=":AddressCreateForm" oncomplete="PF('AddressCreateDialog').show()"/>
+                                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":AddressViewForm" oncomplete="PF('AddressViewDialog').show()" disabled="#{empty addressController.selected}"/>
+                                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":AddressEditForm" oncomplete="PF('AddressEditDialog').show()" disabled="#{empty addressController.selected}"/>
+                                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{addressController.destroy}" update=":growl,:IPAListForm:apUserHome:datalistAddress" disabled="#{empty addressController.selected}"/>
+                                </f:facet>
+                            </p:dataTable>
+
+
+                        </p>
+
+                    </p:tab>
+
+                    <p:tab title="CONTACT PEOPLE">
+                        <p class="m-0">
+
+                            <p:dataTable id="datalistContacts" value="#{iPAController.selected.contact}" var="cont"
+                                         selectionMode="single" selection="#{contactController.selected}"
+                                         paginator="true"
+                                         rowKey="#{cont.id}"
+                                         rows="10"
+                                         rowsPerPageTemplate="10,20,30,40,50"
+                                         rendered="#{!empty iPAController.selected}"
+                                         >
+
+                                <p:ajax event="rowSelect" update="createContButton viewContButton editContButton deleteContButton createButtonHumanName createButtonContact createButtonAddress"/>
+                                <p:ajax event="rowUnselect" update="createContButton viewContButton editContButton deleteContButton createButtonHumanName createButtonContact createButtonAddress"/>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Id"/>
+                                    </f:facet>
+                                    <h:outputText value="#{cont.id}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Relationship"/>
+                                    </f:facet>
+                                    <h:outputText value="#{cont.relationship}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Gender"/>
+                                    </f:facet>
+                                    <h:outputText value="#{cont.gender}"/>
+                                </p:column>                               
+                                <f:facet name="footer">
+                                    <p:commandButton id="createContButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{contactController.prepareCreate}" update=":IPAListForm" oncomplete="PF('ContactCreateDialog').show()" disabled="#{!empty contactController.selected}"/>
+                                    <p:commandButton id="viewContButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ContactViewForm" oncomplete="PF('ContactViewDialog').show()" disabled="#{empty contactController.selected}" />
+                                    <p:commandButton id="editContButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ContactEditForm" oncomplete="PF('ContactEditDialog').show()" disabled="#{empty contactController.selected}"/>
+                                    <p:commandButton id="deleteContButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{contactController.destroy}" update=":growl,:IPAListForm:apUserHome:datalistContacts" disabled="#{empty contactController.selected}"/>
+                                    <br/>
+                                    <p:commandButton actionListener="#{humanNameController.prepareCreate()}" id="createButtonHumanName" icon="ui-icon-plus" value="Human Name" update=":IPAListForm:apUserHome:datalistHumanName,:growl" oncomplete="PF('HumanNameCreateDialog').show()" style="width: 100%; height: 100%; background-color: cadetblue" disabled="#{empty contactController.selected}"/>
+                                    <p:commandButton actionListener="#{contactPointController.prepareCreate}" id="createButtonContact" icon="ui-icon-plus" value="Contact" update=":IPAListForm:apUserHome:datalistContacts" oncomplete="PF('ContactPointCreateDialog').show()" style="width: 100%; height: 100%; background-color: cadetblue" disabled="#{empty contactController.selected}"/>
+                                    <p:commandButton actionListener="#{addressController.prepareCreate}" id="createButtonAddress" icon="ui-icon-plus" value="Address" update=":IPAListForm:apUserHome:datalistAddress" oncomplete="PF('AddressCreateDialog').show()" style="width: 100%; height: 100%; background-color: cadetblue" disabled="#{empty contactController.selected}"/>
+                                </f:facet>                        
+                            </p:dataTable>
+                        </p>
+
+                    </p:tab>
+                    
+                    <p:tab title="GENERAL PRACTITIONER">
+                        <p class="m-0">
+
+                            <p:dataTable id="datalistPractitioner" value="#{iPAController.selected.practitioner}" var="item"
+                                         selectionMode="single" selection="#{practitionerController.selected}"
+                                         paginator="true"
+                                         rowKey="#{item.id}"
+                                         rows="10"
+                                         rowsPerPageTemplate="10,20,30,40,50"
+                                         rendered="#{!empty iPAController.selected}"
+                                         >
+
+                                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Id"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.id}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Name"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.name}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Telecom"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.telecom}"/>
+                                </p:column>                               
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Address"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.address}"/>
+                                </p:column>                               
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Communication"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.communication}"/>
+                                </p:column>                               
+                                <f:facet name="footer">
+                                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{practitionerController.prepareCreate}" update=":IPAListForm" oncomplete="PF('PractitionerCreateDialog').show()" disabled="#{!empty practitionerController.selected}"/>
+                                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PractitionerViewForm" oncomplete="PF('PractitionerViewDialog').show()" disabled="#{empty practitionerController.selected}"/>
+                                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PractitionerEditForm" oncomplete="PF('PractitionerEditDialog').show()" disabled="#{empty practitionerController.selected}"/>
+                                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{practitionerController.destroy}" update=":growl,:IPAListForm:apUserHome:datalistContacts" disabled="#{empty practitionerController.selected}"/>                                    
+                                </f:facet>                        
+
+                            </p:dataTable>
+                        </p>
+
+                    </p:tab>
+                    
+                </p:accordionPanel>
+
+            </h:form>            
+        </ui:define>
+    </ui:composition>
+
+</html>

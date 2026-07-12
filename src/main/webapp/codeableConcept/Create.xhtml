@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CodeableConceptCreateDlg" widgetVar="CodeableConceptCreateDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.CreateCodeableConceptTitle}">
+            <h:form id="CodeableConceptCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{codeableConceptController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCodeableConceptLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{codeableConceptController.selected.id}" title="#{bundle.CreateCodeableConceptTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateCodeableConceptLabel_coding}" for="coding" />
+                        <p:inputText id="coding" value="#{codeableConceptController.selected.coding}" title="#{bundle.CreateCodeableConceptTitle_coding}" />
+                        <p:outputLabel value="#{bundle.CreateCodeableConceptLabel_text}" for="text" />
+                        <p:inputText id="text" value="#{codeableConceptController.selected.text}" title="#{bundle.CreateCodeableConceptTitle_text}" />
+                        <p:outputLabel value="#{bundle.CreateCodeableConceptLabel_IPA}" for="IPA" />
+                        <p:inputText id="IPA" value="#{codeableConceptController.selected.IPA}" title="#{bundle.CreateCodeableConceptTitle_IPA}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{codeableConceptController.create}" value="#{bundle.Save}" update="display,:CodeableConceptListForm:apUserHome:datalist,:growl" oncomplete="handleSubmit(args,'CodeableConceptCreateDialog');"/>
+                    <!--p:commandButton value="#{bundle.Cancel}" onclick="CodeableConceptCreateDialog.hide()"/-->
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MedicationAdministrationViewDlg" widgetVar="MedicationAdministrationViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.ViewMedicationAdministrationTitle}" styleClass="ui-fluid">
+            <h:form id="MedicationAdministrationViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{medicationAdministrationController.selected != null}">
+                        <h:outputText value="#{bundle.ViewMedicationAdministrationLabel_id}"/>
+                        <h:outputText value="#{medicationAdministrationController.selected.id}" title="#{bundle.ViewMedicationAdministrationTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewMedicationAdministrationLabel_encounter}"/>
+                        <h:outputText value="#{medicationAdministrationController.selected.encounter}" title="#{bundle.ViewMedicationAdministrationTitle_encounter}"/>
+                        <h:outputText value="#{bundle.ViewMedicationAdministrationLabel_intent}"/>
+                        <h:outputText value="#{medicationAdministrationController.selected.intent}" title="#{bundle.ViewMedicationAdministrationTitle_intent}"/>
+                        <h:outputText value="#{bundle.ViewMedicationAdministrationLabel_category}"/>
+                        <h:outputText value="#{medicationAdministrationController.selected.category}" title="#{bundle.ViewMedicationAdministrationTitle_category}"/>
+                        <h:outputText value="#{bundle.ViewMedicationAdministrationLabel_title}"/>
+                        <h:outputText value="#{medicationAdministrationController.selected.title}" title="#{bundle.ViewMedicationAdministrationTitle_title}"/>
+                        <h:outputText value="#{bundle.ViewMedicationAdministrationLabel_description}"/>
+                        <h:outputText value="#{medicationAdministrationController.selected.description}" title="#{bundle.ViewMedicationAdministrationTitle_description}"/>
+                        <h:outputText value="#{bundle.ViewMedicationAdministrationLabel_status}"/>
+                        <h:outputText value="#{medicationAdministrationController.selected.status}" title="#{bundle.ViewMedicationAdministrationTitle_status}"/>
+                        <h:outputText value="#{bundle.ViewMedicationAdministrationLabel_periodFrom}"/>
+                        <h:outputText value="#{medicationAdministrationController.selected.periodFrom}" title="#{bundle.ViewMedicationAdministrationTitle_periodFrom}"/>
+                        <h:outputText value="#{bundle.ViewMedicationAdministrationLabel_periodTo}"/>
+                        <h:outputText value="#{medicationAdministrationController.selected.periodTo}" title="#{bundle.ViewMedicationAdministrationTitle_periodTo}"/>
+                        <h:outputText value="#{bundle.ViewMedicationAdministrationLabel_reasonCode}"/>
+                        <h:outputText value="#{medicationAdministrationController.selected.reasonCode}" title="#{bundle.ViewMedicationAdministrationTitle_reasonCode}"/>
+                        <h:outputText value="#{bundle.ViewMedicationAdministrationLabel_note}"/>
+                        <h:outputText value="#{medicationAdministrationController.selected.note}" title="#{bundle.ViewMedicationAdministrationTitle_note}"/>
+                        <h:outputText value="#{bundle.ViewMedicationAdministrationLabel_dosage}"/>
+                        <h:outputText value="#{medicationAdministrationController.selected.dosage}" title="#{bundle.ViewMedicationAdministrationTitle_dosage}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="MedicationAdministrationViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

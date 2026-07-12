@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="IPA - Conditions / Problems"></h:outputText>
+        </ui:define>
+
+        <ui:define name="content">
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+
+            <ui:include src="/evidence/Create.xhtml"/>
+            <ui:include src="/evidence/Edit.xhtml"/>
+            <ui:include src="/evidence/View.xhtml"/>
+
+            <p:growl id="growl" showDetail="true">
+                <p:autoUpdate/>
+            </p:growl>
+            <h3>Conditions / Problems</h3>
+            <h:form id="ConditionListForm">
+                <p:panel id="pnlUserHome" header="Identifier" styleClass="ui-fluid">
+                    <h:panelGrid columns="10" rendered="#{!empty identifierController.selected}" cellspacing="10px;" style="width:100%;" >
+                        <h:outputText value="ID" style="font-weight: bold;"/>
+                        <h:outputText value="#{identifierController.selected.id}"/>                    
+                        <h:outputText value="USE" style="font-weight: bold;"/>
+                        <h:outputText value="#{identifierController.selected.use}"/>                                            
+                        <h:outputText value="VALUE" style="font-weight: bold;"/>
+                        <h:outputText value="#{identifierController.selected.value}"/>                    
+                        <h:outputText value="TYPE" style="font-weight: bold;"/>
+                        <h:outputText value="#{identifierController.selected.IType}"/>
+                    </h:panelGrid>
+                </p:panel>
+
+                <p:panel header="Conditions" styleClass="ui-fluid">
+                    <p:dataTable id="datalistCondition" value="#{conditionController.items}" var="item"
+                                 selectionMode="single" selection="#{conditionController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton :ConditionListForm:datalistEvidence:createButtonEvidence :ConditionListForm:datalistEvidence"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton :ConditionListForm:datalistEvidence:createButtonEvidence :ConditionListForm:datalistEvidence"/>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Clinical Status"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.clinicalStatus}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Verification Status"/>
+                            </f:facet>
+                            <h:outputText value="#{item.verificationStatus}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Category"/>
+                            </f:facet>
+                            <h:outputText value="#{item.category}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Severity"/>
+                            </f:facet>
+                            <h:outputText value="#{item.severity}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Code"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ACode}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Body Site"/>
+                            </f:facet>
+                            <h:outputText value="#{item.bodySite}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Onset Date"/>
+                            </f:facet>
+                            <h:outputText value="#{item.onsetDateTime}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Onset Age"/>
+                            </f:facet>
+                            <h:outputText value="#{item.onsetAge}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Onset From"/>
+                            </f:facet>
+                            <h:outputText value="#{item.onsetPeriodFrom}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Onset To"/>
+                            </f:facet>
+                            <h:outputText value="#{item.onsetPeriodTo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Range"/>
+                            </f:facet>
+                            <h:outputText value="#{item.onsetRange}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Onset String"/>
+                            </f:facet>
+                            <h:outputText value="#{item.onsetString}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Abatement Date"/>
+                            </f:facet>
+                            <h:outputText value="#{item.abatementDateTime}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Abatement Age"/>
+                            </f:facet>
+                            <h:outputText value="#{item.abatementAge}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Abatement From"/>
+                            </f:facet>
+                            <h:outputText value="#{item.abatementPeriodFrom}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Abatement To"/>
+                            </f:facet>
+                            <h:outputText value="#{item.abatementPeriodTo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Abatement Range"/>
+                            </f:facet>
+                            <h:outputText value="#{item.abatementRange}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Abatement String"/>
+                            </f:facet>
+                            <h:outputText value="#{item.abatementString}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Recorded Date"/>
+                            </f:facet>
+                            <h:outputText value="#{item.recordedDate}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Note"/>
+                            </f:facet>
+                            <h:outputText value="#{item.note}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="Create" actionListener="#{conditionController.prepareCreate}" update=":ConditionCreateForm" oncomplete="PF('ConditionCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="View" update=":ConditionViewForm" oncomplete="PF('ConditionViewDialog').show()" disabled="#{empty conditionController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" update=":ConditionEditForm" oncomplete="PF('ConditionEditDialog').show()" disabled="#{empty conditionController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" actionListener="#{conditionController.destroy}" update=":growl,:ConditionListForm:datalistCondition" disabled="#{empty conditionController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+                
+                <p:panel header="Evidence" styleClass="ui-fluid">
+                    <p:dataTable id="datalistEvidence" value="#{conditionController.selected.evidence}" var="item"
+                                 selectionMode="single" selection="#{evidenceController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButtonEvidence viewButton editButton deleteButton "/>
+                        <p:ajax event="rowUnselect" update="createButtonEvidence viewButton editButton deleteButton "/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Problem"/>
+                            </f:facet>
+                            <h:outputText value="#{item.problem}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Code"/>
+                            </f:facet>
+                            <h:outputText value="#{item.code}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButtonEvidence" icon="ui-icon-plus"   value="Create" actionListener="#{evidenceController.prepareCreate}" update=":ConditionListForm" oncomplete="PF('EvidenceCreateDialog').show()" disabled="#{empty conditionController.selected}" />
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="View" update=":EvidenceViewForm" oncomplete="PF('EvidenceViewDialog').show()" disabled="#{empty evidenceController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Edit" update=":EvidenceEditForm" oncomplete="PF('EvidenceEditDialog').show()" disabled="#{empty evidenceController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Delete" actionListener="#{evidenceController.destroy}" update=":growl,datalistEvidence" disabled="#{empty evidenceController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListInvoiceTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form id="InvoiceListForm">
+                <p:panel header="#{bundle.ListInvoiceTitle}" styleClass="ui-fluid">
+                    <p:dataTable id="datalist" value="#{invoiceController.items}" var="item"
+                                 selectionMode="single" selection="#{invoiceController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvoiceTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvoiceTitle_account}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.account}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvoiceTitle_encounter}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.encounter}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvoiceTitle_status}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.status}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvoiceTitle_cancelledReason}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cancelledReason}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvoiceTitle_type}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.type}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvoiceTitle_IPA}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.IPA}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvoiceTitle_recipient}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.recipient}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvoiceTitle_date}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.date}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvoiceTitle_creationDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.creationDate}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvoiceTitle_billingPeriodFrom}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.billingPeriodFrom}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvoiceTitle_billingPeriodTo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.billingPeriodTo}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvoiceTitle_periodFrom}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.periodFrom}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvoiceTitle_periodTo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.periodTo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvoiceTitle_priceComponent}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.priceComponent}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvoiceTitle_totalPriceComponent}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.totalPriceComponent}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvoiceTitle_totalNet}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.totalNet}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvoiceTitle_totalGross}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.totalGross}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvoiceTitle_paymentTerms}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.paymentTerms}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInvoiceTitle_note}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.note}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{invoiceController.prepareCreate}" update=":InvoiceCreateForm" oncomplete="PF('InvoiceCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":InvoiceViewForm" oncomplete="PF('InvoiceViewDialog').show()" disabled="#{empty invoiceController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":InvoiceEditForm" oncomplete="PF('InvoiceEditDialog').show()" disabled="#{empty invoiceController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{invoiceController.destroy}" update=":growl,datalist" disabled="#{empty invoiceController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

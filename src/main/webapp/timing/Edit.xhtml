@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TimingEditDlg" widgetVar="TimingEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTimingTitle}">
+            <h:form id="TimingEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{timingController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTimingLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{timingController.selected.id}" title="#{bundle.EditTimingTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditTimingLabel_dosage}" for="dosage" />
+                        <p:inputText id="dosage" value="#{timingController.selected.dosage}" title="#{bundle.EditTimingTitle_dosage}" />
+                        <p:outputLabel value="#{bundle.EditTimingLabel_repeat}" for="repeat" />
+                        <p:inputText id="repeat" value="#{timingController.selected.repeat}" title="#{bundle.EditTimingTitle_repeat}" />
+                        <p:outputLabel value="#{bundle.EditTimingLabel_boundsDuration}" for="boundsDuration" />
+                        <p:inputText id="boundsDuration" value="#{timingController.selected.boundsDuration}" title="#{bundle.EditTimingTitle_boundsDuration}" />
+                        <p:outputLabel value="#{bundle.EditTimingLabel_boundsRange}" for="boundsRange" />
+                        <p:inputText id="boundsRange" value="#{timingController.selected.boundsRange}" title="#{bundle.EditTimingTitle_boundsRange}" />
+                        <p:outputLabel value="#{bundle.EditTimingLabel_boundsPeriodFrom}" for="boundsPeriodFrom" />
+                        <p:inputText id="boundsPeriodFrom" value="#{timingController.selected.boundsPeriodFrom}" title="#{bundle.EditTimingTitle_boundsPeriodFrom}" />
+                        <p:outputLabel value="#{bundle.EditTimingLabel_batchExpirationDate}" for="batchExpirationDate" />
+                        <p:inputText id="batchExpirationDate" value="#{timingController.selected.batchExpirationDate}" title="#{bundle.EditTimingTitle_batchExpirationDate}" />
+                        <p:outputLabel value="#{bundle.EditTimingLabel_count}" for="count" />
+                        <p:inputText id="count" value="#{timingController.selected.count}" title="#{bundle.EditTimingTitle_count}" />
+                        <p:outputLabel value="#{bundle.EditTimingLabel_countMax}" for="countMax" />
+                        <p:inputText id="countMax" value="#{timingController.selected.countMax}" title="#{bundle.EditTimingTitle_countMax}" />
+                        <p:outputLabel value="#{bundle.EditTimingLabel_duration}" for="duration" />
+                        <p:inputText id="duration" value="#{timingController.selected.duration}" title="#{bundle.EditTimingTitle_duration}" />
+                        <p:outputLabel value="#{bundle.EditTimingLabel_durationMax}" for="durationMax" />
+                        <p:inputText id="durationMax" value="#{timingController.selected.durationMax}" title="#{bundle.EditTimingTitle_durationMax}" />
+                        <p:outputLabel value="#{bundle.EditTimingLabel_durationUnit}" for="durationUnit" />
+                        <p:inputText id="durationUnit" value="#{timingController.selected.durationUnit}" title="#{bundle.EditTimingTitle_durationUnit}" />
+                        <p:outputLabel value="#{bundle.EditTimingLabel_frequency}" for="frequency" />
+                        <p:inputText id="frequency" value="#{timingController.selected.frequency}" title="#{bundle.EditTimingTitle_frequency}" />
+                        <p:outputLabel value="#{bundle.EditTimingLabel_frequencyMax}" for="frequencyMax" />
+                        <p:inputText id="frequencyMax" value="#{timingController.selected.frequencyMax}" title="#{bundle.EditTimingTitle_frequencyMax}" />
+                        <p:outputLabel value="#{bundle.EditTimingLabel_periodLow}" for="periodLow" />
+                        <p:inputText id="periodLow" value="#{timingController.selected.periodLow}" title="#{bundle.EditTimingTitle_periodLow}" />
+                        <p:outputLabel value="#{bundle.EditTimingLabel_periodMax}" for="periodMax" />
+                        <p:inputText id="periodMax" value="#{timingController.selected.periodMax}" title="#{bundle.EditTimingTitle_periodMax}" />
+                        <p:outputLabel value="#{bundle.EditTimingLabel_periodUnit}" for="periodUnit" />
+                        <p:inputText id="periodUnit" value="#{timingController.selected.periodUnit}" title="#{bundle.EditTimingTitle_periodUnit}" />
+                        <p:outputLabel value="#{bundle.EditTimingLabel_dayOfWeek}" for="dayOfWeek" />
+                        <p:inputText id="dayOfWeek" value="#{timingController.selected.dayOfWeek}" title="#{bundle.EditTimingTitle_dayOfWeek}" />
+                        <p:outputLabel value="#{bundle.EditTimingLabel_timeOfDay}" for="timeOfDay" />
+                        <p:inputText id="timeOfDay" value="#{timingController.selected.timeOfDay}" title="#{bundle.EditTimingTitle_timeOfDay}" />
+                        <p:outputLabel value="#{bundle.EditTimingLabel_RPTWhen}" for="RPTWhen" />
+                        <p:inputText id="RPTWhen" value="#{timingController.selected.RPTWhen}" title="#{bundle.EditTimingTitle_RPTWhen}" />
+                        <p:outputLabel value="#{bundle.EditTimingLabel_RPTOffset}" for="RPTOffset" />
+                        <p:inputText id="RPTOffset" value="#{timingController.selected.RPTOffset}" title="#{bundle.EditTimingTitle_RPTOffset}" />
+                        <p:outputLabel value="#{bundle.EditTimingLabel_TCode}" for="TCode" />
+                        <p:inputText id="TCode" value="#{timingController.selected.TCode}" title="#{bundle.EditTimingTitle_TCode}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{timingController.update}" value="#{bundle.Save}" update="display" oncomplete="handleSubmit(args, 'TimingEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TimingEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

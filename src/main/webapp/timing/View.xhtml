@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TimingViewDlg" widgetVar="TimingViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTimingTitle}">
+            <h:form id="TimingViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{timingController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTimingLabel_id}"/>
+                        <h:outputText value="#{timingController.selected.id}" title="#{bundle.ViewTimingTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewTimingLabel_dosage}"/>
+                        <h:outputText value="#{timingController.selected.dosage}" title="#{bundle.ViewTimingTitle_dosage}"/>
+                        <h:outputText value="#{bundle.ViewTimingLabel_repeat}"/>
+                        <h:outputText value="#{timingController.selected.repeat}" title="#{bundle.ViewTimingTitle_repeat}"/>
+                        <h:outputText value="#{bundle.ViewTimingLabel_boundsDuration}"/>
+                        <h:outputText value="#{timingController.selected.boundsDuration}" title="#{bundle.ViewTimingTitle_boundsDuration}"/>
+                        <h:outputText value="#{bundle.ViewTimingLabel_boundsRange}"/>
+                        <h:outputText value="#{timingController.selected.boundsRange}" title="#{bundle.ViewTimingTitle_boundsRange}"/>
+                        <h:outputText value="#{bundle.ViewTimingLabel_boundsPeriodFrom}"/>
+                        <h:outputText value="#{timingController.selected.boundsPeriodFrom}" title="#{bundle.ViewTimingTitle_boundsPeriodFrom}"/>
+                        <h:outputText value="#{bundle.ViewTimingLabel_batchExpirationDate}"/>
+                        <h:outputText value="#{timingController.selected.batchExpirationDate}" title="#{bundle.ViewTimingTitle_batchExpirationDate}"/>
+                        <h:outputText value="#{bundle.ViewTimingLabel_count}"/>
+                        <h:outputText value="#{timingController.selected.count}" title="#{bundle.ViewTimingTitle_count}"/>
+                        <h:outputText value="#{bundle.ViewTimingLabel_countMax}"/>
+                        <h:outputText value="#{timingController.selected.countMax}" title="#{bundle.ViewTimingTitle_countMax}"/>
+                        <h:outputText value="#{bundle.ViewTimingLabel_duration}"/>
+                        <h:outputText value="#{timingController.selected.duration}" title="#{bundle.ViewTimingTitle_duration}"/>
+                        <h:outputText value="#{bundle.ViewTimingLabel_durationMax}"/>
+                        <h:outputText value="#{timingController.selected.durationMax}" title="#{bundle.ViewTimingTitle_durationMax}"/>
+                        <h:outputText value="#{bundle.ViewTimingLabel_durationUnit}"/>
+                        <h:outputText value="#{timingController.selected.durationUnit}" title="#{bundle.ViewTimingTitle_durationUnit}"/>
+                        <h:outputText value="#{bundle.ViewTimingLabel_frequency}"/>
+                        <h:outputText value="#{timingController.selected.frequency}" title="#{bundle.ViewTimingTitle_frequency}"/>
+                        <h:outputText value="#{bundle.ViewTimingLabel_frequencyMax}"/>
+                        <h:outputText value="#{timingController.selected.frequencyMax}" title="#{bundle.ViewTimingTitle_frequencyMax}"/>
+                        <h:outputText value="#{bundle.ViewTimingLabel_periodLow}"/>
+                        <h:outputText value="#{timingController.selected.periodLow}" title="#{bundle.ViewTimingTitle_periodLow}"/>
+                        <h:outputText value="#{bundle.ViewTimingLabel_periodMax}"/>
+                        <h:outputText value="#{timingController.selected.periodMax}" title="#{bundle.ViewTimingTitle_periodMax}"/>
+                        <h:outputText value="#{bundle.ViewTimingLabel_periodUnit}"/>
+                        <h:outputText value="#{timingController.selected.periodUnit}" title="#{bundle.ViewTimingTitle_periodUnit}"/>
+                        <h:outputText value="#{bundle.ViewTimingLabel_dayOfWeek}"/>
+                        <h:outputText value="#{timingController.selected.dayOfWeek}" title="#{bundle.ViewTimingTitle_dayOfWeek}"/>
+                        <h:outputText value="#{bundle.ViewTimingLabel_timeOfDay}"/>
+                        <h:outputText value="#{timingController.selected.timeOfDay}" title="#{bundle.ViewTimingTitle_timeOfDay}"/>
+                        <h:outputText value="#{bundle.ViewTimingLabel_RPTWhen}"/>
+                        <h:outputText value="#{timingController.selected.RPTWhen}" title="#{bundle.ViewTimingTitle_RPTWhen}"/>
+                        <h:outputText value="#{bundle.ViewTimingLabel_RPTOffset}"/>
+                        <h:outputText value="#{timingController.selected.RPTOffset}" title="#{bundle.ViewTimingTitle_RPTOffset}"/>
+                        <h:outputText value="#{bundle.ViewTimingLabel_TCode}"/>
+                        <h:outputText value="#{timingController.selected.TCode}" title="#{bundle.ViewTimingTitle_TCode}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TimingViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

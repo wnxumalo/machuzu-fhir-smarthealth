@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="List Medication Request"></h:outputText>
+        </ui:define>
+
+        <ui:define name="content">
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+            
+            <ui:include src="/medication/Create.xhtml"/>
+            <ui:include src="/medication/Edit.xhtml"/>
+            <ui:include src="/medication/View.xhtml"/>            
+            
+            <ui:include src="/dosage/Create.xhtml"/>
+            <ui:include src="/dosage/Edit.xhtml"/>
+            <ui:include src="/dosage/View.xhtml"/>            
+            
+            <ui:include src="/doseAndRate/Create.xhtml"/>
+            <ui:include src="/doseAndRate/Edit.xhtml"/>
+            <ui:include src="/doseAndRate/View.xhtml"/>            
+            
+            <p:growl id="growl" showDetail="true">
+                <p:autoUpdate/>
+            </p:growl>
+            <h:form id="MedicationRequestListForm">
+                <p:panel id="pnlUserHome" header="Identifier" styleClass="ui-fluid">
+                    <h:panelGrid columns="10" rendered="#{!empty identifierController.selected}" cellspacing="10px;" style="width:100%;" >
+                        <h:outputText value="ID" style="font-weight: bold;"/>
+                        <h:outputText value="#{identifierController.selected.id}"/>                    
+                        <h:outputText value="USE" style="font-weight: bold;"/>
+                        <h:outputText value="#{identifierController.selected.use}"/>                                            
+                        <h:outputText value="VALUE" style="font-weight: bold;"/>
+                        <h:outputText value="#{identifierController.selected.value}"/>                    
+                        <h:outputText value="TYPE" style="font-weight: bold;"/>
+                        <h:outputText value="#{identifierController.selected.IType}"/>
+                    </h:panelGrid>
+                </p:panel>
+
+                <p:panel header="Medication History" styleClass="ui-fluid">
+                    <p:dataTable id="datalist" value="#{encounterController.selected.medicationRequest}" var="item"
+                                 selectionMode="single" selection="#{medicationRequestController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Status"/>
+                            </f:facet>
+                            <h:outputText value="#{item.MStatus}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Status Reason"/>
+                            </f:facet>
+                            <h:outputText value="#{item.statusReason}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Category"/>
+                            </f:facet>
+                            <h:outputText value="#{item.category}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Intent"/>
+                            </f:facet>
+                            <h:outputText value="#{item.intent}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Priority"/>
+                            </f:facet>
+                            <h:outputText value="#{item.priority}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Do Not Perform"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.doNotPerform}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Medication Request"/>
+                            </f:facet>
+                            <h:outputText value="#{item.medication}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Authored On"/>
+                            </f:facet>
+                            <h:outputText value="#{item.authoredOn}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Perform Type"/>
+                            </f:facet>
+                            <h:outputText value="#{item.performType}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Course Of Therapy Type"/>
+                            </f:facet>
+                            <h:outputText value="#{item.courseOfTherapyType}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Reason Code"/>
+                            </f:facet>
+                            <h:outputText value="#{item.reasonCode}"/>
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Note"/>
+                            </f:facet>
+                            <h:outputText value="#{item.note}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{medicationRequestController.prepareCreate}" update=":MedicationRequestCreateForm" oncomplete="PF('MedicationRequestCreateDialog').show()"/>
+                            <p:commandButton id="viewButton" actionListener="#{medicationController.updateSelected(medicationRequestController.selected.medicationDosage)}" icon="ui-icon-search" value="#{bundle.View}" update=":MedicationRequestViewForm" oncomplete="PF('MedicationRequestViewDialog').show();" disabled="#{empty medicationRequestController.selected}"/>
+                            <p:commandButton id="editButton" icon="ui-icon-pencil" value="#{bundle.Edit}" update=":MedicationRequestEditForm" oncomplete="PF('MedicationRequestEditDialog').show()" disabled="#{empty medicationRequestController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{medicationRequestController.destroy}" update=":growl,datalist" disabled="#{empty medicationRequestController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+            
+        </ui:define>
+    </ui:composition>
+
+</html>

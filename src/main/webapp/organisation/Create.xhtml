@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrganisationCreateDlg" widgetVar="OrganisationCreateDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Create Organisation" styleClass="ui-fluid">
+            <h:form id="OrganisationCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">                        
+                        <p:outputLabel value="Type" for="type" />
+                        <p:selectOneMenu id="type" value="#{organisationController.selected.orgType}" required="true" title="Type">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Healthcare Provider" itemValue="prov" />
+                            <f:selectItem itemLabel="Hospital Department" itemValue="dept" />
+                            <f:selectItem itemLabel="Organisational team" itemValue="team" />                            
+                            <f:selectItem itemLabel="Government" itemValue="govt" />
+                            <f:selectItem itemLabel="Insurance Company" itemValue="ins" />
+                            <f:selectItem itemLabel="Government" itemValue="govt" />
+                            <f:selectItem itemLabel="Payer" itemValue="pay" />
+                            <f:selectItem itemLabel="Educational Institute" itemValue="edu" />
+                            <f:selectItem itemLabel="Religious Institution" itemValue="reli" />
+                            <f:selectItem itemLabel="Clinical Research Sponsor" itemValue="crs" />
+                            <f:selectItem itemLabel="Community Group" itemValue="cg" />
+                            <f:selectItem itemLabel="Non-Healthcare Business or Corporation" itemValue="bus" />
+                            <f:selectItem itemLabel="Other" itemValue="other" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Name" for="name" />
+                        <p:inputText id="name" value="#{organisationController.selected.name}" title="#{bundle.CreateOrganisationTitle_name}" />
+                        <p:outputLabel value="Alias" for="alias" />
+                        <p:inputText id="alias" value="#{organisationController.selected.alias}" title="#{bundle.CreateOrganisationTitle_alias}" />
+                        <p:outputLabel value="Contact Number" for="telecoms" />
+                        <p:inputText id="telecoms" value="#{organisationController.selected.contact}" title="#{bundle.CreateOrganisationTitle_telecoms}" />
+                        <p:outputLabel value="Address" for="address" />
+                        <p:inputText id="address" value="#{organisationController.selected.address}" title="#{bundle.CreateOrganisationTitle_address}" />
+                        <p:outputLabel value="Part of which organisation?" for="partOf" />
+                        <p:inputText id="partOf" value="#{organisationController.selected.partOf}" title="#{bundle.CreateOrganisationTitle_partOf}" />
+                        <p:outputLabel value="API Endpoint" for="endPoint" />
+                        <p:inputText id="endPoint" value="#{organisationController.selected.endPoint}" title="#{bundle.CreateOrganisationTitle_endPoint}" />                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{organisationController.create(iPAController.selected)}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args,'OrganisationCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="OrganisationCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

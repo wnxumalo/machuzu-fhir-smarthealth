@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AccountCreateDlg" widgetVar="AccountCreateDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.CreateAccountTitle}" styleClass="ui-fluid">
+            <h:form id="AccountCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{accountController.selected != null}">
+                        <p:outputLabel value="Status" for="status" />
+                        <p:selectOneMenu id="status" value="#{accountController.selected.status}" title="Status">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Active" itemValue="active" />
+                            <f:selectItem itemLabel="Inactive" itemValue="inactive" />
+                            <f:selectItem itemLabel="Entered-In-Error" itemValue="entered-in-error" />
+                            <f:selectItem itemLabel="On-Hold" itemValue="on-hold" />
+                            <f:selectItem itemLabel="Unknown" itemValue="unknown" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Billing Status" for="billingStatus" />
+                        <p:selectOneMenu id="billingStatus" value="#{accountController.selected.status}" title="Billing Status">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Open" itemValue="open" />
+                            <f:selectItem itemLabel="CareComplete/Not Billed" itemValue="carecomplete-notbilled" />
+                            <f:selectItem itemLabel="Billing" itemValue="billing" />
+                            <f:selectItem itemLabel="Closed-Bad Debt" itemValue="closed-baddebt" />
+                            <f:selectItem itemLabel="Closed-Voided" itemValue="closed-voided" />
+                            <f:selectItem itemLabel="Closed-Completed" itemValue="closed-completed" />
+                            <f:selectItem itemLabel="Closed-Combined" itemValue="closed-combined" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAccountLabel_type}" for="type" />
+                        <p:selectOneMenu id="type" value="#{accountController.selected.type}" title="Type">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="ActAccountCode" itemValue="_ActAccountCode" />
+                            <f:selectItem itemLabel="Account Receivable" itemValue="ACCTRECEIVABLE" />
+                            <f:selectItem itemLabel="Cash" itemValue="CASH" />
+                            <f:selectItem itemLabel="Credit Card" itemValue="_CreditCard " />
+                            <f:selectItem itemLabel="American Express" itemValue="AE" />
+                            <f:selectItem itemLabel="Diner's Club" itemValue="DN" />
+                            <f:selectItem itemLabel="Discover Card" itemValue="DV" />
+                            <f:selectItem itemLabel="Master Card" itemValue="MC" />
+                            <f:selectItem itemLabel="Visa" itemValue="V" />
+                            <f:selectItem itemLabel="Patient Billing Account" itemValue="PBILLACCT" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Name" for="name" />
+                        <p:inputText id="name" value="#{accountController.selected.name}" title="#{bundle.CreateAccountTitle_name}" />
+                        <p:outputLabel value="Service Valid From" for="servicePeriodFrom" />
+                        <p:calendar id="servicePeriodFrom" pattern="MM/dd/yyyy" value="#{accountController.selected.servicePeriodFrom}" title="#{bundle.EditAccountTitle_servicePeriodFrom}"  showOn="button"/>
+                        <p:outputLabel value="Service Valid To" for="servicePeriodTo" />
+                        <p:calendar id="servicePeriodTo" pattern="MM/dd/yyyy" value="#{accountController.selected.servicePeriodTo}" title="#{bundle.EditAccountTitle_servicePeriodTo}"  showOn="button"/>
+                        <p:outputLabel value="Description" for="description" />
+                        <p:inputText id="description" value="#{accountController.selected.description}" title="#{bundle.CreateAccountTitle_description}" />
+                        <p:outputLabel value="Balance Aggregate" for="balanceAggregate" />
+                        <p:inputText id="balanceAggregate" value="#{accountController.selected.balanceAggregate}" title="#{bundle.CreateAccountTitle_balanceAggregate}" />
+                        <p:outputLabel value="Balance Term" for="balanceTerm" />
+                        <p:inputText id="balanceTerm" value="#{accountController.selected.balanceTerm}" title="#{bundle.CreateAccountTitle_balanceTerm}" />
+                        <p:outputLabel value="Balance Estimate" for="balanceEstimate" />
+                        <p:inputText id="balanceEstimate" value="#{accountController.selected.balanceEstimate}" title="#{bundle.CreateAccountTitle_balanceEstimate}" />
+                        <p:outputLabel value="Balance Amount" for="balanceAmount" />
+                        <p:inputText id="balanceAmount" value="#{accountController.selected.balanceAmount}" title="#{bundle.CreateAccountTitle_balanceAmount}" />
+                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{accountController.create(iPAController.selected.id, encounterController.selected.id)}" value="#{bundle.Save}" update="display,:AccountListForm:datalist,:growl" oncomplete="handleSubmit(args,'AccountCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AccountCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

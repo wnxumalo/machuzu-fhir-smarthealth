@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrganisationViewDlg" widgetVar="OrganisationViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="View Organisation" styleClass="ui-fluid">
+            <h:form id="OrganisationViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+                        <h:outputText value="Active"/>
+                        <h:outputText value="#{organisationController.selected.active}" title="#{bundle.ViewOrganisationTitle_active}"/>
+                        <h:outputText value="Type"/>
+                        <h:outputText value="#{organisationController.selected.orgType}" title="#{bundle.ViewOrganisationTitle_type}"/>
+                        <h:outputText value="Name"/>
+                        <h:outputText value="#{organisationController.selected.name}" title="#{bundle.ViewOrganisationTitle_name}"/>
+                        <h:outputText value="Alias"/>
+                        <h:outputText value="#{organisationController.selected.alias}" title="#{bundle.ViewOrganisationTitle_alias}"/>
+                        <h:outputText value="Address"/>
+                        <h:outputText value="#{organisationController.selected.address}" title="#{bundle.ViewOrganisationTitle_address}"/>
+                        <h:outputText value="Part Of"/>
+                        <h:outputText value="#{organisationController.selected.partOf}" title="#{bundle.ViewOrganisationTitle_partOf}"/>
+                        <h:outputText value="Contact"/>
+                        <h:outputText value="#{organisationController.selected.contact}" title="#{bundle.ViewOrganisationTitle_contact}"/>
+                        <h:outputText value="End Point"/>
+                        <h:outputText value="#{organisationController.selected.endPoint}" title="#{bundle.ViewOrganisationTitle_endPoint}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="OrganisationViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ObservationViewDlg" widgetVar="ObservationViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="View Observation" styleClass="ui-fluid">
+            <h:form id="ObservationViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{observationController.selected != null}">
+                        <h:outputText value="Id"/>
+                        <h:outputText value="#{observationController.selected.id}" title="#{bundle.ViewObservationTitle_id}"/>
+                        <h:outputText value="Status"/>
+                        <h:outputText value="#{observationController.selected.OStatus}" title="#{bundle.ViewObservationTitle_OStatus}"/>
+                        <h:outputText value="Category"/>
+                        <h:outputText value="#{observationController.selected.category}" title="#{bundle.ViewObservationTitle_category}"/>
+                        <h:outputText value="Code"/>
+                        <h:outputText value="#{observationController.selected.OCode}" title="#{bundle.ViewObservationTitle_OCode}"/>
+                        <h:outputText value="Occurence String"/>
+                        <h:outputText value="#{observationController.selected.occurenceString}" title="#{bundle.ViewObservationTitle_occurenceString}"/>
+                        <h:outputText value="Effective Date"/>
+                        <h:outputText value="#{observationController.selected.effectiveDate}" title="#{bundle.ViewObservationTitle_effectiveDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="Issued"/>
+                        <h:outputText value="#{observationController.selected.issued}" title="#{bundle.ViewObservationTitle_issued}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="Interpretation"/>
+                        <h:outputText value="#{observationController.selected.interpretation}" title="#{bundle.ViewObservationTitle_interpretation}"/>
+                        <h:outputText value="Body Site"/>
+                        <h:outputText value="#{observationController.selected.bodySite}" title="#{bundle.ViewObservationTitle_bodySite}"/>
+                        <h:outputText value="Method"/>
+                        <h:outputText value="#{observationController.selected.OMethod}" title="#{bundle.ViewObservationTitle_OMethod}"/>
+                        <h:outputText value="Note"/>
+                        <h:outputText value="#{observationController.selected.note}" title="#{bundle.ViewObservationTitle_note}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ObservationViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EvidenceEditDlg" widgetVar="EvidenceEditDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Edit Evidence" styleClass="ui-fluid">
+            <h:form id="EvidenceEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{evidenceController.selected != null}">
+                        <p:outputLabel value="Code" for="code" />
+                         <p:selectOneMenu id="code" value="#{evidenceController.selected.code}" required="true" title="Code">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Posterior carpal region" itemValue="106004" />
+                            <f:selectItem itemLabel="Fetal part of placenta" itemValue="107008" />
+                            <f:selectItem itemLabel="Condylar emissary vein" itemValue="108003" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Note" for="note" />
+                        <p:inputText id="note" value="#{evidenceController.selected.note}" title="Note" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{evidenceController.update}" value="#{bundle.Save}" update="display,:ConditionListForm:datalistEvidence,:growl" oncomplete="handleSubmit(args, 'EvidenceEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EvidenceEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

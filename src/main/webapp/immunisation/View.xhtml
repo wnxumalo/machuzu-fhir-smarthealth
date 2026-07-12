@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ImmunisationViewDlg" widgetVar="ImmunisationViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="View Immunisation" styleClass="ui-fluid">
+            <h:form id="ImmunisationViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{immunisationController.selected != null}">
+                        <h:outputText value="Status"/>
+                        <h:outputText value="#{immunisationController.selected.IStatus}" title="#{bundle.ViewImmunisationTitle_IStatus}"/>
+                        <h:outputText value="Status Reason"/>
+                        <h:outputText value="#{immunisationController.selected.statusReason}" title="#{bundle.ViewImmunisationTitle_verificationStatus}"/>
+                        <h:outputText value="Vaccine Code"/>
+                        <h:outputText value="#{immunisationController.selected.vaccineCode}" title="#{bundle.ViewImmunisationTitle_vaccineCode}"/>
+                        <h:outputText value="Occurence Date"/>
+                        <h:outputText value="#{immunisationController.selected.occurenceDate}" title="#{bundle.ViewImmunisationTitle_occurenceDate}"/>
+                        <h:outputText value="Occurence String"/>
+                        <h:outputText value="#{immunisationController.selected.occurenceString}" title="#{bundle.ViewImmunisationTitle_occurenceString}"/>
+                        <h:outputText value="Primary Source"/>
+                        <p:selectBooleanCheckbox value="#{immunisationController.selected.primarySource}" disabled="true"/>
+                        <h:outputText value="Report Origin"/>
+                        <h:outputText value="#{immunisationController.selected.reportOrigin}" title="#{bundle.ViewImmunisationTitle_reportOrigin}"/>
+                        <h:outputText value="Lot Number"/>
+                        <h:outputText value="#{immunisationController.selected.lotNumber}" title="#{bundle.ViewImmunisationTitle_lotNumber}"/>
+                        <h:outputText value="Expiration Date"/>
+                        <h:outputText value="#{immunisationController.selected.expirationDate}" title="#{bundle.ViewImmunisationTitle_expirationDate}"/>
+                        <h:outputText value="Site"/>
+                        <h:outputText value="#{immunisationController.selected.site}" title="#{bundle.ViewImmunisationTitle_site}"/>
+                        <h:outputText value="Route"/>
+                        <h:outputText value="#{immunisationController.selected.route}" title="#{bundle.ViewImmunisationTitle_route}"/>
+                        <h:outputText value="Dose Quantity"/>
+                        <h:outputText value="#{immunisationController.selected.doseQuantity}" title="#{bundle.ViewImmunisationTitle_doseQuantity}"/>
+                        <h:outputText value="Note"/>
+                        <h:outputText value="#{immunisationController.selected.note}" title="#{bundle.ViewImmunisationTitle_note}"/>
+                        <h:outputText value="Reason Code"/>
+                        <h:outputText value="#{immunisationController.selected.reasonCode}" title="#{bundle.ViewImmunisationTitle_reasonCode}"/>
+                        <h:outputText value="Is Sub-potent"/>
+                        <p:selectBooleanCheckbox value="#{immunisationController.selected.isSubpotent}" disabled="true"/>
+                        <h:outputText value="Sub-potent Reason"/>
+                        <h:outputText value="#{immunisationController.selected.subpotentReason}" title="#{bundle.ViewImmunisationTitle_subpotentReason}"/>
+                        <h:outputText value="Program Eligibility"/>
+                        <h:outputText value="#{immunisationController.selected.programEligibility}" title="#{bundle.ViewImmunisationTitle_programEligibility}"/>
+                        <h:outputText value="Funding Source"/>
+                        <h:outputText value="#{immunisationController.selected.fundingSource}" title="#{bundle.ViewImmunisationTitle_fundingSource}"/>
+                        <h:outputText value="Reaction Date"/>
+                        <h:outputText value="#{immunisationController.selected.reactionDate}" title="#{bundle.ViewImmunisationTitle_reactionDate}"/>
+                        <h:outputText value="Reaction Detail"/>
+                        <h:outputText value="#{immunisationController.selected.reactionDetail}" title="#{bundle.ViewImmunisationTitle_reactionDetail}"/>
+                        <h:outputText value="Reaction Reported"/>
+                        <p:selectBooleanCheckbox value="#{immunisationController.selected.reactionReported}" disabled="true"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ImmunisationViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

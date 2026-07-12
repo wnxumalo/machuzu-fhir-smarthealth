@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListDoseAndRateTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form id="DoseAndRateListForm">
+                <p:panel header="#{bundle.ListDoseAndRateTitle}" styleClass="ui-fluid">
+                    <p:dataTable id="datalist" value="#{doseAndRateController.items}" var="item"
+                                 selectionMode="single" selection="#{doseAndRateController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDoseAndRateTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDoseAndRateTitle_dosage}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dosage}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDoseAndRateTitle_DType}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.DType}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDoseAndRateTitle_doseRangeLow}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.doseRangeLow}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDoseAndRateTitle_doseRangeHigh}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.doseRangeHigh}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDoseAndRateTitle_doseQuantity}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.doseQuantity}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDoseAndRateTitle_rateRatioNumerator}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.rateRatioNumerator}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDoseAndRateTitle_rateRatioDenominator}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.rateRatioDenominator}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDoseAndRateTitle_rateRangeLow}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.rateRangeLow}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDoseAndRateTitle_rateRangeHigh}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.rateRangeHigh}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDoseAndRateTitle_rateRangeQty}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.rateRangeQty}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{doseAndRateController.prepareCreate}" update=":DoseAndRateCreateForm" oncomplete="PF('DoseAndRateCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DoseAndRateViewForm" oncomplete="PF('DoseAndRateViewDialog').show()" disabled="#{empty doseAndRateController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DoseAndRateEditForm" oncomplete="PF('DoseAndRateEditDialog').show()" disabled="#{empty doseAndRateController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{doseAndRateController.destroy}" update=":growl,datalist" disabled="#{empty doseAndRateController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

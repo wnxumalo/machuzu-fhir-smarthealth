@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IdentifierEditDlg" widgetVar="IdentifierEditDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.EditIdentifierTitle}" styleClass="ui-fluid">
+            <h:form id="IdentifierEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{identifierController.selected != null}">
+                        <p:outputLabel value="Use" for="use" />
+                        <p:selectOneMenu id="use" value="#{identifierController.selected.use}" required="true" title="Use">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="usual" itemValue="usual" />
+                            <f:selectItem itemLabel="official" itemValue="official" />
+                            <f:selectItem itemLabel="temp" itemValue="temp" />                            
+                            <f:selectItem itemLabel="secondary" itemValue="secondary" />                            
+                            <f:selectItem itemLabel="old" itemValue="old" />                            
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Type" for="type" />
+                        <p:selectOneMenu id="type" value="#{identifierController.selected.IType}" required="true" title="Type" >
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Driver's license number" itemValue="Driver's license number (DL)" />
+                            <f:selectItem itemLabel="Passport number" itemValue="Passport number (PPN)" />
+                            <f:selectItem itemLabel="Breed Registry Number" itemValue="Breed Registry Number (BRN)" />                            
+                            <f:selectItem itemLabel="Medical record number" itemValue="Medical record number (MR)" />                            
+                            <f:selectItem itemLabel="Microchip Number" itemValue="Microchip Number (MCN)" />                            
+                            <f:selectItem itemLabel="Employer number" itemValue="Employer number (EN)" />
+                            <f:selectItem itemLabel="Tax ID number" itemValue="Tax ID number (TAX)" />
+                            <f:selectItem itemLabel="National Insurance Payor Identifier (Payor)" itemValue="National Insurance Payor Identifier (NIIP)" />
+                            <f:selectItem itemLabel="Provider number" itemValue="Provider number (PRN)" />
+                            <f:selectItem itemLabel="Medical License number" itemValue="Medical License number (MD)" />
+                            <f:selectItem itemLabel="Donor Registration Number" itemValue="Donor Registration Number (DR)" />
+                            <f:selectItem itemLabel="Accession ID" itemValue="Accession ID (ACSN)" />
+                            <f:selectItem itemLabel="Universal Device Identifier" itemValue="Universal Device Identifier (UDI)" />
+                            <f:selectItem itemLabel="Serial Number" itemValue="Serial Number (SNO)" />
+                            <f:selectItem itemLabel="Social Beneficiary Identifier" itemValue="Social Beneficiary Identifier (SB)" />
+                            <f:selectItem itemLabel="Placer Identifier" itemValue="Placer Identifier (PLAC)" />
+                            <f:selectItem itemLabel="Filler Identifier" itemValue="Filler Identifier (FILL)" />
+                            <f:selectItem itemLabel="Jurisdictional health number (Canada)" itemValue="Jurisdictional health number (JHN)" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="In which system is more information available (Link/URL)?" for="system" />
+                        <p:inputText id="system" value="#{identifierController.selected.system}" title="System" />
+                        <p:outputLabel value="Identifier Value" for="value" />
+                        <p:inputText id="value" value="#{identifierController.selected.value}" title="Value" />
+                        <p:outputLabel value="Valid From" for="periodFrom" />
+                        <p:calendar id="periodFrom" value="#{identifierController.selected.periodFrom}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Period From" />
+                        <p:outputLabel value="Valid To" for="periodTo" />
+                        <p:calendar id="periodTo" value="#{identifierController.selected.periodTo}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Period To" />
+                        <p:outputLabel value="Assigner" for="assigner" />
+                        <h:selectOneMenu id='assigner' value="#{identifierController.selected.objectReference}" title="Assigner">
+                            <f:selectItems value="#{referenceController.itemsAvailableSelectOne}" var="ref" itemValue="#{ref}" itemLabel="#{ref.objectReference}"/>
+                        </h:selectOneMenu>                            
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{identifierController.update}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args, 'IdentifierEditDialog');"/>
+                    <!--p:commandButton value="#{bundle.Cancel}" onclick="IdentifierEditDialog.hide()"/-->
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

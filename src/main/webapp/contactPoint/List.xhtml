@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListContactPointTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <p:growl id="growl">
+                <p:autoUpdate/>
+            </p:growl>
+            <h:form id="ContactPointListForm">
+                <p:panel header="#{bundle.ListContactPointTitle}" styleClass="ui-fluid">
+                    <p:dataTable id="datalist" value="#{contactPointController.items}" var="item"
+                                 selectionMode="single" selection="#{contactPointController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListContactPointTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListContactPointTitle_telecomSystem}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.telecomSystem}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListContactPointTitle_patientId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.patientId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListContactPointTitle_telecomRank}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.telecomRank}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListContactPointTitle_telecomValue}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.telecomValue}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListContactPointTitle_telecomUse}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.telecomUse}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListContactPointTitle_telecomPeriod}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.telecomPeriod}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListContactPointTitle_IPA}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.IPA}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{contactPointController.prepareCreate}" update=":ContactPointCreateForm" oncomplete="PF('ContactPointCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ContactPointViewForm" oncomplete="PF('ContactPointViewDialog').show()" disabled="#{empty contactPointController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ContactPointEditForm" oncomplete="PF('ContactPointEditDialog').show()" disabled="#{empty contactPointController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{contactPointController.destroy}" update=":growl,datalist" disabled="#{empty contactPointController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

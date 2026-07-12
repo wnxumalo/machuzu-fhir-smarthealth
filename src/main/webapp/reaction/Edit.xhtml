@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReactionEditDlg" widgetVar="ReactionEditDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Edit Reaction" styleClass="ui-fluid">
+            <h:form id="ReactionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{reactionController.selected != null}">
+                        <p:outputLabel value="Substance" for="substance" />                        
+                        <p:selectOneMenu id="substance" value="#{reactionController.selected.substance}" required="true" title="Substance">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Hemoglobin Okaloosa" itemValue="102002" />
+                            <f:selectItem itemLabel="Ornithine racemase" itemValue="120006" />
+                            <f:selectItem itemLabel="Ferrous sulfate Fe^59^" itemValue="125001" />
+                            <f:selectItem itemLabel="Galactosyl-N-acetylglucosaminylgalactosylglucosylceramide alpha-galactosyltransferase" itemValue="126000" />
+                            <f:selectItem itemLabel="Hemoglobin Hopkins-II" itemValue="130002" />
+                            <f:selectItem itemLabel="Dolichyl-phosphate mannosyltransferase" itemValue="131003" />
+                            <f:selectItem itemLabel="Ferrocyanide salt" itemValue="159002" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Manifestation" for="manifestation" />
+                        <p:selectOneMenu id="manifestation" value="#{reactionController.selected.manifestation}" required="true" title="Manifestation">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Anxiety disorder of childhood OR adolescence" itemValue="109006" />
+                            <f:selectItem itemLabel="Choroidal hemorrhage" itemValue="122003" />
+                            <f:selectItem itemLabel="Spontaneous abortion with laceration of cervix" itemValue="127009" />
+                            <f:selectItem itemLabel="Homoiothermia" itemValue="129007" />
+                            <f:selectItem itemLabel="Decreased hair growth" itemValue="134006" />
+                            <f:selectItem itemLabel="Chronic pharyngitis" itemValue="140004" />
+                            <f:selectItem itemLabel="Normal peripheral vision" itemValue="144008" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Description" for="description" />
+                        <p:inputText id="description" value="#{reactionController.selected.description}" title="#{bundle.CreateReactionTitle_description}" />
+                        <p:outputLabel value="Onset" for="onset" />
+                        <p:calendar id="onset" value="#{reactionController.selected.onset}" maxdate="#{iPAController.currentDate}" yearRange="c-100:c+100" mode="popup" pattern="yyyy/MM/dd" navigator="true" required="true" style="width:100%" />                        
+                        <p:outputLabel value="Severity" for="severity" />
+                        <p:selectOneMenu id="severity" value="#{reactionController.selected.severity}" required="true" title="Severity">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Mild" itemValue="mild" />
+                            <f:selectItem itemLabel="Moderate" itemValue="moderate" />
+                            <f:selectItem itemLabel="Severe" itemValue="severe" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Exposure Route" for="exposureRoute" />
+                        <p:selectOneMenu id="exposureRoute" value="#{reactionController.selected.severity}" required="true" title="Severity">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Topical route" itemValue="6064005" />
+                            <f:selectItem itemLabel="Auricular use" itemValue="10547007" />
+                            <f:selectItem itemLabel="Intra-articular route" itemValue="12130007" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Note" for="note" />
+                        <p:inputText id="note" value="#{reactionController.selected.note}" title="#{bundle.CreateReactionTitle_note}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{reactionController.update}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args, 'ReactionEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ReactionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="title">
+            <h:outputText value="International Patient Access (IPA)"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <p:growl id="growl">
+                <p:autoUpdate/>
+            </p:growl>
+            <h3>International Patient Access (IPA) - Basic Patient Details</h3>
+            <h:form id="IPAListForm">
+                <p:panel id="pnlUserHome" header="Main Profile" styleClass="ui-fluid">
+                    <p:panelGrid columns="8" rendered="#{!empty iPAController.selected}">
+                        <h:outputText value="Active" style="font-weight: bold;"/>
+                        <h:outputText value="#{iPAController.selected.active}"/>                    
+                        <h:outputText value="Unique Id" style="font-weight: bold;"/>
+                        <h:outputText value="#{iPAController.selected.UUID}"/>                    
+                        <h:outputText value="Email" style="font-weight: bold;"/>
+                        <h:outputText value="#{iPAController.selected.email}"/>                    
+                        <h:outputText value="Gender" style="font-weight: bold;"/>
+                        <h:outputText value="#{iPAController.selected.gender}"/>
+                        <h:outputText value="Birth Date" style="font-weight: bold;"/>
+                        <h:outputText value="#{iPAController.selected.birthDate}"/>
+                    </p:panelGrid>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{iPAController.prepareCreate}" update=":IPACreateForm" oncomplete="PF('IPACreateDialog').show()"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":IPAEditForm" oncomplete="PF('IPAEditDialog').show()" />
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{iPAController.destroy}" update=":growl" />
+                    </f:facet>                
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>                   
+        </ui:define>
+    </ui:composition>
+
+</html>

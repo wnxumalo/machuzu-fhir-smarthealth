@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AliasCreateDlg" widgetVar="AliasCreateDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.CreateAliasTitle}" styleClass="ui-fluid">
+            <h:form id="AliasCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{aliasController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAliasLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{aliasController.selected.id}" title="#{bundle.CreateAliasTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateAliasLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{aliasController.selected.name}" title="#{bundle.CreateAliasTitle_name}" />
+                        <p:outputLabel value="#{bundle.CreateAliasLabel_IPA}" for="IPA" />
+                        <p:inputText id="IPA" value="#{aliasController.selected.IPA}" title="#{bundle.CreateAliasTitle_IPA}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{aliasController.create}" value="#{bundle.Save}" update="display,:AliasListForm:apUserHome:datalist,:growl" oncomplete="handleSubmit(args,'AliasCreateDialog');"/>
+                    <!--p:commandButton value="#{bundle.Cancel}" onclick="AliasCreateDialog.hide()"/-->
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InvoiceCreateDlg" widgetVar="InvoiceCreateDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Create Invoice" styleClass="ui-fluid">
+            <h:form id="InvoiceCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Status" for="status" />
+                        <p:selectOneMenu id="status" value="#{invoiceController.selected.status}" title="Status">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Draft" itemValue="draft" />
+                            <f:selectItem itemLabel="Issued" itemValue="issued" />
+                            <f:selectItem itemLabel="Balanced" itemValue="balanced" />
+                            <f:selectItem itemLabel="Cancelled" itemValue="cancelled" />
+                            <f:selectItem itemLabel="Entered-In-Error" itemValue="entered-in-error" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Cancelled Reason" for="cancelledReason" />
+                        <p:inputText id="cancelledReason" value="#{invoiceController.selected.cancelledReason}" title="#{bundle.CreateInvoiceTitle_cancelledReason}" />
+                        <p:outputLabel value="Date" for="date" />
+                        <p:calendar id="date" pattern="MM/dd/yyyy" value="#{invoiceController.selected.date}" title="Invoice Date"  showOn="button"/>
+                        <p:outputLabel value="Creation Date" for="creationDate" />
+                        <p:calendar id="creationDate" pattern="MM/dd/yyyy" value="#{invoiceController.selected.creationDate}" title="Creation Date"  showOn="button"/>
+                        <p:outputLabel value="Period From" for="periodFrom" />
+                        <p:calendar id="periodFrom" pattern="MM/dd/yyyy" value="#{invoiceController.selected.periodFrom}" title="#{bundle.EditInvoiceTitle_billingPeriodFrom}"  showOn="button"/>
+                        <p:outputLabel value="Period To" for="periodTo" />
+                        <p:calendar id="periodTo" pattern="MM/dd/yyyy" value="#{invoiceController.selected.periodTo}" title="Period To"  showOn="button"/>
+                        <p:outputLabel value="Total Price Component" for="totalPriceComponent" />
+                        <p:inputText id="totalPriceComponent" value="#{invoiceController.selected.totalPriceComponent}" title="#{bundle.CreateInvoiceTitle_totalPriceComponent}" />
+                        <p:outputLabel value="Total Net" for="totalNet" />
+                        <p:inputText id="totalNet" value="#{invoiceController.selected.totalNet}" title="#{bundle.CreateInvoiceTitle_totalNet}" />
+                        <p:outputLabel value="Total Gross" for="totalGross" />
+                        <p:inputText id="totalGross" value="#{invoiceController.selected.totalGross}" title="#{bundle.CreateInvoiceTitle_totalGross}" />
+                        <p:outputLabel value="Payment Terms" for="paymentTerms" />
+                        <p:inputText id="paymentTerms" value="#{invoiceController.selected.paymentTerms}" title="#{bundle.CreateInvoiceTitle_paymentTerms}" />
+                        <p:outputLabel value="Note" for="note" />
+                        <p:inputText id="note" value="#{invoiceController.selected.note}" title="#{bundle.CreateInvoiceTitle_note}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{invoiceController.create(accountController.selected.id, encounterController.selected.id)}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args,'InvoiceCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="InvoiceCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

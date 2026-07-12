@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition>
+
+        <p:dialog id="IPACreateDlg" widgetVar="IPACreateDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Create New International Patient Access (IPA)" styleClass="ui-fluid">
+            <h:form id="IPACreateForm">                
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{iPAController.selected != null}">
+                        <p:outputLabel value="Unique ID" for="UUID" />
+                        <p:inputText id="UUID" value="#{iPAController.selected.UUID}" title="Unique ID" disabled="true" />
+                        <p:outputLabel value="Email" for="email" />
+                        <p:inputText id="email" value="#{iPAController.selected.email}" title="Email" required="true" />
+                        <p:outputLabel value="Password" for="password" />
+                        <p:password id="password" value="#{iPAController.selected.password}" title="Password" required="true" />
+                        <p:outputLabel value="Active" for="active" />
+                        <p:selectOneMenu id="active" value="#{iPAController.selected.active}" required="true" title="Active">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="True" itemValue="True" />
+                            <f:selectItem itemLabel="False" itemValue="False" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Gender" for="gender" />
+                        <p:selectOneMenu id="gender" value="#{iPAController.selected.gender}" required="true" title="Gender">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Male" itemValue="Male" />
+                            <f:selectItem itemLabel="Female" itemValue="Female" />
+                            <f:selectItem itemLabel="Other" itemValue="Other" />                            
+                            <f:selectItem itemLabel="Unknown" itemValue="Unknown" />                            
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Birth Date" for="birthDate" />
+                        <p:calendar id="birthDate" value="#{iPAController.selected.birthDate}" maxdate="#{iPAController.currentDate}" yearRange="c-100:c+100" mode="popup" pattern="yyyy/MM/dd" navigator="true" required="true" style="width:100%" />
+                        <p:outputLabel value="Marital Status" for="maritalStatus" />
+                        <p:selectOneMenu id="maritalStatus" value="#{iPAController.selected.maritalStatus}" required="true" title="Marital Status">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemValue="A" itemLabel="Annulled" />
+                            <f:selectItem itemValue="D" itemLabel="Divorced" />
+                            <f:selectItem itemValue="I" itemLabel="Interlocutory" />
+                            <f:selectItem itemValue="L" itemLabel="Legally Separated" />                            
+                            <f:selectItem itemValue="M" itemLabel="Married" />                            
+                            <f:selectItem itemValue="P" itemLabel="Polygamous" />                            
+                            <f:selectItem itemValue="S" itemLabel="Never Married" />
+                            <f:selectItem itemValue="T" itemLabel="Domestic partner" />
+                            <f:selectItem itemValue="U" itemLabel="unmarried" />
+                            <f:selectItem itemValue="W" itemLabel="Widowed" />
+                            <f:selectItem itemValue="UNK" itemLabel="unknown" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Multiple Birth" for="multipleBirth" />
+                        <p:selectOneMenu id="multipleBirth" value="#{iPAController.selected.multipleBirth}" required="true" title="Marital Status">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemValue="true" itemLabel="true" />
+                            <f:selectItem itemValue="false" itemLabel="false" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Multiple Birth Qty" for="multipleBirthQty" />
+                        <p:inputText id="multipleBirthQty" value="#{iPAController.selected.multipleBirthQty}" title="Multiple Birth Quantity" required="true" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{iPAController.create}" value="Create" update="display,:growl,:IPAListForm" oncomplete="handleSubmit(args,'IPACreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="IPACreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

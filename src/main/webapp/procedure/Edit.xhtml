@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProcedureEditDlg" widgetVar="ProcedureEditDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.EditProcedureTitle}" styleClass="ui-fluid">
+            <h:form id="ProcedureEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{procedureController.selected != null}">
+                        <p:outputLabel value="Performed Period From" for="performedPeriodFrom" />
+                        <p:calendar id="performedPeriodFrom" value="#{procedureController.selected.performedPeriodFrom}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Performed Period From" />
+                        <p:outputLabel value="Performed Period To" for="performedPeriodTo" />
+                        <p:calendar id="performedPeriodTo" value="#{procedureController.selected.performedPeriodTo}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Performed Period To" />
+                        <p:outputLabel value="" for="performedString" />
+                        <p:inputText id="performedString" value="#{procedureController.selected.performedString}" title="#{bundle.CreateProcedureTitle_performedString}" />
+                        <p:outputLabel value="Performed Age" for="performedAge" />
+                        <p:inputText id="performedAge" value="#{procedureController.selected.performedAge}" title="#{bundle.CreateProcedureTitle_performedAge}" />
+                        <p:outputLabel value="Performed Range" for="performedRange" />
+                        <p:inputText id="performedRange" value="#{procedureController.selected.performedRange}" title="#{bundle.CreateProcedureTitle_performedRange}" />
+                        <p:outputLabel value="Reason Code" for="reasonCode" />
+                        <p:selectOneMenu id="reasonCode" value="#{procedureController.selected.reasonCode}" title="Reason Code">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Excision of lesion of patella" itemValue="104001" />
+                            <f:selectItem itemLabel="Fit removable orthodontic appliance" itemValue="115006" />
+                            <f:selectItem itemLabel="Thoracoscopic partial lobectomy of lung" itemValue="119000" />
+                            <f:selectItem itemLabel="Retrobulbar injection of therapeutic agent" itemValue="121005" />
+                            <f:selectItem itemLabel="Hand microscope examination of skin" itemValue="128004" />
+                            <f:selectItem itemLabel="Percutaneous implantation of neurostimulator electrodes into neuromuscular component" itemValue="133000" />
+                            <f:selectItem itemLabel="Arthrotomy of wrist joint with exploration and biopsy" itemValue="135007" />
+                        </p:selectOneMenu>                                                   
+                        <p:outputLabel value="Body Site" for="bodySite" />
+                        <p:selectOneMenu id="bodySite" value="#{procedureController.selected.bodySite}" title="Body Site">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Posterior carpal region" itemValue="106004" />
+                            <f:selectItem itemLabel="Fetal part of placenta" itemValue="107008" />
+                            <f:selectItem itemLabel="Condylar emissary vein" itemValue="108003" />
+                            <f:selectItem itemLabel="Visceral layer of Bowman's capsule" itemValue="110001" />
+                            <f:selectItem itemLabel="Parathyroid gland" itemValue="111002" />
+                            <f:selectItem itemLabel="Subcutaneous tissue of medial surface of index finger" itemValue="116007" />
+                            <f:selectItem itemLabel="Coronoid process of mandible" itemValue="124002" />
+                        </p:selectOneMenu>                                                                           
+                        <p:outputLabel value="Procedure Status" for="procedureStatus" />
+                        <p:selectOneMenu id="procedureStatus" value="#{procedureController.selected.procedureStatus}" title="Procedure Status">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Preparation" itemValue="preparation" />
+                            <f:selectItem itemLabel="In Progress" itemValue="in-progress" />
+                            <f:selectItem itemLabel="Not Done" itemValue="not-done" />
+                            <f:selectItem itemLabel="On Hold" itemValue="on-hold" />
+                            <f:selectItem itemLabel="Stopped" itemValue="stopped" />
+                            <f:selectItem itemLabel="Completed" itemValue="completed" />
+                            <f:selectItem itemLabel="Entered in Error" itemValue="entered-in-error" />
+                            <f:selectItem itemLabel="Unknown" itemValue="unknown" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Status Reason" for="statusReason" />
+                        <p:selectOneMenu id="statusReason" value="#{procedureController.selected.statusReason}" title="Status Reason">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Preparation" itemValue="preparation" />
+                            <f:selectItem itemLabel="In Progress" itemValue="in-progress" />
+                            <f:selectItem itemLabel="Not Done" itemValue="not-done" />
+                            <f:selectItem itemLabel="On Hold" itemValue="on-hold" />
+                            <f:selectItem itemLabel="Stopped" itemValue="stopped" />
+                            <f:selectItem itemLabel="Completed" itemValue="completed" />
+                            <f:selectItem itemLabel="Entered in Error" itemValue="entered-in-error" />
+                            <f:selectItem itemLabel="Unknown" itemValue="unknown" />
+                        </p:selectOneMenu>                                                   
+                        <p:outputLabel value="Category" for="category" />
+                        <p:selectOneMenu id="category" value="#{procedureController.selected.category}" title="Category">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Psychiatry procedure or service" itemValue="24642003" />
+                            <f:selectItem itemLabel="Counselling" itemValue="409063005" />
+                            <f:selectItem itemLabel="Education" itemValue="409073007" />
+                            <f:selectItem itemLabel="Surgical procedure" itemValue="387713003" />
+                            <f:selectItem itemLabel="Diagnostic procedure" itemValue="103693007" />
+                            <f:selectItem itemLabel="Chiropractic manipulation" itemValue="46947000" />
+                            <f:selectItem itemLabel="Social service procedure" itemValue="410606002" />
+                        </p:selectOneMenu>                                                   
+                        <p:outputLabel value="Code" for="code" />
+                        <p:selectOneMenu id="code" value="#{procedureController.selected.PCode}" title="Code">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Excision of lesion of patella" itemValue="104001" />
+                            <f:selectItem itemLabel="Fit removable orthodontic appliance" itemValue="115006" />
+                            <f:selectItem itemLabel="Thoracoscopic partial lobectomy of lung" itemValue="119000" />
+                            <f:selectItem itemLabel="Retrobulbar injection of therapeutic agent" itemValue="121005" />
+                            <f:selectItem itemLabel="Hand microscope examination of skin" itemValue="128004" />
+                            <f:selectItem itemLabel="Percutaneous implantation of neurostimulator electrodes into neuromuscular component" itemValue="133000" />
+                            <f:selectItem itemLabel="Arthrotomy of wrist joint with exploration and biopsy" itemValue="135007" />
+                        </p:selectOneMenu>                                                   
+                        <p:outputLabel value="Outcome" for="outcome" />
+                        <p:selectOneMenu id="outcome" value="#{procedureController.selected.outcome}" title="Outcome">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Successful" itemValue="385669000" />
+                            <f:selectItem itemLabel="Unsuccessful" itemValue="385671000" />
+                            <f:selectItem itemLabel="Partially successful" itemValue="385670004" />
+                        </p:selectOneMenu>                                                   
+                        <p:outputLabel value="Complication" for="complication" />
+                        <p:selectOneMenu id="complication" value="#{procedureController.selected.complication}" title="Complication">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Anxiety disorder of childhood OR adolescence" itemValue="109006" />
+                            <f:selectItem itemLabel="Choroidal hemorrhage" itemValue="122003" />
+                            <f:selectItem itemLabel="Spontaneous abortion with laceration of cervix" itemValue="127009" />
+                            <f:selectItem itemLabel="Homoiothermia" itemValue="129007" />
+                            <f:selectItem itemLabel="Decreased hair growth" itemValue="134006" />
+                            <f:selectItem itemLabel="Chronic pharyngitis" itemValue="140004" />
+                            <f:selectItem itemLabel="Normal peripheral vision" itemValue="144008 " />
+                        </p:selectOneMenu>                                                   
+                        <p:outputLabel value="Follow Up" for="followUp" />
+                        <p:selectOneMenu id="followUp" value="#{procedureController.selected.followUp}" title="Follow Up">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Change of dressing" itemValue="18949003" />
+                            <f:selectItem itemLabel="Removal of suture" itemValue="30549001" />
+                            <f:selectItem itemLabel="Removal of drain" itemValue="241031001" />
+                            <f:selectItem itemLabel="Removal of staples" itemValue="35963001" />
+                            <f:selectItem itemLabel="Removal of ligature" itemValue="225164002" />
+                            <f:selectItem itemLabel="Cardiopulmonary exercise test" itemValue="447346005" />
+                            <f:selectItem itemLabel="Scar tissue massage" itemValue="229506003" />
+                            <f:selectItem itemLabel="Suction drainage" itemValue="274441001" />
+                            <f:selectItem itemLabel="Diabetes medication review" itemValue="394725008" />
+                            <f:selectItem itemLabel="Cytopathology, review of bronchioalveolar lavage specimen" itemValue="359825008" />
+                        </p:selectOneMenu>                                                   
+                        <p:outputLabel value="Note" for="note" />
+                        <p:inputText id="note" value="#{procedureController.selected.note}" title="#{bundle.CreateProcedureTitle_note}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{procedureController.update}" value="#{bundle.Save}" update="display,:ProcedureListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProcedureEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ProcedureEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

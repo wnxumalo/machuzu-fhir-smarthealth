@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ContactViewDlg" widgetVar="ContactViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="View Contact" styleClass="ui-fluid">
+            <h:form id="ContactViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+                        <h:outputText value="Relationship"/>
+                        <h:outputText value="#{contactController.selected.relationship}" title="#{bundle.ViewContactTitle_relationship}"/>
+                        <h:outputText value="Gender"/>
+                        <h:outputText value="#{contactController.selected.gender}" title="#{bundle.ViewContactTitle_gender}"/>
+                        <h:outputText value="Human Names"/>
+                        <ui:repeat var="hn" value="#{contactController.selected.humanName}">
+                            <h:outputText value="#{hn.text}" title="#{bundle.ViewContactTitle_humanName}"/>
+                        </ui:repeat>                        
+                        <h:outputText value="Telecom"/>
+                        <ui:repeat var="tl" value="#{contactController.selected.IPATelecoms}">
+                            <h:outputText value="#{tl.telecomValue}, #{tl.telecomUse}, #{tl.telecomSystem}" title="#{bundle.ViewContactTitle_humanName}"/>
+                        </ui:repeat>                        
+                        <h:outputText value="Address"/>
+                        <ui:repeat var="add" value="#{contactController.selected.contactAddress}">
+                            <h:outputText value="#{add.text}, #{add.city}, #{add.line}, #{add.postalCode}, #{add.country}, #{add.district}" title="#{bundle.ViewContactTitle_humanName}"/>
+                        </ui:repeat>                        
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ContactViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

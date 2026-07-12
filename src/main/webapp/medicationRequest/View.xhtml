@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MedicationRequestViewDlg" widgetVar="MedicationRequestViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="View Medication Request" styleClass="ui-fluid">
+            <h:form id="MedicationRequestViewForm">
+                <p:panelGrid columns="4">
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2" rendered="#{medicationRequestController.selected != null}">
+                            <h:outputText value="Encounter ID"/>
+                            <h:outputText value="#{medicationRequestController.selected.encounter}" title="Encounter ID"/>
+                            <h:outputText value="Status"/>
+                            <h:outputText value="#{medicationRequestController.selected.MStatus}" title="Status"/>
+                            <h:outputText value="Status Reason"/>
+                            <h:outputText value="#{medicationRequestController.selected.statusReason}" title="Status Reason"/>
+                            <h:outputText value="Category"/>
+                            <h:outputText value="#{medicationRequestController.selected.category}" title="Category"/>
+                            <h:outputText value="Intent"/>
+                            <h:outputText value="#{medicationRequestController.selected.intent}" title="Intent"/>
+                            <h:outputText value="Priority"/>
+                            <h:outputText value="#{medicationRequestController.selected.priority}" title="Priority"/>
+                            <h:outputText value="Do Not Perform"/>
+                            <p:selectBooleanCheckbox value="#{medicationRequestController.selected.doNotPerform}" disabled="true"/>
+                            <h:outputText value="Authored On"/>
+                            <h:outputText value="#{medicationRequestController.selected.authoredOn}" title="Authored On">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                            <h:outputText value="Perform Type"/>
+                            <h:outputText value="#{medicationRequestController.selected.performType}" title="Perform Type"/>
+                            <h:outputText value="Course Of Therapy Type"/>
+                            <h:outputText value="#{medicationRequestController.selected.courseOfTherapyType}" title="Course Of Therapy Type"/>
+                            <h:outputText value="Reason Code"/>
+                            <h:outputText value="#{medicationRequestController.selected.reasonCode}" title="Reason Code"/>
+                            <h:outputText value="Note"/>
+                            <h:outputText value="#{medicationRequestController.selected.note}" title="Note"/>
+                        </p:panelGrid>
+                        <p:commandButton value="#{bundle.Close}" onclick="MedicationRequestViewDialog.hide()"/>
+                    </h:panelGroup>
+
+                    <ui:repeat var="meds" value="#{medicationRequestController.selected.medications}" class="ui-rpt">
+                        <h4>Medications</h4>
+                        <p:panelGrid columns="2">
+                            <h:outputText value="Id"/>
+                            <h:outputText value="#{meds.id}"/>
+                            <h:outputText value="Code"/>
+                            <h:outputText value="#{meds.MCode}" title="Code"/>
+                            <h:outputText value="Status"/>
+                            <h:outputText value="#{meds.status}" title="Status"/>
+                            <h:outputText value="Form"/>
+                            <h:outputText value="#{meds.form}" title="Form"/>
+                            <h:outputText value="Amount"/>
+                            <h:outputText value="#{meds.amount}" title="Amount"/>
+                            <h:outputText value="Batch Lot Number"/>
+                            <h:outputText value="#{meds.batchLotNumber}" title="Batch Lot Number"/>
+                            <h:outputText value="Batch Expiration Date"/>
+                            <h:outputText value="#{meds.batchExpirationDate}" title="Batch Expiration Date"/>
+                        </p:panelGrid>
+                    </ui:repeat>                    
+
+                    <ui:repeat var="dsg" value="#{medicationController.selected.dosages}">
+                        <h4>Dosage Instructions</h4>
+                        <p:panelGrid columns="2">
+                            <h:outputText value="Id"/>
+                            <h:outputText value="#{dsg.id}"/>
+                            <h:outputText value="Sequence"/>
+                            <h:outputText value="#{dsg.sequence}"/>
+                            <h:outputText value="Text"/>
+                            <h:outputText value="#{dsg.text}"/>
+                            <h:outputText value="Additional Instruction"/>
+                            <h:outputText value="#{dsg.additionalInstruction}"/>
+                            <h:outputText value="Patient Instruction"/>
+                            <h:outputText value="#{dsg.patientInstruction}"/>
+                            <h:outputText value="Timing"/>
+                            <h:outputText value="#{dsg.timing}"/>
+                            <h:outputText value="As Needed"/>
+                            <p:selectBooleanCheckbox value="#{dsg.asNeeded}" disabled="true"/>
+                            <h:outputText value="Site"/>
+                            <h:outputText value="#{dsg.site}"/>
+                            <h:outputText value="Route"/>
+                            <h:outputText value="#{dsg.route}"/>
+                            <h:outputText value="Method"/>
+                            <h:outputText value="#{dsg.method}"/>
+                            <h:outputText value="Max Dose Per Period Numerator"/>
+                            <h:outputText value="#{dsg.maxDosePerPeriodNumerator}"/>
+                            <h:outputText value="Max Dose Per Period Denominator"/>
+                            <h:outputText value="#{dsg.maxDosePerPeriodDenominator}"/>
+                            <h:outputText value="Max Dose Per Lifetime"/>
+                            <h:outputText value="#{dsg.maxDosePerLifetime}"/>
+                        </p:panelGrid>
+                    </ui:repeat>
+
+                    <ui:repeat var="dsgr" value="#{dosageController.getDosagesRates(medicationController.selected.dosages)}">
+                        <h4>Dosages and Rates</h4>
+                        <p:panelGrid columns="2">
+                            <h:outputText value="Id"/>
+                            <h:outputText value="#{dsgr.id}"/>
+                            <h:outputText value="Type"/>
+                            <h:outputText value="#{dsgr.DType}"/>
+                            <h:outputText value="Dose Range Low"/>
+                            <h:outputText value="#{dsgr.doseRangeLow}"/>
+                            <h:outputText value="Dose Range High"/>
+                            <h:outputText value="#{dsgr.doseRangeHigh}"/>
+                            <h:outputText value="Dose Quantity"/>
+                            <h:outputText value="#{dsgr.doseQuantity}"/>
+                            <h:outputText value="Rate Ratio Numerator"/>
+                            <h:outputText value="#{dsgr.rateRatioNumerator}"/>
+                            <h:outputText value="Rate Ratio Denominator"/>
+                            <h:outputText value="#{dsgr.rateRatioDenominator}"/>
+                            <h:outputText value="Rate Range Low"/>
+                            <h:outputText value="#{dsgr.rateRangeLow}"/>
+                            <h:outputText value="Rate Range Low"/>
+                            <h:outputText value="#{dsgr.rateRangeLow}"/>
+                            <h:outputText value="Rate Range High"/>
+                            <h:outputText value="#{dsgr.rateRangeHigh}"/>
+                            <h:outputText value="Rate Range Qty"/>
+                            <h:outputText value="#{dsgr.rateRangeQty}"/>                 
+                            
+                        </p:panelGrid>
+                    </ui:repeat>
+                    
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

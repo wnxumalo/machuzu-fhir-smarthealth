@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CarePlanActivityViewDlg" widgetVar="CarePlanActivityViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.ViewCarePlanActivityTitle}" styleClass="ui-fluid">
+            <h:form id="CarePlanActivityViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{carePlanActivityController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCarePlanActivityLabel_id}"/>
+                        <h:outputText value="#{carePlanActivityController.selected.id}" title="#{bundle.ViewCarePlanActivityTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewCarePlanActivityLabel_careplan}"/>
+                        <h:outputText value="#{carePlanActivityController.selected.careplan}" title="#{bundle.ViewCarePlanActivityTitle_careplan}"/>
+                        <h:outputText value="#{bundle.ViewCarePlanActivityLabel_outcomeCodeableConcept}"/>
+                        <h:outputText value="#{carePlanActivityController.selected.outcomeCodeableConcept}" title="#{bundle.ViewCarePlanActivityTitle_outcomeCodeableConcept}"/>
+                        <h:outputText value="#{bundle.ViewCarePlanActivityLabel_progress}"/>
+                        <h:outputText value="#{carePlanActivityController.selected.progress}" title="#{bundle.ViewCarePlanActivityTitle_progress}"/>
+                        <h:outputText value="#{bundle.ViewCarePlanActivityLabel_detailKind}"/>
+                        <h:outputText value="#{carePlanActivityController.selected.detailKind}" title="#{bundle.ViewCarePlanActivityTitle_detailKind}"/>
+                        <h:outputText value="#{bundle.ViewCarePlanActivityLabel_detailCode}"/>
+                        <h:outputText value="#{carePlanActivityController.selected.detailCode}" title="#{bundle.ViewCarePlanActivityTitle_detailCode}"/>
+                        <h:outputText value="#{bundle.ViewCarePlanActivityLabel_detailReasonCode}"/>
+                        <h:outputText value="#{carePlanActivityController.selected.detailReasonCode}" title="#{bundle.ViewCarePlanActivityTitle_detailReasonCode}"/>
+                        <h:outputText value="#{bundle.ViewCarePlanActivityLabel_status}"/>
+                        <h:outputText value="#{carePlanActivityController.selected.status}" title="#{bundle.ViewCarePlanActivityTitle_status}"/>
+                        <h:outputText value="#{bundle.ViewCarePlanActivityLabel_statusReason}"/>
+                        <h:outputText value="#{carePlanActivityController.selected.statusReason}" title="#{bundle.ViewCarePlanActivityTitle_statusReason}"/>
+                        <h:outputText value="#{bundle.ViewCarePlanActivityLabel_doNotPerform}"/>
+                        <p:selectBooleanCheckbox value="#{carePlanActivityController.selected.doNotPerform}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewCarePlanActivityLabel_scheduledPeriodFrom}"/>
+                        <h:outputText value="#{carePlanActivityController.selected.scheduledPeriodFrom}" title="#{bundle.ViewCarePlanActivityTitle_scheduledPeriodFrom}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewCarePlanActivityLabel_scheduledPeriodTo}"/>
+                        <h:outputText value="#{carePlanActivityController.selected.scheduledPeriodTo}" title="#{bundle.ViewCarePlanActivityTitle_scheduledPeriodTo}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewCarePlanActivityLabel_productCodeCodeableConcept}"/>
+                        <h:outputText value="#{carePlanActivityController.selected.productCodeCodeableConcept}" title="#{bundle.ViewCarePlanActivityTitle_productCodeCodeableConcept}"/>
+                        <h:outputText value="#{bundle.ViewCarePlanActivityLabel_productReference}"/>
+                        <h:outputText value="#{carePlanActivityController.selected.productReference}" title="#{bundle.ViewCarePlanActivityTitle_productReference}"/>
+                        <h:outputText value="#{bundle.ViewCarePlanActivityLabel_dailyAmount}"/>
+                        <h:outputText value="#{carePlanActivityController.selected.dailyAmount}" title="#{bundle.ViewCarePlanActivityTitle_dailyAmount}"/>
+                        <h:outputText value="#{bundle.ViewCarePlanActivityLabel_quantity}"/>
+                        <h:outputText value="#{carePlanActivityController.selected.quantity}" title="#{bundle.ViewCarePlanActivityTitle_quantity}"/>
+                        <h:outputText value="#{bundle.ViewCarePlanActivityLabel_description}"/>
+                        <h:outputText value="#{carePlanActivityController.selected.description}" title="#{bundle.ViewCarePlanActivityTitle_description}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CarePlanActivityViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

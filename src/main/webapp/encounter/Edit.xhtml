@@ -1,0 +1,1039 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EncounterEditDlg" widgetVar="EncounterEditDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Edit Encounter" styleClass="ui-fluid">
+            <h:form id="EncounterEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{encounterController.selected != null}">
+                        <p:outputLabel value="Status" for="status" />
+                        <p:selectOneMenu id="status" value="#{encounterController.selected.status}" required="true" title="Status">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="planned" itemValue="planned" />
+                            <f:selectItem itemLabel="arrived" itemValue="arrived" />
+                            <f:selectItem itemLabel="triaged" itemValue="triaged" />
+                            <f:selectItem itemLabel="in-progress" itemValue="in-progress" />
+                            <f:selectItem itemLabel="onleave" itemValue="onleave" />
+                            <f:selectItem itemLabel="finished" itemValue="finished" />
+                            <f:selectItem itemLabel="cancelled" itemValue="cancelled" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Class" for="EClass" />
+                        <p:selectOneMenu id="EClass" value="#{encounterController.selected.EClass}" required="true" title="Class">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="ambulatory" itemValue="AMB" />
+                            <f:selectItem itemLabel="emergency" itemValue="EMER" />
+                            <f:selectItem itemLabel="field" itemValue="FLD" />
+                            <f:selectItem itemLabel="home health" itemValue="HH" />
+                            <f:selectItem itemLabel="inpatient acute" itemValue="ACUTE" />
+                            <f:selectItem itemLabel="inpatient non-acute" itemValue="NONAC" />
+                            <f:selectItem itemLabel="observation encounter" itemValue="OBSENC" />
+                            <f:selectItem itemLabel="pre-admission" itemValue="PRENC" />
+                            <f:selectItem itemLabel="short stay" itemValue="SS" />
+                            <f:selectItem itemLabel="cirtual" itemValue="VR" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Type" for="type" />
+                        <p:selectOneMenu id="type" value="#{encounterController.selected.type}" title="Type">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Annual diabetes mellitis screening" itemValue="ADMS" />
+                            <f:selectItem itemLabel="Bone drilling/bone marrow punction in clinic" itemValue="BD/BM-clin" />
+                            <f:selectItem itemLabel="Infant colon screening - 60 Minutes" itemValue="OKI" />
+                            <f:selectItem itemLabel="Outpatient Kenacort injection" itemValue="OKI" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Type" for="serviceType" />
+                        <p:selectOneMenu id="serviceType" value="#{encounterController.selected.serviceType}" title="Service Type">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Adoption/Permanent Care Info/Support" itemValue="1" />
+                            <f:selectItem itemLabel="Aged Care Assessment" itemValue="2" />
+                            <f:selectItem itemLabel="Aged Care Information/Referral" itemValue="3" />
+                            <f:selectItem itemLabel="Aged Residential Care" itemValue="4" />
+                            <f:selectItem itemLabel="Case Management for Older Persons" itemValue="5" />
+                            <f:selectItem itemLabel="Delivered Meals (Meals On Wheels)" itemValue="6" />
+                            <f:selectItem itemLabel="Friendly Visiting" itemValue="7" />
+                            <f:selectItem itemLabel="Home Care/Housekeeping Assistance" itemValue="8" />
+                            <f:selectItem itemLabel="Home Maintenance and Repair" itemValue="9" />
+                            <f:selectItem itemLabel="Personal Alarms/Alerts" itemValue="10" />
+                            <f:selectItem itemLabel="Personal Care for Older Persons" itemValue="11" />
+                            <f:selectItem itemLabel="Planned Activity Groups" itemValue="12" />
+                            <f:selectItem itemLabel="Acupuncture" itemValue="13" />
+                            <f:selectItem itemLabel="Alexander Technique Therapy" itemValue="14" />
+                            <f:selectItem itemLabel="Aromatherapy" itemValue="15" />
+                            <f:selectItem itemLabel="Biorhythm Services" itemValue="16" />
+                            <f:selectItem itemLabel="Bowen Therapy" itemValue="17" />
+                            <f:selectItem itemLabel="Chinese Herbal Medicine" itemValue="18" />
+                            <f:selectItem itemLabel="Feldenkrais" itemValue="19" />
+                            <f:selectItem itemLabel="Homoeopathy" itemValue="20" />
+                            <f:selectItem itemLabel="Hydrotherapy" itemValue="21" />
+                            <f:selectItem itemLabel="Hypnotherapy" itemValue="22" />
+                            <f:selectItem itemLabel="Kinesiology" itemValue="23" />
+                            <f:selectItem itemLabel="Magnetic Therapy" itemValue="24" />
+                            <f:selectItem itemLabel="Massage Therapy" itemValue="25" />
+                            <f:selectItem itemLabel="Meditation" itemValue="26" />
+                            <f:selectItem itemLabel="Myotherapy" itemValue="27" />
+                            <f:selectItem itemLabel="Naturopathy" itemValue="28" />
+                            <f:selectItem itemLabel="Reflexology" itemValue="29" />
+                            <f:selectItem itemLabel="Reiki" itemValue="30" />
+                            <f:selectItem itemLabel="Relaxation Therapy" itemValue="31" />
+                            <f:selectItem itemLabel="Shiatsu" itemValue="32" />
+                            <f:selectItem itemLabel="Western Herbal Medicine" itemValue="33" />
+                            <f:selectItem itemLabel="Family Day care" itemValue="34" />
+                            <f:selectItem itemLabel="Holiday Programs" itemValue="35" />
+                            <f:selectItem itemLabel="Kindergarten Inclusion Support" itemValue="36" />
+                            <f:selectItem itemLabel="Kindergarten/Preschool" itemValue="37" />
+                            <f:selectItem itemLabel="Long Day Child Care" itemValue="38" />
+                            <f:selectItem itemLabel="Occasional Child Care" itemValue="39" />
+                            <f:selectItem itemLabel="Outside School Hours Care" itemValue="40" />
+                            <f:selectItem itemLabel="Children's Play Programs" itemValue="41" />
+                            <f:selectItem itemLabel="Parenting/Family Support/Education" itemValue="42" />
+                            <f:selectItem itemLabel="Playgroup" itemValue="43" />
+                            <f:selectItem itemLabel="School Nursing" itemValue="44" />
+                            <f:selectItem itemLabel="Toy Library" itemValue="45" />
+                            <f:selectItem itemLabel="Child Protection/Child Abuse Report" itemValue="46" />
+                            <f:selectItem itemLabel="Foster Care" itemValue="47" />
+                            <f:selectItem itemLabel="Residential/Out-of-Home Care" itemValue="48" />
+                            <f:selectItem itemLabel="Support - Young People Leaving Care" itemValue="49" />
+                            <f:selectItem itemLabel="Audiology" itemValue="50" />
+                            <f:selectItem itemLabel="Blood Donation" itemValue="51" />
+                            <f:selectItem itemLabel="Chiropractic" itemValue="52" />
+                            <f:selectItem itemLabel="Dietetics" itemValue="53" />
+                            <f:selectItem itemLabel="Family Planning" itemValue="54" />
+                            <f:selectItem itemLabel="Health Advocacy/Liaison Service" itemValue="55" />
+                            <f:selectItem itemLabel="Health Information/Referral" itemValue="56" />
+                            <f:selectItem itemLabel="Immunization" itemValue="57" />
+                            <f:selectItem itemLabel="Maternal and Child Health" itemValue="58" />
+                            <f:selectItem itemLabel="Nursing" itemValue="59" />
+                            <f:selectItem itemLabel="Nutrition" itemValue="60" />
+                            <f:selectItem itemLabel="Occupational Therapy" itemValue="61" />
+                            <f:selectItem itemLabel="Optometry" itemValue="62" />
+                            <f:selectItem itemLabel="Osteopathy" itemValue="63" />
+                            <f:selectItem itemLabel="Pharmacy" itemValue="64" />
+                            <f:selectItem itemLabel="Physiotherapy" itemValue="65" />
+                            <f:selectItem itemLabel="Podiatry" itemValue="66" />
+                            <f:selectItem itemLabel="Sexual Health" itemValue="67" />
+                            <f:selectItem itemLabel="Speech Pathology/Therapy" itemValue="68" />
+                            <f:selectItem itemLabel="Bereavement Counselling" itemValue="69" />
+                            <f:selectItem itemLabel="Crisis Counselling" itemValue="70" />
+                            <f:selectItem itemLabel="Family Counselling/Therapy" itemValue="71" />
+                            <f:selectItem itemLabel="Family Violence Counselling" itemValue="72" />
+                            <f:selectItem itemLabel="Financial Counselling" itemValue="73" />
+                            <f:selectItem itemLabel="Generalist Counselling" itemValue="74" />
+                            <f:selectItem itemLabel="Genetic Counselling" itemValue="75" />
+                            <f:selectItem itemLabel="Health Counselling" itemValue="76" />
+                            <f:selectItem itemLabel="Mediation" itemValue="77" />
+                            <f:selectItem itemLabel="Problem Gambling Counselling" itemValue="78" />
+                            <f:selectItem itemLabel="Relationship Counselling" itemValue="79" />
+                            <f:selectItem itemLabel="Sexual Assault Counselling" itemValue="80" />
+                            <f:selectItem itemLabel="Trauma Counselling" itemValue="81" />
+                            <f:selectItem itemLabel="Victims of Crime Counselling" itemValue="82" />
+                            <f:selectItem itemLabel="Cemetery Operation" itemValue="83" />
+                            <f:selectItem itemLabel="Cremation" itemValue="84" />
+                            <f:selectItem itemLabel="Death Service Information" itemValue="85" />
+                            <f:selectItem itemLabel="Funeral Services" itemValue="86" />
+                            <f:selectItem itemLabel="Endodontic" itemValue="87" />
+                            <f:selectItem itemLabel="General Dental" itemValue="88" />
+                            <f:selectItem itemLabel="Oral Medicine" itemValue="89" />
+                            <f:selectItem itemLabel="Oral Surgery" itemValue="90" />
+                            <f:selectItem itemLabel="Orthodontic" itemValue="91" />
+                            <f:selectItem itemLabel="Paediatric Dentistry" itemValue="92" />
+                            <f:selectItem itemLabel="Periodontic" itemValue="93" />
+                            <f:selectItem itemLabel="Prosthodontic" itemValue="94" />
+                            <f:selectItem itemLabel="Acquired Brain Injury Info/Referral" itemValue="95" />
+                            <f:selectItem itemLabel="Disability Advocacy" itemValue="96" />
+                            <f:selectItem itemLabel="Disability Aids and Equipment" itemValue="97" />
+                            <f:selectItem itemLabel="Disability Case Management" itemValue="98" />
+                            <f:selectItem itemLabel="Disability Day Programs/Activities" itemValue="99" />
+                            <f:selectItem itemLabel="Disability Information/Referral" itemValue="100" />
+                            <f:selectItem itemLabel="Disability Support Packages" itemValue="101" />
+                            <f:selectItem itemLabel="Disability Supported Accommodation" itemValue="102" />
+                            <f:selectItem itemLabel="Early Childhood Intervention" itemValue="103" />
+                            <f:selectItem itemLabel="Hearing Aids and Equipment" itemValue="104" />
+                            <f:selectItem itemLabel="Drug and/or Alcohol Counselling" itemValue="105" />
+                            <f:selectItem itemLabel="Drug/Alcohol Information/Referral" itemValue="106" />
+                            <f:selectItem itemLabel="Needle and Syringe Exchange" itemValue="107" />
+                            <f:selectItem itemLabel="Non-resid. Alcohol/Drug Treatment" itemValue="108" />
+                            <f:selectItem itemLabel="Pharmacotherapy" itemValue="109" />
+                            <f:selectItem itemLabel="Quit Program" itemValue="110" />
+                            <f:selectItem itemLabel="Residential Alcohol/Drug Treatment" itemValue="111" />
+                            <f:selectItem itemLabel="Adult/Community Education" itemValue="112" />
+                            <f:selectItem itemLabel="Higher Education" itemValue="113" />
+                            <f:selectItem itemLabel="Primary Education" itemValue="114" />
+                            <f:selectItem itemLabel="Secondary Education" itemValue="115" />
+                            <f:selectItem itemLabel="Training and Vocational Education" itemValue="116" />
+                            <f:selectItem itemLabel="Emergency Medical" itemValue="117" />
+                            <f:selectItem itemLabel="Employment Placement and/or Support" itemValue="118" />
+                            <f:selectItem itemLabel="Vocational Rehabilitation" itemValue="119" />
+                            <f:selectItem itemLabel="Work Safety/Accident Prevention" itemValue="120" />
+                            <f:selectItem itemLabel="Financial Assistance" itemValue="121" />
+                            <f:selectItem itemLabel="Financial Information/Advice" itemValue="122" />
+                            <f:selectItem itemLabel="Material Aid" itemValue="123" />
+                            <f:selectItem itemLabel="General Practice" itemValue="124" />
+                            <f:selectItem itemLabel="Accommodation Placement/Support" itemValue="125" />
+                            <f:selectItem itemLabel="Crisis/Emergency Accommodation" itemValue="126" />
+                            <f:selectItem itemLabel="Homelessness Support" itemValue="127" />
+                            <f:selectItem itemLabel="Housing Information/Referral" itemValue="128" />
+                            <f:selectItem itemLabel="Public Rental Housing" itemValue="129" />
+                            <f:selectItem itemLabel="Interpreting/Multilingual Service" itemValue="130" />
+                            <f:selectItem itemLabel="Juvenile Justice" itemValue="131" />
+                            <f:selectItem itemLabel="Legal Advocacy" itemValue="132" />
+                            <f:selectItem itemLabel="Legal Information/Advice/Referral" itemValue="133" />
+                            <f:selectItem itemLabel="Mental Health Advocacy" itemValue="134" />
+                            <f:selectItem itemLabel="Mental Health Assess/Triage/Crisis Response" itemValue="135" />
+                            <f:selectItem itemLabel="Mental Health Case Management" itemValue="136" />
+                            <f:selectItem itemLabel="Mental Health Information/Referral" itemValue="137" />
+                            <f:selectItem itemLabel="Mental Health Inpatient Services" itemValue="138" />
+                            <f:selectItem itemLabel="Mental Health Non-residential Rehab" itemValue="139" />
+                            <f:selectItem itemLabel="Mental Health Residential Rehab/CCU" itemValue="140" />
+                            <f:selectItem itemLabel="Psychiatry (Requires Referral)" itemValue="141" />
+                            <f:selectItem itemLabel="Psychology" itemValue="142" />
+                            <f:selectItem itemLabel="Martial Arts" itemValue="143" />
+                            <f:selectItem itemLabel="Personal Fitness Training" itemValue="144" />
+                            <f:selectItem itemLabel="Physical Activity Group" itemValue="145" />
+                            <f:selectItem itemLabel="Physical Activity Programs" itemValue="146" />
+                            <f:selectItem itemLabel="Physical Fitness Testing" itemValue="147" />
+                            <f:selectItem itemLabel="Pilates" itemValue="148" />
+                            <f:selectItem itemLabel="Self-Defence" itemValue="149" />
+                            <f:selectItem itemLabel="Sporting Club" itemValue="150" />
+                            <f:selectItem itemLabel="Yoga" itemValue="151" />
+                            <f:selectItem itemLabel="Food Safety" itemValue="152" />
+                            <f:selectItem itemLabel="Health Regulatory /Inspection /Cert." itemValue="153" />
+                            <f:selectItem itemLabel="Work Health/Safety Inspection/Cert." itemValue="154" />
+                            <f:selectItem itemLabel="Carer Support" itemValue="155" />
+                            <f:selectItem itemLabel="Respite Care" itemValue="156" />
+                            <f:selectItem itemLabel="Anatomical Pathology" itemValue="157" />
+                            <f:selectItem itemLabel="Pathology - Clinical Chemistry" itemValue="158" />
+                            <f:selectItem itemLabel="Pathology - General" itemValue="159" />
+                            <f:selectItem itemLabel="Pathology - Genetics" itemValue="160" />
+                            <f:selectItem itemLabel="Pathology - Haematology" itemValue="161" />
+                            <f:selectItem itemLabel="Pathology - Immunology" itemValue="162" />
+                            <f:selectItem itemLabel="Pathology - Microbiology" itemValue="163" />
+                            <f:selectItem itemLabel="Anaesthesiology - Pain Medicine" itemValue="164" />
+                            <f:selectItem itemLabel="Cardiology" itemValue="165" />
+                            <f:selectItem itemLabel="Clinical Genetics" itemValue="166" />
+                            <f:selectItem itemLabel="Clinical Pharmacology" itemValue="167" />
+                            <f:selectItem itemLabel="Dermatology" itemValue="168" />
+                            <f:selectItem itemLabel="Endocrinology" itemValue="169" />
+                            <f:selectItem itemLabel="Gastroenterology and Hepatology" itemValue="170" />
+                            <f:selectItem itemLabel="Geriatric Medicine" itemValue="171" />
+                            <f:selectItem itemLabel="Immunology and Allergy" itemValue="172" />
+                            <f:selectItem itemLabel="Infectious Diseases" itemValue="173" />
+                            <f:selectItem itemLabel="Intensive Care Medicine" itemValue="174" />
+                            <f:selectItem itemLabel="Medical Oncology" itemValue="175" />
+                            <f:selectItem itemLabel="Nephrology" itemValue="176" />
+                            <f:selectItem itemLabel="Neurology" itemValue="177" />
+                            <f:selectItem itemLabel="Occupational Medicine" itemValue="178" />
+                            <f:selectItem itemLabel="Palliative Medicine" itemValue="179" />
+                            <f:selectItem itemLabel="Public Health Medicine" itemValue="180" />
+                            <f:selectItem itemLabel="Rehabilitation Medicine" itemValue="181" />
+                            <f:selectItem itemLabel="Rheumatology" itemValue="182" />
+                            <f:selectItem itemLabel="Sleep Medicine" itemValue="183" />
+                            <f:selectItem itemLabel="Thoracic Medicine" itemValue="184" />
+                            <f:selectItem itemLabel="Gynaecological Oncology" itemValue="185" />
+                            <f:selectItem itemLabel="Obstetrics and Gynaecology" itemValue="186" />
+                            <f:selectItem itemLabel="Reproductive Endocrinology/Infertility" itemValue="187" />
+                            <f:selectItem itemLabel="Urogynaecology" itemValue="188" />
+                            <f:selectItem itemLabel="Neonatology and Perinatology" itemValue="189" />
+                            <f:selectItem itemLabel="Paediatric Cardiology" itemValue="190" />
+                            <f:selectItem itemLabel="Paediatric Clinical Genetics" itemValue="191" />
+                            <f:selectItem itemLabel="Paediatric Clinical Pharmacology" itemValue="192" />
+                            <f:selectItem itemLabel="Paediatric Endocrinology" itemValue="193" />
+                            <f:selectItem itemLabel="Paed. Gastroenterology/Hepatology" itemValue="194" />
+                            <f:selectItem itemLabel="Paediatric Haematology" itemValue="195" />
+                            <f:selectItem itemLabel="Paediatric Immunology and Allergy" itemValue="196" />
+                            <f:selectItem itemLabel="Paediatric Infectious Diseases" itemValue="197" />
+                            <f:selectItem itemLabel="Paediatric Intensive Care Medicine" itemValue="198" />
+                            <f:selectItem itemLabel="Paediatric Medical Oncology" itemValue="199" />
+                            <f:selectItem itemLabel="Paediatric Medicine" itemValue="200" />
+                            <f:selectItem itemLabel="Paediatric Nephrology" itemValue="201" />
+                            <f:selectItem itemLabel="Paediatric Neurology" itemValue="202" />
+                            <f:selectItem itemLabel="Paediatric Nuclear Medicine" itemValue="203" />
+                            <f:selectItem itemLabel="Paediatric Rehabilitation Medicine" itemValue="204" />
+                            <f:selectItem itemLabel="Paediatric Rheumatology" itemValue="205" />
+                            <f:selectItem itemLabel="Paediatric Sleep Medicine" itemValue="206" />
+                            <f:selectItem itemLabel="Paediatric Surgery" itemValue="207" />
+                            <f:selectItem itemLabel="Paediatric Thoracic Medicine" itemValue="208" />
+                            <f:selectItem itemLabel="Diag. Radiology /Xray /CT /Fluoroscopy" itemValue="209" />
+                            <f:selectItem itemLabel="Diagnostic Ultrasound" itemValue="210" />
+                            <f:selectItem itemLabel="Magnetic Resonance Imaging (MRI)" itemValue="211" />
+                            <f:selectItem itemLabel="Nuclear Medicine" itemValue="212" />
+                            <f:selectItem itemLabel="Obstetric/Gynaecological Ultrasound" itemValue="213" />
+                            <f:selectItem itemLabel="Radiation Oncology" itemValue="214" />
+                            <f:selectItem itemLabel="Cardiothoracic Surgery" itemValue="215" />
+                            <f:selectItem itemLabel="Neurosurgery" itemValue="216" />
+                            <f:selectItem itemLabel="Ophthalmology" itemValue="217" />
+                            <f:selectItem itemLabel="Orthopaedic Surgery" itemValue="218" />
+                            <f:selectItem itemLabel="Otolaryngology/Head and Neck Surgery" itemValue="219" />
+                            <f:selectItem itemLabel="Plastic and Reconstructive Surgery" itemValue="220" />
+                            <f:selectItem itemLabel="Surgery - General" itemValue="221" />
+                            <f:selectItem itemLabel="Urology" itemValue="222" />
+                            <f:selectItem itemLabel="Vascular Surgery" itemValue="223" />
+                            <f:selectItem itemLabel="Support Groups" itemValue="224" />
+                            <f:selectItem itemLabel="Air ambulance" itemValue="225" />
+                            <f:selectItem itemLabel="Ambulance" itemValue="226" />
+                            <f:selectItem itemLabel="Blood Transport" itemValue="227" />
+                            <f:selectItem itemLabel="Community Bus" itemValue="228" />
+                            <f:selectItem itemLabel="Flying Doctor Service" itemValue="229" />
+                            <f:selectItem itemLabel="Patient Transport" itemValue="230" />
+                            <f:selectItem itemLabel="AandE" itemValue="231" />
+                            <f:selectItem itemLabel="AandEP" itemValue="232" />
+                            <f:selectItem itemLabel="Abuse" itemValue="233" />
+                            <f:selectItem itemLabel="ACAS" itemValue="234" />
+                            <f:selectItem itemLabel="Access" itemValue="235" />
+                            <f:selectItem itemLabel="Accident" itemValue="236" />
+                            <f:selectItem itemLabel="Acute Inpatient Serv" itemValue="237" />
+                            <f:selectItem itemLabel="Adult Day Programs" itemValue="238" />
+                            <f:selectItem itemLabel="Adult Mental Health Services" itemValue="239" />
+                            <f:selectItem itemLabel="Advice" itemValue="240" />
+                            <f:selectItem itemLabel="Advocacy" itemValue="241" />
+                            <f:selectItem itemLabel="Aged Persons Mental Health Residential Units" itemValue="242" />
+                            <f:selectItem itemLabel="Aged Persons Mental Health Services" itemValue="243" />
+                            <f:selectItem itemLabel="Aged Persons Mental Health Teams" itemValue="244" />
+                            <f:selectItem itemLabel="Aids" itemValue="245" />
+                            <f:selectItem itemLabel="Al-Anon" itemValue="246" />
+                            <f:selectItem itemLabel="Alcohol" itemValue="247" />
+                            <f:selectItem itemLabel="Al-Teen" itemValue="248" />
+                            <f:selectItem itemLabel="Antenatal" itemValue="249" />
+                            <f:selectItem itemLabel="Anxiety" itemValue="250" />
+                            <f:selectItem itemLabel="Arthritis" itemValue="251" />
+                            <f:selectItem itemLabel="Assessment" itemValue="252" />
+                            <f:selectItem itemLabel="Assistance" itemValue="253" />
+                            <f:selectItem itemLabel="Asthma" itemValue="254" />
+                            <f:selectItem itemLabel="ATSS" itemValue="255" />
+                            <f:selectItem itemLabel="Attendant Care" itemValue="256" />
+                            <f:selectItem itemLabel="Babies" itemValue="257" />
+                            <f:selectItem itemLabel="Bathroom Modificatio" itemValue="258" />
+                            <f:selectItem itemLabel="Behavior" itemValue="259" />
+                            <f:selectItem itemLabel="Behavior Intervention" itemValue="260" />
+                            <f:selectItem itemLabel="Bereavement" itemValue="261" />
+                            <f:selectItem itemLabel="Bipolar" itemValue="262" />
+                            <f:selectItem itemLabel="Birth" itemValue="263" />
+                            <f:selectItem itemLabel="Birth Control" itemValue="264" />
+                            <f:selectItem itemLabel="Birthing Options" itemValue="265" />
+                            <f:selectItem itemLabel="BIST" itemValue="266" />
+                            <f:selectItem itemLabel="Blood" itemValue="267" />
+                            <f:selectItem itemLabel="Bone" itemValue="268" />
+                            <f:selectItem itemLabel="Bowel" itemValue="269" />
+                            <f:selectItem itemLabel="Brain" itemValue="270" />
+                            <f:selectItem itemLabel="Breast Feeding" itemValue="271" />
+                            <f:selectItem itemLabel="Breast Screen" itemValue="272" />
+                            <f:selectItem itemLabel="Brokerage" itemValue="273" />
+                            <f:selectItem itemLabel="Cancer" itemValue="274" />
+                            <f:selectItem itemLabel="Cancer Support" itemValue="275" />
+                            <f:selectItem itemLabel="Cardiovascular Disease" itemValue="276" />
+                            <f:selectItem itemLabel="Care Packages" itemValue="277" />
+                            <f:selectItem itemLabel="Carer" itemValue="278" />
+                            <f:selectItem itemLabel="Case Management" itemValue="279" />
+                            <f:selectItem itemLabel="Casualty" itemValue="280" />
+                            <f:selectItem itemLabel="Centrelink" itemValue="281" />
+                            <f:selectItem itemLabel="Chemists" itemValue="282" />
+                            <f:selectItem itemLabel="Child And Adolescent" itemValue="283" />
+                            <f:selectItem itemLabel="Child Care" itemValue="284" />
+                            <f:selectItem itemLabel="Child Services" itemValue="285" />
+                            <f:selectItem itemLabel="Children" itemValue="286" />
+                            <f:selectItem itemLabel="Children's Services" itemValue="287" />
+                            <f:selectItem itemLabel="Cholesterol" itemValue="288" />
+                            <f:selectItem itemLabel="Clothing" itemValue="289" />
+                            <f:selectItem itemLabel="Community Based Accommodation" itemValue="290" />
+                            <f:selectItem itemLabel="Community Care Unit" itemValue="291" />
+                            <f:selectItem itemLabel="Community Child And Adolescent Mental Health Services" itemValue="292" />
+                            <f:selectItem itemLabel="Community Health" itemValue="293" />
+                            <f:selectItem itemLabel="Community Residential Unit" itemValue="294" />
+                            <f:selectItem itemLabel="Community Transport" itemValue="295" />
+                            <f:selectItem itemLabel="Companion Visiting" itemValue="296" />
+                            <f:selectItem itemLabel="Companionship" itemValue="297" />
+                            <f:selectItem itemLabel="Consumer Advice" itemValue="298" />
+                            <f:selectItem itemLabel="Consumer Issues" itemValue="299" />
+                            <f:selectItem itemLabel="Continuing Care Services" itemValue="300" />
+                            <f:selectItem itemLabel="Contraception Inform" itemValue="301" />
+                            <f:selectItem itemLabel="Coordinating Bodies" itemValue="302" />
+                            <f:selectItem itemLabel="Correctional Service" itemValue="303" />
+                            <f:selectItem itemLabel="Council Environmental Health" itemValue="304" />
+                            <f:selectItem itemLabel="Counselling" itemValue="305" />
+                            <f:selectItem itemLabel="Criminal" itemValue="306" />
+                            <f:selectItem itemLabel="Crises" itemValue="307" />
+                            <f:selectItem itemLabel="Crisis Assessment And Treatment Services (Cats)" itemValue="308" />
+                            <f:selectItem itemLabel="Crisis Assistance" itemValue="309" />
+                            <f:selectItem itemLabel="Crisis Refuge" itemValue="310" />
+                            <f:selectItem itemLabel="Day Program" itemValue="311" />
+                            <f:selectItem itemLabel="Deaf" itemValue="312" />
+                            <f:selectItem itemLabel="Dental Hygiene" itemValue="313" />
+                            <f:selectItem itemLabel="Dentistry" itemValue="314" />
+                            <f:selectItem itemLabel="Dentures" itemValue="315" />
+                            <f:selectItem itemLabel="Depression" itemValue="316" />
+                            <f:selectItem itemLabel="Detoxification" itemValue="317" />
+                            <f:selectItem itemLabel="Diabetes" itemValue="318" />
+                            <f:selectItem itemLabel="Diaphragm Fitting" itemValue="319" />
+                            <f:selectItem itemLabel="Dieticians" itemValue="320" />
+                            <f:selectItem itemLabel="Disabled Parking" itemValue="321" />
+                            <f:selectItem itemLabel="District Nursing" itemValue="322" />
+                            <f:selectItem itemLabel="Divorce" itemValue="323" />
+                            <f:selectItem itemLabel="Doctors" itemValue="324" />
+                            <f:selectItem itemLabel="Drink-Drive" itemValue="325" />
+                            <f:selectItem itemLabel="Dual Diagnosis Services" itemValue="326" />
+                            <f:selectItem itemLabel="Early Choice" itemValue="327" />
+                            <f:selectItem itemLabel="Eating Disorder" itemValue="328" />
+                            <f:selectItem itemLabel="Emergency Relief" itemValue="329" />
+                            <f:selectItem itemLabel="Employment And Train" itemValue="331" />
+                            <f:selectItem itemLabel="Environment" itemValue="332" />
+                            <f:selectItem itemLabel="Equipment" itemValue="333" />
+                            <f:selectItem itemLabel="Exercise" itemValue="334" />
+                            <f:selectItem itemLabel="Facility" itemValue="335" />
+                            <f:selectItem itemLabel="Family Choice" itemValue="336" />
+                            <f:selectItem itemLabel="Family Law" itemValue="337" />
+                            <f:selectItem itemLabel="Family Options" itemValue="338" />
+                            <f:selectItem itemLabel="Family Services" itemValue="339" />
+                            <f:selectItem itemLabel="FFYA" itemValue="340" />
+                            <f:selectItem itemLabel="Financial Aid" itemValue="341" />
+                            <f:selectItem itemLabel="Fitness" itemValue="342" />
+                            <f:selectItem itemLabel="Flexible Care Packages" itemValue="343" />
+                            <f:selectItem itemLabel="Food" itemValue="344" />
+                            <f:selectItem itemLabel="Food Vouchers" itemValue="345" />
+                            <f:selectItem itemLabel="Forensic Mental Heal" itemValue="346" />
+                            <f:selectItem itemLabel="Futures" itemValue="347" />
+                            <f:selectItem itemLabel="Futures For Young Adults" itemValue="348" />
+                            <f:selectItem itemLabel="General Practitioner" itemValue="349" />
+                            <f:selectItem itemLabel="Grants" itemValue="350" />
+                            <f:selectItem itemLabel="Grief" itemValue="351" />
+                            <f:selectItem itemLabel="Grief Counselling" itemValue="352" />
+                            <f:selectItem itemLabel="HACC" itemValue="353" />
+                            <f:selectItem itemLabel="Heart Disease" itemValue="354" />
+                            <f:selectItem itemLabel="Help" itemValue="355" />
+                            <f:selectItem itemLabel="High Blood Pressure" itemValue="356" />
+                            <f:selectItem itemLabel="Home Help" itemValue="357" />
+                            <f:selectItem itemLabel="Home Nursing" itemValue="358" />
+                            <f:selectItem itemLabel="Homefirst" itemValue="359" />
+                            <f:selectItem itemLabel="Hospice Care" itemValue="360" />
+                            <f:selectItem itemLabel="Hospital Services" itemValue="361" />
+                            <f:selectItem itemLabel="Hospital To Home" itemValue="362" />
+                            <f:selectItem itemLabel="Hostel" itemValue="364" />
+                            <f:selectItem itemLabel="Hostel Accommodation" itemValue="365" />
+                            <f:selectItem itemLabel="Household Items" itemValue="366" />
+                            <f:selectItem itemLabel="Hypertension" itemValue="367" />
+                            <f:selectItem itemLabel="Illness" itemValue="368" />
+                            <f:selectItem itemLabel="Independent Living" itemValue="369" />
+                            <f:selectItem itemLabel="Information" itemValue="370" />
+                            <f:selectItem itemLabel="Injury" itemValue="371" />
+                            <f:selectItem itemLabel="Intake" itemValue="372" />
+                            <f:selectItem itemLabel="Intensive Mobile Youth Outreach Services (Imyos)" itemValue="373" />
+                            <f:selectItem itemLabel="Intervention" itemValue="374" />
+                            <f:selectItem itemLabel="Job Searching" itemValue="375" />
+                            <f:selectItem itemLabel="Justice" itemValue="376" />
+                            <f:selectItem itemLabel="Leisure" itemValue="377" />
+                            <f:selectItem itemLabel="Loans" itemValue="378" />
+                            <f:selectItem itemLabel="Low Income Earners" itemValue="379" />
+                            <f:selectItem itemLabel="Lung" itemValue="380" />
+                            <f:selectItem itemLabel="Making A Difference" itemValue="381" />
+                            <f:selectItem itemLabel="Medical Services" itemValue="382" />
+                            <f:selectItem itemLabel="Medical Specialists" itemValue="383" />
+                            <f:selectItem itemLabel="Medication Administration" itemValue="384" />
+                            <f:selectItem itemLabel="Menstrual Information" itemValue="385" />
+                            <f:selectItem itemLabel="Methadone" itemValue="386" />
+                            <f:selectItem itemLabel="Mobile Support And Treatment Services (MSTS)" itemValue="387" />
+                            <f:selectItem itemLabel="Motor Neurone" itemValue="388" />
+                            <f:selectItem itemLabel="Multiple Sclerosis" itemValue="389" />
+                            <f:selectItem itemLabel="Neighbourhood House" itemValue="390" />
+                            <f:selectItem itemLabel="Nursing Home" itemValue="391" />
+                            <f:selectItem itemLabel="Nursing Mothers" itemValue="392" />
+                            <f:selectItem itemLabel="Obesity" itemValue="393" />
+                            <f:selectItem itemLabel="Occupational Health and Safety" itemValue="394" />
+                            <f:selectItem itemLabel="Optometrist" itemValue="395" />
+                            <f:selectItem itemLabel="Oral Hygiene" itemValue="396" />
+                            <f:selectItem itemLabel="Outpatients" itemValue="397" />
+                            <f:selectItem itemLabel="Outreach Service" itemValue="398" />
+                            <f:selectItem itemLabel="PADP" itemValue="399" />
+                            <f:selectItem itemLabel="Pain" itemValue="400" />
+                            <f:selectItem itemLabel="Pap Smear" itemValue="401" />
+                            <f:selectItem itemLabel="Parenting" itemValue="402" />
+                            <f:selectItem itemLabel="Peak Organizations" itemValue="403" />
+                            <f:selectItem itemLabel="Personal Care" itemValue="404" />
+                            <f:selectItem itemLabel="Pharmacies" itemValue="405" />
+                            <f:selectItem itemLabel="Phobias" itemValue="406" />
+                            <f:selectItem itemLabel="Physical" itemValue="407" />
+                            <f:selectItem itemLabel="Physical Activity" itemValue="408" />
+                            <f:selectItem itemLabel="Postnatal" itemValue="409" />
+                            <f:selectItem itemLabel="Pregnancy" itemValue="410" />
+                            <f:selectItem itemLabel="Pregnancy Tests" itemValue="411" />
+                            <f:selectItem itemLabel="Preschool" itemValue="412" />
+                            <f:selectItem itemLabel="Prescriptions" itemValue="413" />
+                            <f:selectItem itemLabel="Primary Mental Health And Early Intervention Teams" itemValue="414" />
+                            <f:selectItem itemLabel="Property Maintenance" itemValue="415" />
+                            <f:selectItem itemLabel="Prostate" itemValue="416" />
+                            <f:selectItem itemLabel="Psychiatric" itemValue="417" />
+                            <f:selectItem itemLabel="Psychiatric Disability Support Services - Home-Based Outreach" itemValue="418" />
+                            <f:selectItem itemLabel="Psychiatric Disability Support Services - Planned Respite" itemValue="419" />
+                            <f:selectItem itemLabel="Psychiatric Disability Support Services - Residential Rehabilitation" itemValue="420" />
+                            <f:selectItem itemLabel="Psychiatric Disability Support Services Home-Based Outreach" itemValue="421" />
+                            <f:selectItem itemLabel="Psychiatric Disability Support Services Mutual Support And Self Help" itemValue="422" />
+                            <f:selectItem itemLabel="Psychiatric Support" itemValue="423" />
+                            <f:selectItem itemLabel="Recreation" itemValue="424" />
+                            <f:selectItem itemLabel="Referral" itemValue="425" />
+                            <f:selectItem itemLabel="Refuge" itemValue="426" />
+                            <f:selectItem itemLabel="Rent Assistance" itemValue="427" />
+                            <f:selectItem itemLabel="Residential Facilities" itemValue="428" />
+                            <f:selectItem itemLabel="Residential Respite" itemValue="429" />
+                            <f:selectItem itemLabel="Respiratory" itemValue="430" />
+                            <f:selectItem itemLabel="Response" itemValue="431" />
+                            <f:selectItem itemLabel="Rooming Houses" itemValue="432" />
+                            <f:selectItem itemLabel="Safe Sex" itemValue="433" />
+                            <f:selectItem itemLabel="Secure Extended Care" itemValue="434" />
+                            <f:selectItem itemLabel="Self Help" itemValue="435" />
+                            <f:selectItem itemLabel="Separation" itemValue="436" />
+                            <f:selectItem itemLabel="Services" itemValue="437" />
+                            <f:selectItem itemLabel="Sex Education" itemValue="438" />
+                            <f:selectItem itemLabel="Sexual Abuse" itemValue="439" />
+                            <f:selectItem itemLabel="Sexual Issues" itemValue="440" />
+                            <f:selectItem itemLabel="Sexually Transmitted" itemValue="441" />
+                            <f:selectItem itemLabel="SIDS" itemValue="442" />
+                            <f:selectItem itemLabel="Social Support" itemValue="443" />
+                            <f:selectItem itemLabel="Socialisation" itemValue="444" />
+                            <f:selectItem itemLabel="Special Needs" itemValue="445" />
+                            <f:selectItem itemLabel="Speech Therapist" itemValue="446" />
+                            <f:selectItem itemLabel="Splinting" itemValue="447" />
+                            <f:selectItem itemLabel="Sport" itemValue="448" />
+                            <f:selectItem itemLabel="Statewide And Specialist Services" itemValue="449" />
+                            <f:selectItem itemLabel="STD" itemValue="450" />
+                            <f:selectItem itemLabel="STI" itemValue="451" />
+                            <f:selectItem itemLabel="Stillbirth" itemValue="452" />
+                            <f:selectItem itemLabel="Stomal Care" itemValue="453" />
+                            <f:selectItem itemLabel="Stroke" itemValue="454" />
+                            <f:selectItem itemLabel="Substance Abuse" itemValue="455" />
+                            <f:selectItem itemLabel="Support" itemValue="456" />
+                            <f:selectItem itemLabel="Syringes" itemValue="457" />
+                            <f:selectItem itemLabel="Teeth" itemValue="458" />
+                            <f:selectItem itemLabel="Tenancy Advice" itemValue="459" />
+                            <f:selectItem itemLabel="Terminal Illness" itemValue="460" />
+                            <f:selectItem itemLabel="Therapy" itemValue="461" />
+                            <f:selectItem itemLabel="Transcription" itemValue="462" />
+                            <f:selectItem itemLabel="Translating Services" itemValue="463" />
+                            <f:selectItem itemLabel="Translator" itemValue="464" />
+                            <f:selectItem itemLabel="Transport" itemValue="465" />
+                            <f:selectItem itemLabel="Vertebrae" itemValue="466" />
+                            <f:selectItem itemLabel="Violence" itemValue="467" />
+                            <f:selectItem itemLabel="Vocational Guidance" itemValue="468" />
+                            <f:selectItem itemLabel="Weight" itemValue="469" />
+                            <f:selectItem itemLabel="Welfare Assistance" itemValue="470" />
+                            <f:selectItem itemLabel="Welfare Counselling" itemValue="471" />
+                            <f:selectItem itemLabel="Wheelchairs" itemValue="472" />
+                            <f:selectItem itemLabel="Wound Management" itemValue="473" />
+                            <f:selectItem itemLabel="Young People At Risk" itemValue="474" />
+                            <f:selectItem itemLabel="Further Description - Community Health Care" itemValue="475" />
+                            <f:selectItem itemLabel="Library" itemValue="476" />
+                            <f:selectItem itemLabel="Community Hours" itemValue="477" />
+                            <f:selectItem itemLabel="Further Description - Specialist Medical" itemValue="478" />
+                            <f:selectItem itemLabel="Hepatology" itemValue="479" />
+                            <f:selectItem itemLabel="Gastroenterology" itemValue="480" />
+                            <f:selectItem itemLabel="Gynaecology" itemValue="481" />
+                            <f:selectItem itemLabel="Obstetrics" itemValue="482" />
+                            <f:selectItem itemLabel="Further Description - Specialist Surgical" itemValue="483" />
+                            <f:selectItem itemLabel="Placement Protection" itemValue="484" />
+                            <f:selectItem itemLabel="Family Violence" itemValue="485" />
+                            <f:selectItem itemLabel="Integrated Family Services" itemValue="486" />
+                            <f:selectItem itemLabel="Diabetes Educator" itemValue="488" />
+                            <f:selectItem itemLabel="Kinship Care" itemValue="489" />
+                            <f:selectItem itemLabel="General Mental Health Services" itemValue="490" />
+                            <f:selectItem itemLabel="Exercise Physiology" itemValue="491" />
+                            <f:selectItem itemLabel="Medical Research" itemValue="492" />
+                            <f:selectItem itemLabel="Youth" itemValue="493" />
+                            <f:selectItem itemLabel="Youth Services" itemValue="494" />
+                            <f:selectItem itemLabel="Youth Health" itemValue="495" />
+                            <f:selectItem itemLabel="Child and Family Services" itemValue="496" />
+                            <f:selectItem itemLabel="Home Visits" itemValue="497" />
+                            <f:selectItem itemLabel="Mobile Services" itemValue="498" />
+                            <f:selectItem itemLabel="Before and/or After School Care" itemValue="500" />
+                            <f:selectItem itemLabel="Cancer Services" itemValue="501" />
+                            <f:selectItem itemLabel="Integrated Cancer Services" itemValue="502" />
+                            <f:selectItem itemLabel="Multidisciplinary Services" itemValue="503" />
+                            <f:selectItem itemLabel="Multidisciplinary Cancer Services" itemValue="504" />
+                            <f:selectItem itemLabel="Meetings" itemValue="505" />
+                            <f:selectItem itemLabel="Blood pressure monitoring" itemValue="506" />
+                            <f:selectItem itemLabel="Dose administration aid" itemValue="507" />
+                            <f:selectItem itemLabel="Medical Equipment Hire" itemValue="508" />
+                            <f:selectItem itemLabel="Parenting/Family Support/Education	" itemValue="509" />
+                            <f:selectItem itemLabel="Deputising Service	" itemValue="510" />
+                            <f:selectItem itemLabel="Cancer Support Groups" itemValue="513" />
+                            <f:selectItem itemLabel="Community Cancer Services" itemValue="514" />
+                            <f:selectItem itemLabel="Disability Care Transport" itemValue="530" />
+                            <f:selectItem itemLabel="Aged Care Transport" itemValue="531" />
+                            <f:selectItem itemLabel="Diabetes Education service" itemValue="532" />
+                            <f:selectItem itemLabel="Cardiac Rehabilitation Service" itemValue="533" />
+                            <f:selectItem itemLabel="Young Adult Diabetes services (YADS)" itemValue="534" />
+                            <f:selectItem itemLabel="Pulmonary Rehabilitation Service" itemValue="535" />
+                            <f:selectItem itemLabel="Art therapy" itemValue="536" />
+                            <f:selectItem itemLabel="Medication Reviews" itemValue="537" />
+                            <f:selectItem itemLabel="Telephone Counselling" itemValue="538" />
+                            <f:selectItem itemLabel="Telephone Help Line" itemValue="539" />
+                            <f:selectItem itemLabel="Online Service" itemValue="540" />
+                            <f:selectItem itemLabel="Crisis - Mental Health" itemValue="541" />
+                            <f:selectItem itemLabel="Youth Crisis" itemValue="542" />
+                            <f:selectItem itemLabel="Sexual Assault" itemValue="543" />
+                            <f:selectItem itemLabel="GPAH Other" itemValue="544" />
+                            <f:selectItem itemLabel="Paediatric Dermatology" itemValue="545" />
+                            <f:selectItem itemLabel="Veterans Services" itemValue="546" />
+                            <f:selectItem itemLabel="Veterans" itemValue="547" />
+                            <f:selectItem itemLabel="Food Relief/Food/Meals" itemValue="548" />
+                            <f:selectItem itemLabel="Dementia Care" itemValue="550" />
+                            <f:selectItem itemLabel="Alzheimer" itemValue="551" />
+                            <f:selectItem itemLabel="Drug and/or Alcohol Support Groups" itemValue="552" />
+                            <f:selectItem itemLabel="1-on-1 Support /Mentoring /Coaching" itemValue="553" />
+                            <f:selectItem itemLabel="Chronic Disease Management" itemValue="554" />
+                            <f:selectItem itemLabel="Liaison Services" itemValue="555" />
+                            <f:selectItem itemLabel="Walk-in Centre /Non-Emergency" itemValue="556" />
+                            <f:selectItem itemLabel="Inpatients" itemValue="557" />
+                            <f:selectItem itemLabel="Spiritual Counselling" itemValue="558" />
+                            <f:selectItem itemLabel="Women's Health" itemValue="559" />
+                            <f:selectItem itemLabel="Men's Health" itemValue="560" />
+                            <f:selectItem itemLabel="Health Education/Awareness Program" itemValue="561" />
+                            <f:selectItem itemLabel="Test Message" itemValue="562" />
+                            <f:selectItem itemLabel="Remedial Massage" itemValue="563" />
+                            <f:selectItem itemLabel="Adolescent Mental Health Services" itemValue="564" />
+                            <f:selectItem itemLabel="Youth Drop In/Assistance/Support" itemValue="565" />
+                            <f:selectItem itemLabel="Aboriginal Health Worker" itemValue="566" />
+                            <f:selectItem itemLabel="Women's Health Clinic" itemValue="567" />
+                            <f:selectItem itemLabel="Men's Health Clinic" itemValue="568" />
+                            <f:selectItem itemLabel="Migrant Health Clinic" itemValue="569" />
+                            <f:selectItem itemLabel="Refugee Health Clinic" itemValue="570" />
+                            <f:selectItem itemLabel="Aboriginal Health Clinic" itemValue="571" />
+                            <f:selectItem itemLabel="Nurse Practitioner Lead Clinic/s" itemValue="572" />
+                            <f:selectItem itemLabel="Nurse Lead Clinic/s" itemValue="573" />
+                            <f:selectItem itemLabel="Culturally Tailored Support Groups" itemValue="574" />
+                            <f:selectItem itemLabel="Culturally Tailored Health Promotion" itemValue="575" />
+                            <f:selectItem itemLabel="Rehabilitation" itemValue="576" />
+                            <f:selectItem itemLabel="Education Information/Referral" itemValue="577" />
+                            <f:selectItem itemLabel="Social Work" itemValue="580" />
+                            <f:selectItem itemLabel="Haematology" itemValue="581" />
+                            <f:selectItem itemLabel="Maternity Shared Car" itemValue="582" />
+                            <f:selectItem itemLabel="Rehabilitation Service" itemValue="583" />
+                            <f:selectItem itemLabel="Cranio-Sacral Therapy" itemValue="584" />
+                            <f:selectItem itemLabel="Prosthetics and Orthotics" itemValue="585" />
+                            <f:selectItem itemLabel="Home Medicine Review" itemValue="589" />
+                            <f:selectItem itemLabel="GPAH - Medical" itemValue="590" />
+                            <f:selectItem itemLabel="Music Therapy" itemValue="591" />
+                            <f:selectItem itemLabel="Falls Prevention" itemValue="593" />
+                            <f:selectItem itemLabel="Accommodation/Tenancy" itemValue="599" />
+                            <f:selectItem itemLabel="Assess-Skill, Ability, Needs" itemValue="600" />
+                            <f:selectItem itemLabel="Assist Access/Maintain Employ" itemValue="601" />
+                            <f:selectItem itemLabel="Assist Prod-Pers Care/Safety" itemValue="602" />
+                            <f:selectItem itemLabel="Assist-Integrate School/Ed" itemValue="603" />
+                            <f:selectItem itemLabel="Assist-Life Stage, Transition" itemValue="604" />
+                            <f:selectItem itemLabel="Assist-Personal Activities" itemValue="605" />
+                            <f:selectItem itemLabel="Assist-Travel/Transport" itemValue="606" />
+                            <f:selectItem itemLabel="Assistive Equip-General Tasks" itemValue="607" />
+                            <f:selectItem itemLabel="Assistive Equip-Recreation" itemValue="608" />
+                            <f:selectItem itemLabel="Assistive Prod-Household Task" itemValue="609" />
+                            <f:selectItem itemLabel="Behavior Support" itemValue="610" />
+                            <f:selectItem itemLabel="Comms and Info Equipment" itemValue="611" />
+                            <f:selectItem itemLabel="Community Nursing Care" itemValue="612" />
+                            <f:selectItem itemLabel="Daily Tasks/Shared Living" itemValue="613" />
+                            <f:selectItem itemLabel="Development-Life Skills" itemValue="614" />
+                            <f:selectItem itemLabel="Early Childhood Supports" itemValue="615" />
+                            <f:selectItem itemLabel="Equipment Special Assess Setup" itemValue="616" />
+                            <f:selectItem itemLabel="Hearing Equipment" itemValue="617" />
+                            <f:selectItem itemLabel="Home Modification" itemValue="618" />
+                            <f:selectItem itemLabel="Household Tasks" itemValue="619" />
+                            <f:selectItem itemLabel="Interpret/Translate" itemValue="620" />
+                            <f:selectItem itemLabel="Other Innovative Supports" itemValue="621" />
+                            <f:selectItem itemLabel="Participate Community" itemValue="622" />
+                            <f:selectItem itemLabel="Personal Mobility Equipment" itemValue="623" />
+                            <f:selectItem itemLabel="Physical Wellbeing" itemValue="624" />
+                            <f:selectItem itemLabel="Plan Management" itemValue="625" />
+                            <f:selectItem itemLabel="Therapeutic Supports" itemValue="626" />
+                            <f:selectItem itemLabel="Training-Travel Independence" itemValue="627" />
+                            <f:selectItem itemLabel="Vehicle modifications" itemValue="628" />
+                            <f:selectItem itemLabel="Vision Equipment" itemValue="629" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Priority" for="priority" />
+                        <p:selectOneMenu id="priority" value="#{encounterController.selected.serviceType}" title="Service Type">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="ASAP" itemValue="A" />
+                            <f:selectItem itemLabel="callback results" itemValue="CR" />
+                            <f:selectItem itemLabel="callback for scheduling" itemValue="CS" />
+                            <f:selectItem itemLabel="callback placer for scheduling" itemValue="CSP" />
+                            <f:selectItem itemLabel="contact recipient for scheduling" itemValue="CSR" />
+                            <f:selectItem itemLabel="elective" itemValue="EL" />
+                            <f:selectItem itemLabel="emergency" itemValue="EM" />
+                            <f:selectItem itemLabel="preop" itemValue="P" />
+                            <f:selectItem itemLabel="as needed" itemValue="PRN" />
+                            <f:selectItem itemLabel="routine" itemValue="R" />
+                            <f:selectItem itemLabel="rush reporting" itemValue="RR" />
+                            <f:selectItem itemLabel="stat" itemValue="S" />
+                            <f:selectItem itemLabel="timing critical" itemValue="T" />
+                            <f:selectItem itemLabel="use as directed" itemValue="UD" />
+                            <f:selectItem itemLabel="urgent" itemValue="UR" />                            
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Valid From" for="periodFrom" />
+                        <p:inputText id="periodFrom" value="#{encounterController.selected.periodFrom}" title="#{bundle.CreateEncounterTitle_periodFrom}" />
+                        <p:outputLabel value="Valid To" for="periodTo" />
+                        <p:inputText id="periodTo" value="#{encounterController.selected.periodTo}" title="#{bundle.CreateEncounterTitle_periodTo}" />
+                        <p:outputLabel value="Reason" for="reasoncode" />
+                        <p:selectOneMenu id="reasoncode" value="#{encounterController.selected.reasonCode}" title="Reason Code">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Anxiety disorder of childhood OR adolescence" itemValue="109006" />
+                            <f:selectItem itemLabel="Choroidal hemorrhage" itemValue="122003" />
+                            <f:selectItem itemLabel="Spontaneous abortion with laceration of cervix" itemValue="127009" />
+                            <f:selectItem itemLabel="Homoiothermia" itemValue="129007" />
+                            <f:selectItem itemLabel="Decreased hair growth" itemValue="134006" />
+                            <f:selectItem itemLabel="Chronic pharyngitis" itemValue="140004" />
+                            <f:selectItem itemLabel="Normal peripheral vision" itemValue="144008" />
+                            <f:selectItem itemLabel="Superficial foreign body of scrotum without major open wound but with infection" itemValue="147001" />
+                            <f:selectItem itemLabel="Abnormal bladder continence" itemValue="150003" />
+                            <f:selectItem itemLabel="Meningitis due to gonococcus" itemValue="151004" />
+                            <f:selectItem itemLabel="Severe manic bipolar I disorder without psychotic features" itemValue="162004" />
+                            <f:selectItem itemLabel="Accident-prone" itemValue="165002" />
+                            <f:selectItem itemLabel="Typhlolithiasis" itemValue="168000" />
+                            <f:selectItem itemLabel="Injury of ascending right colon without open wound into abdominal cavity" itemValue="171008" />
+                            <f:selectItem itemLabel="Endometritis following molar AND/OR ectopic pregnancy" itemValue="172001" />
+                            <f:selectItem itemLabel="Supraorbital neuralgia" itemValue="175004" />
+                            <f:selectItem itemLabel="Poisoning by sawfly larvae" itemValue="177007" />
+                            <f:selectItem itemLabel="Apraxia of dressing" itemValue="179005" />
+                            <f:selectItem itemLabel="Hemorrhagic bronchopneumonia" itemValue="181007" />
+                            <f:selectItem itemLabel="Autoimmune pancytopenia" itemValue="183005" />
+                            <f:selectItem itemLabel="Withdrawal arrhythmia" itemValue="184004" />
+                            <f:selectItem itemLabel="Intercostal artery injury" itemValue="188001" />
+                            <f:selectItem itemLabel="Congenital syphilitic hepatomegaly" itemValue="192008" />
+                            <f:selectItem itemLabel="Benign hypertensive renal disease" itemValue="193003" />
+                            <f:selectItem itemLabel="Illegal abortion with endometritis" itemValue="195005" />
+                            <f:selectItem itemLabel="Disease due to Filoviridae" itemValue="198007" />
+                            <f:selectItem itemLabel="Decreased lactation" itemValue="199004" />
+                            <f:selectItem itemLabel="Neurocutaneous melanosis sequence" itemValue="208008" />
+                            <f:selectItem itemLabel="Delusion of persecution" itemValue="216004" />
+                            <f:selectItem itemLabel="Alcohol user" itemValue="219006" />
+                            <f:selectItem itemLabel="Acute epiglottitis with obstruction" itemValue="222008" />
+                            <f:selectItem itemLabel="Tumor of body of uterus affecting pregnancy" itemValue="223003" />
+                            <f:selectItem itemLabel="Lucio phenomenon" itemValue="228007" />
+                            <f:selectItem itemLabel="Motor simple partial status" itemValue="241006" />
+                            <f:selectItem itemLabel="Noninfectious jejunitis" itemValue="242004" />
+                            <f:selectItem itemLabel="Sycosis" itemValue="253005" />
+                            <f:selectItem itemLabel="Acne rosacea, erythematous telangiectatic type" itemValue="257006" />
+                            <f:selectItem itemLabel="Pseudoknuckle pad" itemValue="258001" />
+                            <f:selectItem itemLabel="Blind hypertensive eye" itemValue="264008" />
+                            <f:selectItem itemLabel="Oxytocin poisoning" itemValue="276008" />
+                            <f:selectItem itemLabel="Senile myocarditis" itemValue="279001" />
+                            <f:selectItem itemLabel="Alcoholic dementia" itemValue="281004" />
+                            <f:selectItem itemLabel="Acute myocardial infarction of basal-lateral wall" itemValue="282006" />
+                            <f:selectItem itemLabel="Melnick-Fraser syndrome" itemValue="290006" />
+                            <f:selectItem itemLabel="EEG finding" itemValue="292003" />
+                            <f:selectItem itemLabel="Acute myringitis" itemValue="297009" />
+                            <f:selectItem itemLabel="Paraffinoma of skin" itemValue="299007" />
+                            <f:selectItem itemLabel="Apoplectic pancreatitis" itemValue="303002" />
+                            <f:selectItem itemLabel="Pearly penile papules" itemValue="308006" />
+                            <f:selectItem itemLabel="Penile boil" itemValue="310008" />
+                            <f:selectItem itemLabel="Déjà vu" itemValue="313005" />
+                            <f:selectItem itemLabel="Reactive hypoglycemia" itemValue="317006" />
+                            <f:selectItem itemLabel="Cervical dilatation, 1cm" itemValue="320003" />
+                            <f:selectItem itemLabel="Plaster ulcer" itemValue="324007" />
+                            <f:selectItem itemLabel="Occipital headache" itemValue="330007" />
+                            <f:selectItem itemLabel="Pylorospasm" itemValue="335002" />
+                            <f:selectItem itemLabel="ABO incompatibility reaction" itemValue="341009" />
+                            <f:selectItem itemLabel="Absent tendon reflex" itemValue="349006" />
+                            <f:selectItem itemLabel="Hemorrhagic shock" itemValue="355001" />
+                            <f:selectItem itemLabel="Closed fracture trapezoid" itemValue="357009" />
+                            <f:selectItem itemLabel="Smallpox vaccine poisoning" itemValue="358004" />
+                            <f:selectItem itemLabel="Kernicterus due to isoimmunization" itemValue="359007" />
+                            <f:selectItem itemLabel="Acute radiation disease" itemValue="360002" />
+                            <f:selectItem itemLabel="Acute left-sided heart failure" itemValue="364006" />
+                            <f:selectItem itemLabel="Hidromeiosis" itemValue="366008" />
+                            <f:selectItem itemLabel="Heart valve disorder" itemValue="368009" />
+                            <f:selectItem itemLabel="Normal jugular venous pressure" itemValue="369001" />
+                            <f:selectItem itemLabel="Morquio syndrome" itemValue="378007" />
+                            <f:selectItem itemLabel="Legal history finding relating to child" itemValue="382009" />
+                            <f:selectItem itemLabel="Finding of passive range of hip extension" itemValue="383004" />
+                            <f:selectItem itemLabel="Secondary peripheral neuropathy" itemValue="385006" />
+                            <f:selectItem itemLabel="Melanuria" itemValue="387003" />
+                            <f:selectItem itemLabel="Left axis deviation greater than -90 degrees by EKG" itemValue="398002" />
+                            <f:selectItem itemLabel="Congenital hepatomegaly" itemValue="407000" />
+                            <f:selectItem itemLabel="Tooth chattering" itemValue="408005" />
+                            <f:selectItem itemLabel="Food allergy diet" itemValue="409002" />
+                            <f:selectItem itemLabel="Superficial injury of ankle without infection" itemValue="426008" />
+                            <f:selectItem itemLabel="Hypertrophy of scrotum" itemValue="431005" />
+                            <f:selectItem itemLabel="Abnormal composition of urine" itemValue="437009" />
+                            <f:selectItem itemLabel="Persistent hyperphenylalaninemia" itemValue="440009" />
+                            <f:selectItem itemLabel="Secondary hypopituitarism" itemValue="442001" />
+                            <f:selectItem itemLabel="Cystocele affecting pregnancy" itemValue="443006" />
+                            <f:selectItem itemLabel="Coach in sports activity accident" itemValue="447007" />
+                            <f:selectItem itemLabel="Ulcerative stomatitis" itemValue="450005" />
+                            <f:selectItem itemLabel="Blister of groin without infection" itemValue="452002" />
+                            <f:selectItem itemLabel="Squamous metaplasia of prostate gland" itemValue="460001" />
+                            <f:selectItem itemLabel="Old laceration of pelvic floor muscle" itemValue="467003" />
+                            <f:selectItem itemLabel="Vitreous touch syndrome" itemValue="470004" />
+                            <f:selectItem itemLabel="Graves' disease with pretibial myxedema AND with thyrotoxic crisis" itemValue="479003" />
+                            <f:selectItem itemLabel="Acute vascular insufficiency" itemValue="486006" />
+                            <f:selectItem itemLabel="Fibroid myocarditis" itemValue="488007" />
+                            <f:selectItem itemLabel="Upper respiratory tract hypersensitivity reaction" itemValue="4980008" />
+                            <f:selectItem itemLabel="Closed traumatic dislocation of third cervical vertebra" itemValue="496002" />
+                            <f:selectItem itemLabel="Androgen-dependent hirsutism" itemValue="504009" />
+                            <f:selectItem itemLabel="Foreign body in hypopharynx" itemValue="517007" />
+                            <f:selectItem itemLabel="Multiple aggregation" itemValue="518002" />
+                            <f:selectItem itemLabel="Congenital bent nose" itemValue="520004" />
+                            <f:selectItem itemLabel="Spontaneous fetal evolution, Roederer's method" itemValue="527001" />
+                            <f:selectItem itemLabel="Glissonian cirrhosis" itemValue="536002" />
+                            <f:selectItem itemLabel="Conjunctival argyrosis" itemValue="539009" />
+                            <f:selectItem itemLabel="Hypersecretion of calcitonin" itemValue="547009" />
+                            <f:selectItem itemLabel="13p partial trisomy syndrome" itemValue="548004" />
+                            <f:selectItem itemLabel="2p partial trisomy syndrome" itemValue="554003" />
+                            <f:selectItem itemLabel="Dicentra species poisoning" itemValue="555002" />
+                            <f:selectItem itemLabel="Nystagmus" itemValue="563001" />
+                            <f:selectItem itemLabel="Habit disorder" itemValue="568005" />
+                            <f:selectItem itemLabel="Contact dermatitis due to primrose" itemValue="586008" />
+                            <f:selectItem itemLabel="Congenital aneurysm of anterior communicating artery" itemValue="590005" />
+                            <f:selectItem itemLabel="Premenstrual dysphoric disorder" itemValue="596004" />
+                            <f:selectItem itemLabel="Persistent pneumothorax" itemValue="599006" />
+                            <f:selectItem itemLabel="Pyromania" itemValue="600009" />
+                            <f:selectItem itemLabel="Ross river fever" itemValue="602001" />
+                            <f:selectItem itemLabel="Decreased vital capacity" itemValue="607007" />
+                            <f:selectItem itemLabel="Spastic aphonia" itemValue="610000" />
+                            <f:selectItem itemLabel="FRAXA - Fragile X syndrome" itemValue="613003" />
+                            <f:selectItem itemLabel="Obstruction due to foreign body accidentally left in operative wound AND/OR body cavity during a procedure" itemValue="615005" />
+                            <f:selectItem itemLabel="Sensorimotor disorder of eyelid" itemValue="616006" />
+                            <f:selectItem itemLabel="Hypercortisolism due to nonpituitary tumor" itemValue="626004" />
+                            <f:selectItem itemLabel="Transfusion reaction due to minor incompatibility" itemValue="631002" />
+                            <f:selectItem itemLabel="Saddle boil" itemValue="364005" />
+                            <f:selectItem itemLabel="Injury of pneumogastric nerve" itemValue="640003" />
+                            <f:selectItem itemLabel="Hypertrophy of lip" itemValue="643001" />
+                            <f:selectItem itemLabel="Idiopathic cyst of anterior chamber" itemValue="646009" />
+                            <f:selectItem itemLabel="Open fracture of distal end of ulna" itemValue="649002" />
+                            <f:selectItem itemLabel="Root work" itemValue="651003" />
+                            <f:selectItem itemLabel="Gangrenous tonsillitis" itemValue="652005" />
+                            <f:selectItem itemLabel="Abnormal fetal heart beat noted before labor in liveborn infant" itemValue="655007" />
+                            <f:selectItem itemLabel="Injury of colon without open wound into abdominal cavity" itemValue="658009" />
+                            <f:selectItem itemLabel="Pulmonary embolism following molar AND/OR ectopic pregnancy" itemValue="663008" />
+                            <f:selectItem itemLabel="Delayed ovulation" itemValue="664002" />
+                            <f:selectItem itemLabel="Poisoning by antivaricose drug AND/OR sclerosing agent" itemValue="666000" />
+                            <f:selectItem itemLabel="Torsion of intestine" itemValue="675003" />
+                            <f:selectItem itemLabel="Thrombosis complicating pregnancy AND/OR puerperium" itemValue="682004" />
+                            <f:selectItem itemLabel="Acquired telangiectasia of small AND/OR large intestines" itemValue="685002" />
+                            <f:selectItem itemLabel="Adult osteochondritis of spine" itemValue="701003" />
+                            <f:selectItem itemLabel="Congenital adhesion of tongue" itemValue="703000" />
+                            <f:selectItem itemLabel="Abrasion AND/OR friction burn of toe with infection" itemValue="714002" />
+                            <f:selectItem itemLabel="Nontraumatic rupture of urethra" itemValue="715001" />
+                            <f:selectItem itemLabel="Acute bronchiolitis with obstruction" itemValue="718004" />
+                            <f:selectItem itemLabel="Superficial foreign body of groin without major open wound but with infection" itemValue="733007" />
+                            <f:selectItem itemLabel="Opocephalus" itemValue="734001" />
+                            <f:selectItem itemLabel="Abscess of hip" itemValue="736004" />
+                            <f:selectItem itemLabel="Schistosoma mansoni infection" itemValue="750009" />
+                            <f:selectItem itemLabel="Postgastrectomy phytobezoar" itemValue="755004" />
+                            <f:selectItem itemLabel="Chronic rheumatic myopericarditis" itemValue="756003" />
+                            <f:selectItem itemLabel="Cyst of uterus" itemValue="758002" />
+                            <f:selectItem itemLabel="Open wound of head with complication" itemValue="775008" />
+                            <f:selectItem itemLabel="Partial arterial retinal occlusion" itemValue="776009" />
+                            <f:selectItem itemLabel="Cestrum diurnum poisoning" itemValue="781000" />
+                            <f:selectItem itemLabel="Clinical stage I B" itemValue="786005" />
+                            <f:selectItem itemLabel="Rheumatic mitral stenosis with regurgitation" itemValue="787001" />
+                            <f:selectItem itemLabel="Disease-related diet" itemValue="788006" />
+                            <f:selectItem itemLabel="CJD - Creutzfeldt-Jakob disease" itemValue="792004" />
+                            <f:selectItem itemLabel="Sigmoid colon ulcer" itemValue="799008" />
+                            <f:selectItem itemLabel="Insect bite, nonvenomous, of foot, infected" itemValue="801006" />
+                            <f:selectItem itemLabel="Pneumoconiosis due to silica" itemValue="805002" />
+                            <f:selectItem itemLabel="Flail motion" itemValue="811004" />
+                            <f:selectItem itemLabel="Ankle instability" itemValue="813001" />
+                            <f:selectItem itemLabel="Episcleritis" itemValue="815008" />
+                            <f:selectItem itemLabel="Genetic recombination" itemValue="816009" />
+                            <f:selectItem itemLabel="Third degree burn of multiple sites of lower limb" itemValue="818005" />
+                            <f:selectItem itemLabel="Superficial injury of axilla with infection" itemValue="825003" />
+                            <f:selectItem itemLabel="Late congenital syphilis, latent (+ sero., - C.S.F., 2 years OR more)" itemValue="827006" />
+                            <f:selectItem itemLabel="Moderate major depression" itemValue="832007" />
+                            <f:selectItem itemLabel="Chair-seated facing coital position" itemValue="834008" />
+                            <f:selectItem itemLabel="Congenital absence of skull bone" itemValue="841002" />
+                            <f:selectItem itemLabel="Consanguinity" itemValue="842009" />
+                            <f:selectItem itemLabel="Poliomyelomalacia" itemValue="843004" />
+                            <f:selectItem itemLabel="Finding relating to behavior" itemValue="844005" />
+                            <f:selectItem itemLabel="Inferior mesenteric artery injury" itemValue="845006" />
+                            <f:selectItem itemLabel="Total cataract" itemValue="849000" />
+                            <f:selectItem itemLabel="Erythema simplex" itemValue="857002" />
+                            <f:selectItem itemLabel="Anemia due to chlorate" itemValue="862001" />
+                            <f:selectItem itemLabel="Hyperalimentation formula for ileus" itemValue="865004" />
+                            <f:selectItem itemLabel="Contracted pelvis" itemValue="871005" />
+                            <f:selectItem itemLabel="Therapeutic diuresis" itemValue="874002" />
+                            <f:selectItem itemLabel="Chalcosis of eye" itemValue="875001" />
+                            <f:selectItem itemLabel="Foetal or neonatal effect of maternal blood loss" itemValue="888003" />
+                            <f:selectItem itemLabel="Deep third degree burn of elbow" itemValue="890002" />
+                            <f:selectItem itemLabel="Axis I diagnosis" itemValue="899001" />
+                            <f:selectItem itemLabel="Chorioretinal infarction" itemValue="903008" />
+                            <f:selectItem itemLabel="Pinard's sign" itemValue="904002" />
+                            <f:selectItem itemLabel="Superficial injury of interscapular region without infection" itemValue="908004" />
+                            <f:selectItem itemLabel="Pseudohomosexual state" itemValue="919001" />
+                            <f:selectItem itemLabel="Musculoskeletal disorder" itemValue="928000" />
+                            <f:selectItem itemLabel="Gestation period, 9 weeks" itemValue="931004" />
+                            <f:selectItem itemLabel="Flat affect" itemValue="932006" />
+                            <f:selectItem itemLabel="Thalassemia intermedia" itemValue="934007" />
+                            <f:selectItem itemLabel="Congenital retinal aneurysm" itemValue="943003" />
+                            <f:selectItem itemLabel="Renon-Delille syndrome" itemValue="954008" />
+                            <f:selectItem itemLabel="Erythema nodosum, acute form" itemValue="961007" />
+                            <f:selectItem itemLabel="Disability evaluation, disability 6%" itemValue="962000" />
+                            <f:selectItem itemLabel="Open wound of pharynx without complication" itemValue="694004" />
+                            <f:selectItem itemLabel="Toxic amblyopia" itemValue="965003" />
+                            <f:selectItem itemLabel="Anorectal agenesis" itemValue="975000" />
+                            <f:selectItem itemLabel="Chronic infantile eczema" itemValue="978003" />
+                            <f:selectItem itemLabel="Hemorrhagic proctitis" itemValue="981008" />
+                            <f:selectItem itemLabel="Perirectal cellulitis" itemValue="984000" />
+                            <f:selectItem itemLabel="Cellulitis of temple region" itemValue="987007" />
+                            <f:selectItem itemLabel="Wide QRS complex" itemValue="991002" />
+                            <f:selectItem itemLabel="Chagas' disease with heart involvement" itemValue="998008" />
+                            <f:selectItem itemLabel="Religious discrimination" itemValue="1003002" />
+                            <f:selectItem itemLabel="Disease due to Nairovirus" itemValue="1020003" />
+                            <f:selectItem itemLabel="Apneic" itemValue="1023001" />
+                            <f:selectItem itemLabel="Biliary esophagitis" itemValue="1027000" />
+                            <f:selectItem itemLabel="Open wound of trachea without complication" itemValue="1031006" />
+                            <f:selectItem itemLabel="Thoracic arthritis" itemValue="1033009" />
+                            <f:selectItem itemLabel="Mesenteric-portal fistula" itemValue="1034003" />
+                            <f:selectItem itemLabel="Disacchariduria" itemValue="1038000" />
+                            <f:selectItem itemLabel="Colonospasm" itemValue="1045000" />
+                            <f:selectItem itemLabel="Ureteritis glandularis" itemValue="1046004" />
+                            <f:selectItem itemLabel="Hyperplasia of islet alpha cells with gastrin excess" itemValue="1051005" />
+                            <f:selectItem itemLabel="Stenosis of precerebral artery" itemValue="1055001" />
+                            <f:selectItem itemLabel="Opisthorchiasis" itemValue="1059007" />
+                            <f:selectItem itemLabel="Facial myokymia" itemValue="1070000" />
+                            <f:selectItem itemLabel="Xeroderma pigmentosum group B" itemValue="1073003" />
+                            <f:selectItem itemLabel="Glucocorticoid-responsive primary hyperaldosteronism" itemValue="1074009" />
+                            <f:selectItem itemLabel="Septal infarction by EKG" itemValue="1077002" />
+                            <f:selectItem itemLabel="Macular retinal cyst" itemValue="1079004" />
+                            <f:selectItem itemLabel="Vulval candidiasis" itemValue="1085006" />
+                            <f:selectItem itemLabel="Congenital sepsis" itemValue="1089000" />
+                            <f:selectItem itemLabel="Intraerythrocytic parasitosis by Nuttallia" itemValue="1102005" />
+                            <f:selectItem itemLabel="Early latent syphilis, positive serology, negative cerebrospinal fluid, with relapse after treatment" itemValue="1107004" />
+                            <f:selectItem itemLabel="Female pattern alopecia" itemValue="1108009" />
+                            <f:selectItem itemLabel="Normal sebaceous gland activity" itemValue="1111005" />
+                            <f:selectItem itemLabel="Degenerative disorder of eyelid" itemValue="1112003" />
+                            <f:selectItem itemLabel="Chronic aggressive type B viral hepatitis" itemValue="1116000" />
+                            <f:selectItem itemLabel="Postpartum period, 6 days" itemValue="1124005" />
+                            <f:selectItem itemLabel="Septicemia during labor" itemValue="1125006" />
+                            <f:selectItem itemLabel="Knee locking" itemValue="1126007" />
+                            <f:selectItem itemLabel="Congenital valvular insufficiency" itemValue="1131009" />
+                            <f:selectItem itemLabel="Muehrcke lines" itemValue="1134001" />
+                            <f:selectItem itemLabel="Solar retinitis" itemValue="1135000" />
+                            <f:selectItem itemLabel="Confrontation (visual) test" itemValue="1139006" />
+                            <f:selectItem itemLabel="Thermal hypesthesia" itemValue="1140008" />
+                            <f:selectItem itemLabel="Circumoral paresthesia" itemValue="1141007" />
+                            <f:selectItem itemLabel="DSD - Developmental speech disorder" itemValue="1145003" />
+                            <f:selectItem itemLabel="Congenital microcheilia" itemValue="1150009" />
+                            <f:selectItem itemLabel="Constricted visual field" itemValue="1151008" />
+                            <f:selectItem itemLabel="Skin reaction negative" itemValue="1152001" />
+                            <f:selectItem itemLabel="Myocardial hypertrophy, determined by electrocardiogram" itemValue="1155004" />
+                            <f:selectItem itemLabel="Cavitary prostatitis" itemValue="1156003" />
+                            <f:selectItem itemLabel="Allotype" itemValue="1168007" />
+                            <f:selectItem itemLabel="Glasgow coma scale, 10" itemValue="1184008" />
+                            <f:selectItem itemLabel="Familial amyloid neuropathy, Finnish type" itemValue="1192004" />
+                            <f:selectItem itemLabel="Disease condition determination, well controlled" itemValue="1194003" />
+                            <f:selectItem itemLabel="Chronic bipolar II disorder, most recent episode major depressive" itemValue="1196001" />
+                            <f:selectItem itemLabel="Carbuncle of heel" itemValue="1197005" />
+                            <f:selectItem itemLabel="Benign essential hypertension" itemValue="1201005" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItem itemLabel="" itemValue="" />                           
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Diagnosis Use" for="diagnosisUse" />
+                        <p:selectOneMenu id="diagnosisUse" value="#{encounterController.selected.diagnosisUse}" title="Diagnosis Use">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Admission diagnosis" itemValue="AD" />
+                            <f:selectItem itemLabel="Discharge diagnosis" itemValue="DD" />
+                            <f:selectItem itemLabel="Chief complaint" itemValue="CC" />
+                            <f:selectItem itemLabel="Comorbidity diagnosis" itemValue="CM" />
+                            <f:selectItem itemLabel="pre-op diagnosis" itemValue="pre-op" />
+                            <f:selectItem itemLabel="post-op diagnosis" itemValue="post-op" />
+                            <f:selectItem itemLabel="Billing" itemValue="billing" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Diagnosis Rank" for="diagnosisRank" />
+                        <p:inputText id="diagnosisRank" value="#{encounterController.selected.diagnosisRank}" title="#{bundle.CreateEncounterTitle_diagnosisRank}" />
+                        <p:outputLabel value="Admition Source" for="admitSource" />
+                        <p:selectOneMenu id="admitSource" value="#{encounterController.selected.admitSource}" title="Admit Source">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Transferred from other hospital" itemValue="hosp-trans" />
+                            <f:selectItem itemLabel="From accident/emergency department" itemValue="emd" />
+                            <f:selectItem itemLabel="From outpatient department" itemValue="outp" />
+                            <f:selectItem itemLabel="Born in hospital" itemValue="born" />
+                            <f:selectItem itemLabel="General Practitioner referral" itemValue="gp" />
+                            <f:selectItem itemLabel="Medical Practitioner/physician referral" itemValue="mp" />
+                            <f:selectItem itemLabel="From nursing home" itemValue="nursing" />
+                            <f:selectItem itemLabel="From psychiatric hospital" itemValue="psych" />
+                            <f:selectItem itemLabel="From rehabilitation facility" itemValue="rehab" />
+                            <f:selectItem itemLabel="Other" itemValue="other" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="ReAdmission" for="hospReAdmission" />
+                        <p:selectOneMenu id="hospReAdmission" value="#{encounterController.selected.hospReAdmission}" title="Hospital Re Admission">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Re-admission" itemValue="R" />
+                            <f:selectItem itemLabel="Wiederaufnahme" itemValue="R" />
+                            <f:selectItem itemLabel="Heropname" itemValue="R" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Diet Preference" for="dietPreference" />
+                        <p:selectOneMenu id="dietPreference" value="#{encounterController.selected.dietPreference}" title="Diet Preference">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Vegetarian" itemValue="vegetarian" />
+                            <f:selectItem itemLabel="Dairy Free" itemValue="dairy-free" />
+                            <f:selectItem itemLabel="Nut Free" itemValue="nut-free" />
+                            <f:selectItem itemLabel="Gluten Free" itemValue="gluten-free" />
+                            <f:selectItem itemLabel="Vegan" itemValue="vegan" />
+                            <f:selectItem itemLabel="Halal" itemValue="halal" />
+                            <f:selectItem itemLabel="Kosher" itemValue="kosher" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Special Courtesy" for="specialCourtesy" />
+                        <p:selectOneMenu id="specialCourtesy" value="#{encounterController.selected.specialCourtesy}" title="Special Courtesy">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="extended courtesy" itemValue="EXT" />
+                            <f:selectItem itemLabel="normal courtesy" itemValue="NRM" />
+                            <f:selectItem itemLabel="professional courtesy" itemValue="PRF" />
+                            <f:selectItem itemLabel="staff" itemValue="STF" />
+                            <f:selectItem itemLabel="very important person" itemValue="VIP" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Special Arrangement" for="specialArrangement" />
+                        <p:selectOneMenu id="specialArrangement" value="#{encounterController.selected.specialArrangement}" title="Special Arrangement">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Wheelchair" itemValue="wheel" />
+                            <f:selectItem itemLabel="Additional bedding" itemValue="add-bed" />
+                            <f:selectItem itemLabel="Interpreter" itemValue="int" />
+                            <f:selectItem itemLabel="Attendant" itemValue="att" />
+                            <f:selectItem itemLabel="Guide dog" itemValue="dog" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Discharge Disposition" for="dischargeDisposition" />
+                        <p:selectOneMenu id="dischargeDisposition" value="#{encounterController.selected.dischargeDisposition}" title="Discharge Disposition">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Home" itemValue="home" />
+                            <f:selectItem itemLabel="Alternative home	" itemValue="alt-home" />
+                            <f:selectItem itemLabel="Other healthcare facility" itemValue="other-hcf" />
+                            <f:selectItem itemLabel="Hospice" itemValue="hosp" />
+                            <f:selectItem itemLabel="Long-term care" itemValue="long" />
+                            <f:selectItem itemLabel="Left against advice" itemValue="aadvice" />
+                            <f:selectItem itemLabel="Expired" itemValue="exp" />
+                            <f:selectItem itemLabel="Psychiatric hospital" itemValue="psy" />
+                            <f:selectItem itemLabel="Rehabilitation" itemValue="rehab" />
+                            <f:selectItem itemLabel="Skilled nursing facility" itemValue="snf" />
+                            <f:selectItem itemLabel="Other" itemValue="oth" />
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{encounterController.update}" value="#{bundle.Save}" update="display,:EncounterListForm:datalistEncounters,:growl" oncomplete="handleSubmit(args, 'EncounterEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EncounterEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

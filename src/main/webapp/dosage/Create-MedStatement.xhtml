@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DosageCreateMedStatementDlg" widgetVar="DosageCreateMedStatementDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Create Dosage" styleClass="ui-fluid">
+            <h:form id="DosageCreateMedStatementForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Sequence" for="sequence" />
+                        <p:inputText id="sequence" value="#{dosageController.selected.sequence}" title="Sequence" />
+                        <p:outputLabel value="Text" for="text" />
+                        <p:inputText id="text" value="#{dosageController.selected.text}" title="Text" />
+                        <p:outputLabel value="Additional Instruction" for="additionalInstruction" />
+                        <p:selectOneMenu id="additionalInstruction" value="#{dosageController.selected.additionalInstruction}" title="Additional Instruction">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Half to one hour before food" itemValue="311501008" />
+                            <f:selectItem itemLabel="With or after food" itemValue="311504000" />
+                            <f:selectItem itemLabel="Times" itemValue="417929005" />
+                            <f:selectItem itemLabel="Contains aspirin" itemValue="417980006" />
+                            <f:selectItem itemLabel="Dissolve or mix with water before taking" itemValue="417995008" />
+                            <f:selectItem itemLabel="Warning. Causes drowsiness which may continue the next day. If affected do not drive or operate machinery. Avoid alcoholic drink" itemValue="418071006" />
+                            <f:selectItem itemLabel="Contains an aspirin-like medicine" itemValue="418194009" />
+                            <f:selectItem itemLabel="Do not take anything containing aspirin while taking this medicine" itemValue="418281004" />
+                        </p:selectOneMenu>                                                   
+
+                        <p:outputLabel value="As Needed" for="asNeeded" />
+                        <p:selectBooleanCheckbox id="asNeeded" value="#{dosageController.selected.asNeeded}" />
+                        <p:outputLabel value="Site" for="site" />
+                        <p:inputText id="site" value="#{dosageController.selected.site}" title="Site" />
+                        <p:outputLabel value="Route" for="route" />
+                        <p:inputText id="route" value="#{dosageController.selected.route}" title="Route" />
+                        <p:outputLabel value="Method" for="method" />
+                        <p:inputText id="method" value="#{dosageController.selected.method}" title="Method" />
+                        <p:outputLabel value="Max Dose Per Period Numerator" for="maxDosePerPeriodNumerator" />
+                        <p:inputText id="maxDosePerPeriodNumerator" value="#{dosageController.selected.maxDosePerPeriodNumerator}" title="Max Dose Per Period Numerator" />
+                        <p:outputLabel value="Max Dose Per Period Denominator" for="maxDosePerPeriodDenominator" />
+                        <p:inputText id="maxDosePerPeriodDenominator" value="#{dosageController.selected.maxDosePerPeriodDenominator}" title="Max Dose Per Period Denominator" />
+                        <p:outputLabel value="Max Dose Per Lifetime" for="maxDosePerLifetime" />
+                        <p:inputText id="maxDosePerLifetime" value="#{dosageController.selected.maxDosePerLifetime}" title="Max Dose Per Lifetime" />
+                    </p:panelGrid>
+
+                    <p:commandButton action="#{dosageController.create(medicationStatementController.selected.id)}" actionListener="#{doseAndRateController.prepareCreate()}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args,'DosageCreateMedStatementDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DosageCreateMedStatementDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

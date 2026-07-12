@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PractitionerViewDlg" widgetVar="PractitionerViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="View Practitioner">
+            <h:form id="PractitionerViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+                        <h:outputText value="Id"/>
+                        <h:outputText value="#{practitionerController.selected.id}" title="#{bundle.ViewPractitionerTitle_id}"/>
+                        <h:outputText value="Active"/>
+                        <h:outputText value="#{practitionerController.selected.active}" title="#{bundle.ViewPractitionerTitle_active}"/>
+                        <h:outputText value="Name"/>
+                        <h:outputText value="#{practitionerController.selected.name}" title="#{bundle.ViewPractitionerTitle_name}"/>
+                        <h:outputText value="Telecom"/>
+                        <h:outputText value="#{practitionerController.selected.telecom}" title="#{bundle.ViewPractitionerTitle_telecom}"/>
+                        <h:outputText value="Gender"/>
+                        <h:outputText value="#{practitionerController.selected.gender}" title="#{bundle.ViewPractitionerTitle_gender}"/>
+                        <h:outputText value="Birth Date"/>
+                        <h:outputText value="#{practitionerController.selected.birthDate}" title="#{bundle.ViewPractitionerTitle_birthDate}"/>
+                        <h:outputText value="Communication"/>
+                        <h:outputText value="#{practitionerController.selected.communication}" title="#{bundle.ViewPractitionerTitle_communication}"/>
+                        <h:outputText value="Address"/>
+                        <h:outputText value="#{practitionerController.selected.address}" title="#{bundle.ViewPractitionerTitle_address}"/>                        
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PractitionerViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="HumanNameEditDlg" widgetVar="HumanNameEditDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Edit Human Name" styleClass="ui-fluid">
+            <h:form id="HumanNameEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{humanNameController.selected != null}">
+                        <p:outputLabel value="Use" for="use" />
+                        <p:selectOneMenu id="use" value="#{humanNameController.selected.use}" required="true" title="Use">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="usual" itemValue="usual" />
+                            <f:selectItem itemLabel="official" itemValue="official" />
+                            <f:selectItem itemLabel="temp" itemValue="temp" />                            
+                            <f:selectItem itemLabel="nickname" itemValue="nickname" />
+                            <f:selectItem itemLabel="anonymous" itemValue="anonymous" />
+                            <f:selectItem itemLabel="old" itemValue="old" />
+                            <f:selectItem itemLabel="maiden" itemValue="maiden" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Prefix" for="prefix" />
+                        <p:selectOneMenu id="prefix" value="#{humanNameController.selected.prefix}" required="true" title="Prefix">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Master" itemValue="Master" />
+                            <f:selectItem itemLabel="Mr" itemValue="Mr" />
+                            <f:selectItem itemLabel="Messrs" itemValue="Messrs" />                            
+                            <f:selectItem itemLabel="Miss" itemValue="Miss" />
+                            <f:selectItem itemLabel="Mrs" itemValue="Mrs" />
+                            <f:selectItem itemLabel="Ms" itemValue="Ms" />
+                            <f:selectItem itemLabel="Mx" itemValue="Mx" />
+                            <f:selectItem itemLabel="Sir" itemValue="Sir" />
+                            <f:selectItem itemLabel="Gentleman" itemValue="Gentleman" />
+                            <f:selectItem itemLabel="Sire" itemValue="Sire" />
+                            <f:selectItem itemLabel="Mistress" itemValue="Mistress" />
+                            <f:selectItem itemLabel="Madam" itemValue="Madam" />
+                            <f:selectItem itemLabel="Dame" itemValue="Dame" />
+                            <f:selectItem itemLabel="Lord" itemValue="Lord" />
+                            <f:selectItem itemLabel="Lady" itemValue="Lady" />
+                            <f:selectItem itemLabel="Esq" itemValue="Esq" />
+                            <f:selectItem itemLabel="Excellency" itemValue="Excellency" />
+                            <f:selectItem itemLabel="The Honourable" itemValue="The Honourable" />
+                            <f:selectItem itemLabel="The Right Honourable" itemValue="The Right Honourable" />
+                            <f:selectItem itemLabel="The Most Honourable" itemValue="The Most Honourable" />
+                            <f:selectItem itemLabel="Dr" itemValue="Dr" />
+                            <f:selectItem itemLabel="Professor" itemValue="Professor" />
+                            <f:selectItem itemLabel="KC" itemValue="KC" />
+                            <f:selectItem itemLabel="Eur lng" itemValue="Eur lng" />
+                            <f:selectItem itemLabel="Chancellor" itemValue="Chancellor" />
+                            <f:selectItem itemLabel="Vice-Chancellor" itemValue="Vice-Chancellor" />
+                            <f:selectItem itemLabel="Principal" itemValue="Principal" />                            
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Name" for="text" />
+                        <p:inputText id="text" value="#{humanNameController.selected.text}" title="#{bundle.CreateHumanNameTitle_text}" required="true" />
+                        <p:outputLabel value="Middlename" for="given" />
+                        <p:inputText id="given" value="#{humanNameController.selected.given}" title="#{bundle.CreateHumanNameTitle_given}" />
+                        <p:outputLabel value="Surname" for="family" />
+                        <p:inputText id="family" value="#{humanNameController.selected.family}" title="#{bundle.CreateHumanNameTitle_family}" required="true" />                                                
+                        <p:outputLabel value="Sufix" for="sufix" />
+                        <p:selectOneMenu id="sufix" value="#{humanNameController.selected.sufix}" required="true" title="Sufix">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Jr" itemValue="Jr" />
+                            <f:selectItem itemLabel="Snr" itemValue="Snr" />
+                            <f:selectItem itemLabel="I" itemValue="I" />
+                            <f:selectItem itemLabel="II" itemValue="II" />
+                            <f:selectItem itemLabel="II" itemValue="III" />
+                            <f:selectItem itemLabel="IV" itemValue="IV" />
+                            <f:selectItem itemLabel="V" itemValue="V" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Valid From" for="periodFrom" />
+                        <p:calendar id="periodFrom" value="#{humanNameController.selected.periodFrom}" yearRange="c-100:c+100" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" />
+                        <p:outputLabel value="Valid To" for="periodTo" />
+                        <p:calendar id="periodTo" value="#{humanNameController.selected.periodTo}" yearRange="c-100:c+100" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{humanNameController.update}" value="#{bundle.Save}" update="display,:IPAListForm:apUserHome:datalistHumanName,:growl" oncomplete="handleSubmit(args, 'HumanNameEditDialog');"/>
+                    <!--p:commandButton value="#{bundle.Cancel}" onclick="HumanNameEditDialog.hide()"/-->
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

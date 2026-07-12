@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LabViewDlg" widgetVar="LabViewDialog" modal="true" resizable="false" appendTo="@(content)" header="#{bundle.ViewLabTitle}" styleClass="ui-fluid">
+            <h:form id="LabViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{labController.selected != null}">
+                        <h:outputText value="#{bundle.ViewLabLabel_id}"/>
+                        <h:outputText value="#{labController.selected.id}" title="#{bundle.ViewLabTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_hmBloodGroupRh}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.hmBloodGroupRh}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_hmFBC}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.hmFBC}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_hmMalaria}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.hmMalaria}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_hmCoombsTest}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.hmCoombsTest}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_hmESR}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.hmESR}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_hmDDimer}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.hmDDimer}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_hmPTINR}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.hmPTINR}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_hmHemoglobin}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.hmHemoglobin}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_hmCD4}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.hmCD4}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_hmCD4CD8CD3}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.hmCD4CD8CD3}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_encounter}"/>
+                        <h:outputText value="#{labController.selected.encounter}" title="#{bundle.ViewLabTitle_encounter}"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_cpLiquidProfile}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.cpLiquidProfile}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_cpLFT}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.cpLFT}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_cpKFT}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.cpKFT}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_cpCardiacProfile}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.cpCardiacProfile}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_cpARTPRofile}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.cpARTPRofile}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_cpUECAProfile}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.cpUECAProfile}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_cpCSFAnalysis}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.cpCSFAnalysis}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_eyBHCG}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.eyBHCG}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_eyT4}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.eyT4}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_eyTSH}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.eyTSH}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_eyCortisol}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.eyCortisol}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_eyHBsAg}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.eyHBsAg}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_eyUrine}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.eyUrine}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_eyBlood}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.eyBlood}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_syphilisRPR}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.syphilisRPR}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_cragLFA}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.cragLFA}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_HIV12}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.HIV12}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_RDT}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.RDT}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_PCR}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.PCR}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_viralLoad}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.viralLoad}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_ceruloplasmin}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.ceruloplasmin}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_ALT}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.ALT}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_AST}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.AST}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_albumin}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.albumin}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_ALP}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.ALP}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_ammonia}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.ammonia}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_amylase}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.amylase}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_bilirubin}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.bilirubin}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_direct}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.direct}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_total}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.total}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_calcium}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.calcium}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_CO2}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.CO2}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_phosphorus}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.phosphorus}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_cholesterol}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.cholesterol}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_cholinesterase}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.cholinesterase}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_haptoglobin}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.haptoglobin}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_creatinine}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.creatinine}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_creatinineKinase}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.creatinineKinase}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_GGT}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.GGT}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_glucose}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.glucose}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_HDLCholesterol}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.HDLCholesterol}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_LDLCholesterol}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.LDLCholesterol}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_lipase}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.lipase}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_totalIronBindingCapacity}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.totalIronBindingCapacity}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_iron}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.iron}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_LDH}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.LDH}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_chloride}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.chloride}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_potassium}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.potassium}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_sodium}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.sodium}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_magnesium}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.magnesium}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_urineBiochemistry}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.urineBiochemistry}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_drugAbuseToxicology}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.drugAbuseToxicology}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_totalProtein}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.totalProtein}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_PSA}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.PSA}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_uricAcid}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.uricAcid}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_totslIgE}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.totslIgE}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_aldolase}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.aldolase}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_triglycerides}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.triglycerides}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_hbA1c}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.hbA1c}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_CKMB}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.CKMB}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_lactate}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.lactate}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_myoglobin}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.myoglobin}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_troponinI}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.troponinI}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_ntProBNP}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.ntProBNP}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_ferritin}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.ferritin}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_CA125}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.CA125}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_CA153}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.CA153}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_CA199}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.CA199}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_cultureSense}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.cultureSense}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_bloodCulture}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.bloodCulture}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_AFBMicroscopy}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.AFBMicroscopy}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_urineMicroscopy}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.urineMicroscopy}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_DNAPaternityTest}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.DNAPaternityTest}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_DNAKinshipTest}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.DNAKinshipTest}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_DNASiblingshipTest}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.DNASiblingshipTest}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_HIVDrugResistanceTest}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.HIVDrugResistanceTest}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_abdomen}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.abdomen}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_pelvis}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.pelvis}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_renal}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.renal}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_testicular}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.testicular}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_thyroid}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.thyroid}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_vascular}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.vascular}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_obstetrics}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.obstetrics}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_lung}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.lung}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_musculoskeletal}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.musculoskeletal}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_breast}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.breast}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_cerebrovascular}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.cerebrovascular}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_orthopedic}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.orthopedic}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_cardiac}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.cardiac}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_gynecology}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.gynecology}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_prostrate}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.prostrate}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_urology}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.urology}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_CRP}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.CRP}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_rheumatoidFactor}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.rheumatoidFactor}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_carbamazepine}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.carbamazepine}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_digoxin}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.digoxin}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_phenobarbital}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.phenobarbital}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_amikacin}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.amikacin}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_vancomycin}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.vancomycin}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_gentamicin}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.gentamicin}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_phenytoin}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.phenytoin}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewLabLabel_theophylline}"/>
+                        <p:selectBooleanCheckbox value="#{labController.selected.theophylline}" disabled="true"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="LabViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

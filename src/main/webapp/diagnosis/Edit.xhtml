@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DiagnosisEditDlg" widgetVar="DiagnosisEditDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Edit Diagnosis">
+            <h:form id="DiagnosisEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{diagnosisController.selected != null}">
+                        <p:outputLabel value="Diagnosis ID" for="diagID" />
+                        <p:inputText id="diagID" value="#{diagnosisController.selected.diagID}" title="#{bundle.CreateDiagnosisTitle_diagID}" />
+                        <p:outputLabel value="Chapter #" for="chapterNo" />
+                        <p:inputText id="chapterNo" value="#{diagnosisController.selected.chapterNo}" title="#{bundle.CreateDiagnosisTitle_chapterNo}" />
+                        <p:outputLabel value="Chapter Description" for="chapter_Desc" />
+                        <p:inputText id="chapter_Desc" value="#{diagnosisController.selected.chapterDesc}" title="#{bundle.CreateDiagnosisTitle_chapter_Desc}" />
+                        <p:outputLabel value="Group Code" for="groupCode" />
+                        <p:inputText id="groupCode" value="#{diagnosisController.selected.groupCode}" title="#{bundle.CreateDiagnosisTitle_groupCode}" />
+                        <p:outputLabel value="Group Description" for="groupDescription" />
+                        <p:inputText id="groupDescription" value="#{diagnosisController.selected.groupDescription}" title="#{bundle.CreateDiagnosisTitle_groupDescription}" />
+                        <p:outputLabel value="ICD3 Code" for="ICD3Code" />
+                        <p:inputText id="ICD3Code" value="#{diagnosisController.selected.ICD3Code}" title="#{bundle.CreateDiagnosisTitle_ICD3Code}" />
+                        <p:outputLabel value="ICD3 Code Description" for="ICD3CodeDesc" />
+                        <p:inputText id="ICD3CodeDesc" value="#{diagnosisController.selected.ICD3CodeDesc}" title="#{bundle.CreateDiagnosisTitle_ICD3CodeDesc}" />
+                        <p:outputLabel value="ICD10 Code" for="ICD10Code" />
+                        <p:inputText id="ICD10Code" value="#{diagnosisController.selected.ICD10Code}" title="#{bundle.CreateDiagnosisTitle_ICD10Code}" />
+                        <p:outputLabel value="WHO Short Description" for="WHOSHORTDescr" />
+                        <p:inputText id="WHOSHORTDescr" value="#{diagnosisController.selected.WHOSHORTDescr}" title="#{bundle.CreateDiagnosisTitle_WHOSHORTDescr}" />
+                        <p:outputLabel value="WHO Full Description" for="WHOFULLDesc" />
+                        <p:inputText id="WHOFULLDesc" value="#{diagnosisController.selected.WHOFULLDesc}" title="#{bundle.CreateDiagnosisTitle_WHOFULLDesc}" />
+                        <p:outputLabel value="ICD10 Clinical Use" for="validICD10ClinicalUse" />
+                        <p:inputText id="validICD10ClinicalUse" value="#{diagnosisController.selected.validICD10ClinicalUse}" title="#{bundle.CreateDiagnosisTitle_validICD10ClinicalUse}" />
+                        <p:outputLabel value="Valid ICD10 Primary" for="validICD10Primary" />
+                        <p:inputText id="validICD10Primary" value="#{diagnosisController.selected.validICD10Primary}" title="#{bundle.CreateDiagnosisTitle_validICD10Primary}" />
+                        <p:outputLabel value="Asterisk" for="asterisk" />
+                        <p:inputText id="asterisk" value="#{diagnosisController.selected.asterisk}" title="#{bundle.CreateDiagnosisTitle_asterisk}" />
+                        <p:outputLabel value="Dagger" for="dagger" />
+                        <p:inputText id="dagger" value="#{diagnosisController.selected.dagger}" title="#{bundle.CreateDiagnosisTitle_dagger}" />
+                        <p:outputLabel value="Sequelae" for="sequelae" />
+                        <p:inputText id="sequelae" value="#{diagnosisController.selected.sequelae}" title="#{bundle.CreateDiagnosisTitle_sequelae}" />
+                        <p:outputLabel value="Status ADM" for="statusADM" />
+                        <p:inputText id="statusADM" value="#{diagnosisController.selected.statusADM}" title="#{bundle.CreateDiagnosisTitle_statusADM}" />
+                        <p:outputLabel value="Start Date" for="startDate" />
+                        <p:calendar id="startDate" value="#{diagnosisController.selected.startDate}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Start Date" />
+                        <p:outputLabel value="End Date" for="endDate" />
+                        <p:calendar id="endDate" value="#{diagnosisController.selected.endDate}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="End Date" />
+                        <p:outputLabel value="Comment" for="comment" />
+                        <p:inputText id="comment" value="#{diagnosisController.selected.comment}" title="#{bundle.CreateDiagnosisTitle_comment}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{diagnosisController.update}" value="#{bundle.Save}" update="display,:DiagnosisListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DiagnosisEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DiagnosisEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

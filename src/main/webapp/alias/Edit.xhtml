@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AliasEditDlg" widgetVar="AliasEditDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.EditAliasTitle}" styleClass="ui-fluid">
+            <h:form id="AliasEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{aliasController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditAliasLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{aliasController.selected.id}" title="#{bundle.EditAliasTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditAliasLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{aliasController.selected.name}" title="#{bundle.EditAliasTitle_name}" />
+                        <p:outputLabel value="#{bundle.EditAliasLabel_IPA}" for="IPA" />
+                        <p:inputText id="IPA" value="#{aliasController.selected.IPA}" title="#{bundle.EditAliasTitle_IPA}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{aliasController.update}" value="#{bundle.Save}" update="display,:AliasListForm:apUserHome:datalist,:growl" oncomplete="handleSubmit(args, 'AliasEditDialog');"/>
+                    <!--p:commandButton value="#{bundle.Cancel}" onclick="AliasEditDialog.hide()"/-->
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

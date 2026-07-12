@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ContactPointEditDlg" widgetVar="ContactPointEditDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Edit Contact Point" styleClass="ui-fluid">
+            <h:form id="ContactPointEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Use" for="telecomUse" />
+                        <p:selectOneMenu id="telecomUse" value="#{contactPointController.selected.telecomUse}" required="true" title="Telecom Use">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="home" itemValue="home" />
+                            <f:selectItem itemLabel="work" itemValue="work" />
+                            <f:selectItem itemLabel="temp" itemValue="temp" />                            
+                            <f:selectItem itemLabel="old" itemValue="old" />                            
+                            <f:selectItem itemLabel="mobile" itemValue="mobile" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="System" for="telecomSystem" />
+                        <p:selectOneMenu id="telecomSystem" value="#{contactPointController.selected.telecomSystem}" required="true" title="Telecom System">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="phone" itemValue="phone" />
+                            <f:selectItem itemLabel="fax" itemValue="fax" />
+                            <f:selectItem itemLabel="email" itemValue="email" />                            
+                            <f:selectItem itemLabel="pager" itemValue="pager" />                            
+                            <f:selectItem itemLabel="url" itemValue="url" />
+                            <f:selectItem itemLabel="sms" itemValue="sms" />
+                            <f:selectItem itemLabel="other" itemValue="other" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Rank" for="telecomRank" />
+                        <p:inputText id="telecomRank" value="#{contactPointController.selected.telecomRank}" title="#{bundle.CreateContactPointTitle_telecomRank}" />
+                        <p:outputLabel value="Value" for="telecomValue" />
+                        <p:inputText id="telecomValue" value="#{contactPointController.selected.telecomValue}" title="#{bundle.CreateContactPointTitle_telecomValue}" />                        
+                        <p:outputLabel value="Valid From" for="periodFrom" />
+                        <p:calendar id="periodFrom" value="#{contactPointController.selected.telecomPeriodFrom}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Period From" />
+                        <p:outputLabel value="Valid To" for="periodTo" />
+                        <p:calendar id="periodTo" value="#{contactPointController.selected.telecomPeriodTo}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Period To" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{contactPointController.update}" value="#{bundle.Save}" update="display,:IPAListForm:apUserHome:datalistContacts,:growl" oncomplete="handleSubmit(args, 'ContactPointEditDialog');"/>
+                    <!--p:commandButton value="#{bundle.Cancel}" onclick="ContactPointEditDialog.hide()"/-->
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

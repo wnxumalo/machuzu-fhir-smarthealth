@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InvoiceEditDlg" widgetVar="InvoiceEditDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.EditInvoiceTitle}" styleClass="ui-fluid">
+            <h:form id="InvoiceEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{invoiceController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditInvoiceLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{invoiceController.selected.id}" title="#{bundle.EditInvoiceTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditInvoiceLabel_account}" for="account" />
+                        <p:inputText id="account" value="#{invoiceController.selected.account}" title="#{bundle.EditInvoiceTitle_account}" />
+                        <p:outputLabel value="#{bundle.EditInvoiceLabel_encounter}" for="encounter" />
+                        <p:inputText id="encounter" value="#{invoiceController.selected.encounter}" title="#{bundle.EditInvoiceTitle_encounter}" />
+                        <p:outputLabel value="#{bundle.EditInvoiceLabel_status}" for="status" />
+                        <p:inputText id="status" value="#{invoiceController.selected.status}" title="#{bundle.EditInvoiceTitle_status}" />
+                        <p:outputLabel value="#{bundle.EditInvoiceLabel_cancelledReason}" for="cancelledReason" />
+                        <p:inputText id="cancelledReason" value="#{invoiceController.selected.cancelledReason}" title="#{bundle.EditInvoiceTitle_cancelledReason}" />
+                        <p:outputLabel value="#{bundle.EditInvoiceLabel_type}" for="type" />
+                        <p:inputText id="type" value="#{invoiceController.selected.type}" title="#{bundle.EditInvoiceTitle_type}" />
+                        <p:outputLabel value="#{bundle.EditInvoiceLabel_IPA}" for="IPA" />
+                        <p:inputText id="IPA" value="#{invoiceController.selected.IPA}" title="#{bundle.EditInvoiceTitle_IPA}" />
+                        <p:outputLabel value="#{bundle.EditInvoiceLabel_recipient}" for="recipient" />
+                        <p:inputText id="recipient" value="#{invoiceController.selected.recipient}" title="#{bundle.EditInvoiceTitle_recipient}" />
+                        <p:outputLabel value="#{bundle.EditInvoiceLabel_date}" for="date" />
+                        <p:inputText id="date" value="#{invoiceController.selected.date}" title="#{bundle.EditInvoiceTitle_date}" />
+                        <p:outputLabel value="#{bundle.EditInvoiceLabel_creationDate}" for="creationDate" />
+                        <p:inputText id="creationDate" value="#{invoiceController.selected.creationDate}" title="#{bundle.EditInvoiceTitle_creationDate}" />
+                        <p:outputLabel value="#{bundle.EditInvoiceLabel_billingPeriodFrom}" for="billingPeriodFrom" />
+                        <p:calendar id="billingPeriodFrom" pattern="MM/dd/yyyy" value="#{invoiceController.selected.billingPeriodFrom}" title="#{bundle.EditInvoiceTitle_billingPeriodFrom}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditInvoiceLabel_billingPeriodTo}" for="billingPeriodTo" />
+                        <p:calendar id="billingPeriodTo" pattern="MM/dd/yyyy" value="#{invoiceController.selected.billingPeriodTo}" title="#{bundle.EditInvoiceTitle_billingPeriodTo}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditInvoiceLabel_periodFrom}" for="periodFrom" />
+                        <p:inputText id="periodFrom" value="#{invoiceController.selected.periodFrom}" title="#{bundle.EditInvoiceTitle_periodFrom}" />
+                        <p:outputLabel value="#{bundle.EditInvoiceLabel_periodTo}" for="periodTo" />
+                        <p:inputText id="periodTo" value="#{invoiceController.selected.periodTo}" title="#{bundle.EditInvoiceTitle_periodTo}" />
+                        <p:outputLabel value="#{bundle.EditInvoiceLabel_priceComponent}" for="priceComponent" />
+                        <p:inputText id="priceComponent" value="#{invoiceController.selected.priceComponent}" title="#{bundle.EditInvoiceTitle_priceComponent}" />
+                        <p:outputLabel value="#{bundle.EditInvoiceLabel_totalPriceComponent}" for="totalPriceComponent" />
+                        <p:inputText id="totalPriceComponent" value="#{invoiceController.selected.totalPriceComponent}" title="#{bundle.EditInvoiceTitle_totalPriceComponent}" />
+                        <p:outputLabel value="#{bundle.EditInvoiceLabel_totalNet}" for="totalNet" />
+                        <p:inputText id="totalNet" value="#{invoiceController.selected.totalNet}" title="#{bundle.EditInvoiceTitle_totalNet}" />
+                        <p:outputLabel value="#{bundle.EditInvoiceLabel_totalGross}" for="totalGross" />
+                        <p:inputText id="totalGross" value="#{invoiceController.selected.totalGross}" title="#{bundle.EditInvoiceTitle_totalGross}" />
+                        <p:outputLabel value="#{bundle.EditInvoiceLabel_paymentTerms}" for="paymentTerms" />
+                        <p:inputText id="paymentTerms" value="#{invoiceController.selected.paymentTerms}" title="#{bundle.EditInvoiceTitle_paymentTerms}" />
+                        <p:outputLabel value="#{bundle.EditInvoiceLabel_note}" for="note" />
+                        <p:inputText id="note" value="#{invoiceController.selected.note}" title="#{bundle.EditInvoiceTitle_note}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{invoiceController.update}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args, 'InvoiceEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="InvoiceEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

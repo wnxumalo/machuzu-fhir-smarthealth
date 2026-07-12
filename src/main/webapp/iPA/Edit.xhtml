@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IPAEditDlg" widgetVar="IPAEditDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.EditIPATitle}" styleClass="ui-fluid">            
+            <h:form id="IPAEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{iPAController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditIPALabel_id}" for="id" />
+                        <p:inputText id="id" value="#{iPAController.selected.id}" title="#{bundle.EditIPATitle_id}" />
+                        <p:outputLabel value="#{bundle.EditIPALabel_UUID}" for="UUID" />
+                        <p:inputText id="UUID" value="#{iPAController.selected.UUID}" title="#{bundle.EditIPATitle_UUID}" />
+                        <p:outputLabel value="#{bundle.EditIPALabel_active}" for="active" />
+                        <p:inputText id="active" value="#{iPAController.selected.active}" title="#{bundle.EditIPATitle_active}" />
+                        <p:outputLabel value="#{bundle.EditIPALabel_humanName}" for="humanName" />
+                        <p:inputText id="humanName" value="#{iPAController.selected.humanName}" title="#{bundle.EditIPATitle_humanName}" />
+                        <p:outputLabel value="#{bundle.EditIPALabel_gender}" for="gender" />
+                        <p:inputText id="gender" value="#{iPAController.selected.gender}" title="#{bundle.EditIPATitle_gender}" />
+                        <p:outputLabel value="#{bundle.EditIPALabel_birthDate}" for="birthDate" />
+                        <p:inputText id="birthDate" value="#{iPAController.selected.birthDate}" title="#{bundle.EditIPATitle_birthDate}" />
+                        <p:outputLabel value="#{bundle.EditIPALabel_IPATelecoms}" for="IPATelecoms" />
+                        <p:inputText id="IPATelecoms" value="#{iPAController.selected.IPATelecoms}" title="#{bundle.EditIPATitle_IPATelecoms}" />
+                        <p:outputLabel value="#{bundle.EditIPALabel_IPAAddress}" for="IPAAddress" />
+                        <p:inputText id="IPAAddress" value="#{iPAController.selected.IPAAddress}" title="#{bundle.EditIPATitle_IPAAddress}" />
+                        <p:outputLabel value="#{bundle.EditIPALabel_identifier}" for="identifier" />
+                        <p:inputText id="identifier" value="#{iPAController.selected.identifier}" title="#{bundle.EditIPATitle_identifier}" />
+                        <p:outputLabel value="#{bundle.EditIPALabel_deceased}" for="deceased" />
+                        <p:selectBooleanCheckbox id="deceased" value="#{iPAController.selected.deceased}" />
+                        <p:outputLabel value="#{bundle.EditIPALabel_deceasedDateTime}" for="deceasedDateTime" />
+                        <p:inputText id="deceasedDateTime" value="#{iPAController.selected.deceasedDateTime}" title="#{bundle.EditIPATitle_deceasedDateTime}" />
+                        <p:outputLabel value="#{bundle.EditIPALabel_address}" for="address" />
+                        <p:inputText id="address" value="#{iPAController.selected.IPAAddress}" title="#{bundle.EditIPATitle_address}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{iPAController.update}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args, 'IPAEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="IPAEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

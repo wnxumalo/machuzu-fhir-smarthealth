@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EncounterViewDlg" widgetVar="EncounterViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="View Encounter" styleClass="ui-fluid">
+            <h:form id="EncounterViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{encounterController.selected != null}">
+                        <h:outputText value="Status"/>
+                        <h:outputText value="#{encounterController.selected.status}" title="#{bundle.ViewEncounterTitle_status}"/>
+                        <h:outputText value="Class"/>
+                        <h:outputText value="#{encounterController.selected.EClass}" title="#{bundle.ViewEncounterTitle_EClass}"/>
+                        <h:outputText value="Service Type"/>
+                        <h:outputText value="#{encounterController.selected.serviceType}" title="#{bundle.ViewEncounterTitle_serviceType}"/>
+                        <h:outputText value="Priority"/>
+                        <h:outputText value="#{encounterController.selected.priority}" title="#{bundle.ViewEncounterTitle_priority}"/>
+                        <h:outputText value="Period From"/>
+                        <h:outputText value="#{encounterController.selected.periodFrom}" title="#{bundle.ViewEncounterTitle_periodFrom}"/>
+                        <h:outputText value="Period To"/>
+                        <h:outputText value="#{encounterController.selected.periodTo}" title="#{bundle.ViewEncounterTitle_periodTo}"/>
+                        <h:outputText value="Reason"/>
+                        <h:outputText value="#{encounterController.selected.reasonCode}" title="#{bundle.ViewEncounterTitle_reason}"/>                        
+                        <h:outputText value="Diagnosis Use"/>
+                        <h:outputText value="#{encounterController.selected.diagnosisUse}" title="#{bundle.ViewEncounterTitle_diagnosisUse}"/>
+                        <h:outputText value="Diagnosis Rank"/>
+                        <h:outputText value="#{encounterController.selected.diagnosisRank}" title="#{bundle.ViewEncounterTitle_diagnosisRank}"/>
+                        <h:outputText value="Admit Source"/>
+                        <h:outputText value="#{encounterController.selected.admitSource}" title="#{bundle.ViewEncounterTitle_admitSource}"/>
+                        <h:outputText value="Hospital Re-Admission"/>
+                        <h:outputText value="#{encounterController.selected.hospReAdmission}" title="#{bundle.ViewEncounterTitle_hospReAdmission}"/>
+                        <h:outputText value="Diet Preference"/>
+                        <h:outputText value="#{encounterController.selected.dietPreference}" title="#{bundle.ViewEncounterTitle_dietPreference}"/>
+                        <h:outputText value="Special Courtesy"/>
+                        <h:outputText value="#{encounterController.selected.specialCourtesy}" title="#{bundle.ViewEncounterTitle_specialCourtesy}"/>
+                        <h:outputText value="Special Arrangement"/>
+                        <h:outputText value="#{encounterController.selected.specialArrangement}" title="#{bundle.ViewEncounterTitle_specialArrangement}"/>
+                        <h:outputText value="Discharge Disposition"/>
+                        <h:outputText value="#{encounterController.selected.dischargeDisposition}" title="#{bundle.ViewEncounterTitle_dischargeDisposition}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="EncounterViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ObservationCreateDlg" widgetVar="ObservationCreateDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Create Observation" styleClass="ui-fluid">
+            <h:form id="ObservationCreateForm">                           
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Status" for="OStatus" />                        
+                        <p:selectOneMenu id="OStatus" value="#{observationController.selected.OStatus}" title="Status">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Registered" itemValue="registered" />
+                            <f:selectItem itemLabel="Preliminary" itemValue="preliminary" />
+                            <f:selectItem itemLabel="Final" itemValue="final" />
+                            <f:selectItem itemLabel="Amended" itemValue="amended" />
+                            <f:selectItem itemLabel="Corrected" itemValue="corrected" />
+                            <f:selectItem itemLabel="Cancelled" itemValue="cancelled" />
+                            <f:selectItem itemLabel="Entered in Error" itemValue="entered-in-error" />
+                            <f:selectItem itemLabel="Unknown" itemValue="unknown" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Diagnosis" for="diagnosis" />
+                        <h:selectOneMenu id='diagnosis' value="#{observationController.selected.diagnosis}" title="Country">
+                            <f:selectItems value="#{diagnosisController.items}" var="diag" itemValue="#{diag.id}" itemLabel="#{diag.WHOFULLDesc}"/>
+                        </h:selectOneMenu>                            
+                        <p:outputLabel value="Effective Date" for="effectiveDate" />
+                        <p:calendar id="effectiveDate" pattern="MM/dd/yyyy" value="#{observationController.selected.effectiveDate}" title="#{bundle.EditObservationTitle_effectiveDate}"  showOn="button"/>
+                        <p:outputLabel value="Issued" for="issued" />
+                        <p:calendar id="issued" pattern="MM/dd/yyyy" value="#{observationController.selected.issued}" title="#{bundle.EditObservationTitle_issued}"  showOn="button"/>
+                        <p:outputLabel value="Interpretation" for="interpretation" />
+                        <p:selectOneMenu id="interpretation" value="#{observationController.selected.interpretation}" title="Interpretation">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="GeneticObservationInterpretation" itemValue="_GeneticObservationInterpretation" />
+                            <f:selectItem itemLabel="Carrier" itemValue="CAR" />
+                            <f:selectItem itemLabel="ObservationInterpretationChange" itemValue="_ObservationInterpretationChange" />
+                            <f:selectItem itemLabel="Better" itemValue="B" />
+                            <f:selectItem itemLabel="Significant change down" itemValue="D" />
+                            <f:selectItem itemLabel="Significant change up" itemValue="U" />
+                            <f:selectItem itemLabel="Worse" itemValue="W" />
+                            <f:selectItem itemLabel="ObservationInterpretationExceptions" itemValue="_ObservationInterpretationExceptions" />
+                            <f:selectItem itemLabel="Off scale low" itemValue="***incorrect***" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Body Site" for="bodySite" />
+                        <p:selectOneMenu id="bodySite" value="#{observationController.selected.bodySite}" title="Body Site">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Posterior carpal region" itemValue="106004" />
+                            <f:selectItem itemLabel="Fetal part of placenta" itemValue="107008" />
+                            <f:selectItem itemLabel="Condylar emissary vein" itemValue="108003" />
+                            <f:selectItem itemLabel="Visceral layer of Bowman's capsule" itemValue="110001" />
+                            <f:selectItem itemLabel="Parathyroid gland" itemValue="111002" />
+                            <f:selectItem itemLabel="Subcutaneous tissue of medial surface of index finger" itemValue="116007" />
+                            <f:selectItem itemLabel="Coronoid process of mandible" itemValue="124002" />
+                            <f:selectItem itemLabel="Central pair of microtubules, cilium or flagellum, not bacterial" itemValue="149003" />
+                            <f:selectItem itemLabel="Deep circumflex artery of ilium" itemValue="155008" />
+                        </p:selectOneMenu>                        
+                        <p:outputLabel value="Method" for="OMethod" />
+                        <p:selectOneMenu id="OMethod" value="#{observationController.selected.OMethod}" title="OMethod">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Competitive protein binding assay technique" itemValue="58207001" />
+                            <f:selectItem itemLabel="Total measurement" itemValue="115341008" />
+                            <f:selectItem itemLabel="Acquisition technique" itemValue="246363001" />
+                            <f:selectItem itemLabel="Bladder filling technique" itemValue="246502009" />
+                            <f:selectItem itemLabel="Catheter movement technique" itemValue="246503004" />
+                            <f:selectItem itemLabel="Near reading technique" itemValue="246504004" />
+                            <f:selectItem itemLabel="Photon detection technique" itemValue="246505006" />
+                            <f:selectItem itemLabel="Provocation technique" itemValue="246506007" />
+                            <f:selectItem itemLabel="Stimulation technique" itemValue="24607003" />
+                        </p:selectOneMenu>                        
+                        <p:outputLabel value="Note" for="note" />
+                        <p:inputText id="note" value="#{observationController.selected.note}" title="#{bundle.CreateObservationTitle_note}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{observationController.createDiagnosis(encounterController.selected.id)}" value="#{bundle.Save}" update="display,:ObservationListForm:datalist,:growl" oncomplete="handleSubmit(args,'ObservationCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ObservationCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConditionCreateDlg" widgetVar="ConditionCreateDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Create Condition" styleClass="ui-fluid">
+            <h:form id="ConditionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{conditionController.selected != null}">
+                        <p:outputLabel value="Clinical Status" for="clinicalStatus" />
+                        <p:selectOneMenu id="clinicalStatus" value="#{conditionController.selected.clinicalStatus}" required="true" title="Clinical Status">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Active" itemValue="active" />
+                            <f:selectItem itemLabel="Recurrence" itemValue="recurrence" />
+                            <f:selectItem itemLabel="Relapse" itemValue="relapse" />
+                            <f:selectItem itemLabel="Inactive" itemValue="inactive" />
+                            <f:selectItem itemLabel="Remission" itemValue="remission" />
+                            <f:selectItem itemLabel="Resolved" itemValue="resolved" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Verification Status" for="verificationStatus" />
+                        <p:selectOneMenu id="verificationStatus" value="#{conditionController.selected.verificationStatus}" required="true" title="Verification Status">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Unconfirmed" itemValue="unconfirmed" />
+                            <f:selectItem itemLabel="Provisional" itemValue="provisional" />
+                            <f:selectItem itemLabel="Differential" itemValue="differential" />
+                            <f:selectItem itemLabel="Confirmed" itemValue="confirmed" />
+                            <f:selectItem itemLabel="Refuted" itemValue="refuted" />
+                            <f:selectItem itemLabel="Entered in Error" itemValue="entered-in-error" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Category" for="category" />
+                        <p:selectOneMenu id="category" value="#{conditionController.selected.category}" required="true" title="Category">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Problem List Item" itemValue="problem-list-item" />
+                            <f:selectItem itemLabel="Encounter Diagnosis" itemValue="encounter-diagnosis" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Severity" for="severity" />
+                        <p:selectOneMenu id="severity" value="#{conditionController.selected.severity}" required="true" title="Severity">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Severe" itemValue="24484000" />
+                            <f:selectItem itemLabel="Moderate" itemValue="6736007" />
+                            <f:selectItem itemLabel="Mild" itemValue="255604002" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Code" for="ACode" />
+                        <p:selectOneMenu id="ACode" value="#{conditionController.selected.ACode}" required="true" title="Code">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Anxiety disorder of childhood OR adolescence" itemValue="109006" />
+                            <f:selectItem itemLabel="Choroidal hemorrhage" itemValue="122003" />
+                            <f:selectItem itemLabel="Spontaneous abortion with laceration of cervix" itemValue="127009" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Body Site" for="bodySite" />                        
+                        <p:selectOneMenu id="bodySite" value="#{conditionController.selected.bodySite}" required="true" title="Body Site">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Posterior carpal region" itemValue="106004" />
+                            <f:selectItem itemLabel="Fetal part of placenta" itemValue="107008" />
+                            <f:selectItem itemLabel="Condylar emissary vein" itemValue="108003" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Onset Date" for="onsetDateTime" />
+                        <p:calendar id="onsetDateTime" value="#{conditionController.selected.onsetDateTime}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Onset Date" />
+                        <p:outputLabel value="Onset Age" for="onsetAge" />
+                        <p:inputText id="onsetAge" value="#{conditionController.selected.onsetAge}" title="#{bundle.CreateConditionTitle_onsetAge}" />
+                        <p:outputLabel value="Onset From" for="onsetPeriodFrom" />
+                        <p:calendar id="onsetPeriodFrom" value="#{conditionController.selected.onsetPeriodFrom}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Onset Date" />
+                        <p:outputLabel value="Onset To" for="onsetPeriodTo" />                        
+                        <p:calendar id="onsetPeriodTo" value="#{conditionController.selected.onsetPeriodTo}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Onset Date" />
+                        <p:outputLabel value="Onset Range" for="onsetRange" />
+                        <p:inputText id="onsetRange" value="#{conditionController.selected.onsetRange}" title="#{bundle.CreateConditionTitle_onsetRange}" />
+                        <p:outputLabel value="Onset String" for="onsetString" />
+                        <p:inputText id="onsetString" value="#{conditionController.selected.onsetString}" title="#{bundle.CreateConditionTitle_onsetString}" />
+                        <p:outputLabel value="Abatement Date" for="abatementDateTime" />
+                        <p:calendar id="abatementDateTime" value="#{conditionController.selected.abatementDateTime}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Onset Date" />
+                        <p:outputLabel value="Abatement Age" for="abatementAge" />
+                        <p:inputText id="abatementAge" value="#{conditionController.selected.abatementAge}" title="#{bundle.CreateConditionTitle_abatementAge}" />
+                        <p:outputLabel value="Abatement From" for="abatementPeriodFrom" />
+                        <p:calendar id="abatementPeriodFrom" value="#{conditionController.selected.abatementPeriodFrom}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Onset Date" />
+                        <p:outputLabel value="Abatement To" for="abatementPeriodTo" />
+                        <p:calendar id="abatementPeriodTo" value="#{conditionController.selected.abatementPeriodTo}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Onset Date" />
+                        <p:outputLabel value="Abatement Range" for="abatementRange" />
+                        <p:inputText id="abatementRange" value="#{conditionController.selected.abatementRange}" title="#{bundle.CreateConditionTitle_abatementRange}" />
+                        <p:outputLabel value="Abatement String" for="abatementString" />
+                        <p:inputText id="abatementString" value="#{conditionController.selected.abatementString}" title="#{bundle.CreateConditionTitle_abatementString}" />
+                        <p:outputLabel value="Recorded Date" for="recordedDate" />
+                        <p:calendar id="recordedDate" value="#{conditionController.selected.recordedDate}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Onset Date" />
+                        <p:outputLabel value="Note" for="note" />
+                        <p:inputText id="note" value="#{conditionController.selected.note}" title="#{bundle.CreateConditionTitle_note}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{conditionController.create(encounterController.selected.id)}" value="#{bundle.Save}" update="display,:ConditionListForm:datalistCondition,:growl" oncomplete="handleSubmit(args,'ConditionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ConditionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

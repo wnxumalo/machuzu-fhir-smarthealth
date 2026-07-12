@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DocumentReferenceViewDlg" widgetVar="DocumentReferenceViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.ViewDocumentReferenceTitle}" styleClass="ui-fluid">
+            <h:form id="DocumentReferenceViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{documentReferenceController.selected != null}">
+                        <h:outputText value="Id"/>
+                        <h:outputText value="#{documentReferenceController.selected.id}" title="#{bundle.ViewDocumentReferenceTitle_id}"/>
+                        <h:outputText value="Status"/>
+                        <h:outputText value="#{documentReferenceController.selected.DRStatus}" title="#{bundle.ViewDocumentReferenceTitle_DRStatus}"/>
+                        <h:outputText value="Document Status"/>
+                        <h:outputText value="#{documentReferenceController.selected.docStatus}" title="#{bundle.ViewDocumentReferenceTitle_docStatus}"/>
+                        <h:outputText value="Type"/>
+                        <h:outputText value="#{documentReferenceController.selected.DRType}" title="#{bundle.ViewDocumentReferenceTitle_DRType}"/>
+                        <h:outputText value="Category"/>
+                        <h:outputText value="#{documentReferenceController.selected.category}" title="#{bundle.ViewDocumentReferenceTitle_category}"/>
+                        <h:outputText value="Date"/>
+                        <h:outputText value="#{documentReferenceController.selected.DRDate}" title="#{bundle.ViewDocumentReferenceTitle_DRDate}"/>
+                        <h:outputText value="Description"/>
+                        <h:outputText value="#{documentReferenceController.selected.description}" title="#{bundle.ViewDocumentReferenceTitle_description}"/>
+                        <h:outputText value="Security Label"/>
+                        <h:outputText value="#{documentReferenceController.selected.securityLabel}" title="#{bundle.ViewDocumentReferenceTitle_securityLabel}"/>
+                        <h:outputText value="Content Attachment"/>
+                        <h:outputText value="#{documentReferenceController.selected.contentAttachment}" title="#{bundle.ViewDocumentReferenceTitle_contentAttachment}"/>
+                        <h:outputText value="Content Format"/>
+                        <h:outputText value="#{documentReferenceController.selected.contentFormat}" title="#{bundle.ViewDocumentReferenceTitle_contentFormat}"/>
+                    </p:panelGrid>
+                    <h:outputLink value="#{documentReferenceController.selected.contentAttachment}" target="_blank" style="color: #1AA11A;">VIEW</h:outputLink><br/>
+
+                    <p:commandButton value="#{bundle.Close}" onclick="DocumentReferenceViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

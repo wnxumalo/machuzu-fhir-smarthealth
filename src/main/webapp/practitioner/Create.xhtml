@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PractitionerCreateDlg" widgetVar="PractitionerCreateDialog" modal="true" resizable="false" appendTo="@(dialog)" header="Create Practitioner">
+            <h:form id="PractitionerCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Active" for="active" />
+                        <p:selectOneMenu id="active" value="#{practitionerController.selected.active}" required="true" title="active">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="true" itemValue="true" />
+                            <f:selectItem itemLabel="false" itemValue="false" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Name" for="name" />
+                        <p:inputText id="name" value="#{practitionerController.selected.name}" title="#{bundle.CreatePractitionerTitle_name}" />
+                        <p:outputLabel value="Telecom" for="telecom" />
+                        <p:inputText id="telecom" value="#{practitionerController.selected.telecom}" title="#{bundle.CreatePractitionerTitle_telecom}" />
+                        <p:outputLabel value="Gender" for="gender" />
+                        <p:selectOneMenu id="gender" value="#{practitionerController.selected.gender}" required="true" title="Gender">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Male" itemValue="Male" />
+                            <f:selectItem itemLabel="Female" itemValue="Female" />
+                            <f:selectItem itemLabel="Other" itemValue="Other" />                            
+                            <f:selectItem itemLabel="Unknown" itemValue="Unknown" />                                                        
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Birth Date" for="birthDate" />
+                        <p:calendar id="birthDate" value="#{practitionerController.selected.birthDate}" yearRange="c-100:c+100" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" />
+                        <p:outputLabel value="Communication" for="communication" />
+                        <p:inputText id="communication" value="#{practitionerController.selected.communication}" title="#{bundle.CreatePractitionerTitle_communication}" />
+                        <p:outputLabel value="Address" for="address" />
+                        <p:inputText id="address" value="#{practitionerController.selected.address}" title="#{bundle.CreatePractitionerTitle_address}" />                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{practitionerController.create(iPAController.selected.id)}" value="#{bundle.Save}" update="display,:IPAListForm:apUserHome:datalistPractitioner,:growl" oncomplete="handleSubmit(args,'PractitionerCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PractitionerCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

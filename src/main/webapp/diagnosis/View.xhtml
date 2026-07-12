@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DiagnosisViewDlg" widgetVar="DiagnosisViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="View Diagnosis">
+            <h:form id="DiagnosisViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{diagnosisController.selected != null}">
+                        <h:outputText value="Diagnosis Id"/>
+                        <h:outputText value="#{diagnosisController.selected.diagID}" title="#{bundle.ViewDiagnosisTitle_diagID}"/>
+                        <h:outputText value="Chapter #"/>
+                        <h:outputText value="#{diagnosisController.selected.chapterNo}" title="#{bundle.ViewDiagnosisTitle_chapterNo}"/>
+                        <h:outputText value="Chapter Descsription"/>
+                        <h:outputText value="#{diagnosisController.selected.chapter_Desc}" title="#{bundle.ViewDiagnosisTitle_chapter_Desc}"/>
+                        <h:outputText value="Group Code"/>
+                        <h:outputText value="#{diagnosisController.selected.groupCode}" title="#{bundle.ViewDiagnosisTitle_groupCode}"/>
+                        <h:outputText value="Group Description"/>
+                        <h:outputText value="#{diagnosisController.selected.groupDescription}" title="#{bundle.ViewDiagnosisTitle_groupDescription}"/>
+                        <h:outputText value="ICD3 Code"/>
+                        <h:outputText value="#{diagnosisController.selected.ICD3Code}" title="#{bundle.ViewDiagnosisTitle_ICD3Code}"/>
+                        <h:outputText value="ICD3 Code Description"/>
+                        <h:outputText value="#{diagnosisController.selected.ICD3CodeDesc}" title="#{bundle.ViewDiagnosisTitle_ICD3CodeDesc}"/>
+                        <h:outputText value="ICD10 Code"/>
+                        <h:outputText value="#{diagnosisController.selected.ICD10Code}" title="#{bundle.ViewDiagnosisTitle_ICD10Code}"/>
+                        <h:outputText value="WHO SHORT Description"/>
+                        <h:outputText value="#{diagnosisController.selected.WHOSHORTDescr}" title="#{bundle.ViewDiagnosisTitle_WHOSHORTDescr}"/>
+                        <h:outputText value="WHO FULL Description"/>
+                        <h:outputText value="#{diagnosisController.selected.WHOFULLDesc}" title="#{bundle.ViewDiagnosisTitle_WHOFULLDesc}"/>
+                        <h:outputText value="ICD10 Clinical Use"/>
+                        <h:outputText value="#{diagnosisController.selected.validICD10ClinicalUse}" title="#{bundle.ViewDiagnosisTitle_validICD10ClinicalUse}"/>
+                        <h:outputText value="ICD10 Primary"/>
+                        <h:outputText value="#{diagnosisController.selected.validICD10Primary}" title="#{bundle.ViewDiagnosisTitle_validICD10Primary}"/>
+                        <h:outputText value="Asterisk"/>
+                        <h:outputText value="#{diagnosisController.selected.asterisk}" title="#{bundle.ViewDiagnosisTitle_asterisk}"/>
+                        <h:outputText value="Dagger"/>
+                        <h:outputText value="#{diagnosisController.selected.dagger}" title="#{bundle.ViewDiagnosisTitle_dagger}"/>
+                        <h:outputText value="Sequelae"/>
+                        <h:outputText value="#{diagnosisController.selected.sequelae}" title="#{bundle.ViewDiagnosisTitle_sequelae}"/>
+                        <h:outputText value="Status ADM"/>
+                        <h:outputText value="#{diagnosisController.selected.statusADM}" title="#{bundle.ViewDiagnosisTitle_statusADM}"/>
+                        <h:outputText value="Start Date"/>
+                        <h:outputText value="#{diagnosisController.selected.startDate}" title="#{bundle.ViewDiagnosisTitle_startDate}"/>
+                        <h:outputText value="End Date"/>
+                        <h:outputText value="#{diagnosisController.selected.endDate}" title="#{bundle.ViewDiagnosisTitle_endDate}"/>
+                        <h:outputText value="Comment"/>
+                        <h:outputText value="#{diagnosisController.selected.comment}" title="#{bundle.ViewDiagnosisTitle_comment}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DiagnosisViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

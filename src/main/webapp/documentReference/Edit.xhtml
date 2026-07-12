@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DocumentReferenceEditDlg" widgetVar="DocumentReferenceEditDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.EditDocumentReferenceTitle}" styleClass="ui-fluid">
+            <h:form id="DocumentReferenceEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{documentReferenceController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDocumentReferenceLabel_DRStatus}" for="DRStatus" />
+                        <p:selectOneMenu id="DRStatus" value="#{documentReferenceController.selected.DRStatus}" title="Status">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Current" itemValue="current" />
+                            <f:selectItem itemLabel="Superseded" itemValue="superseded" />
+                            <f:selectItem itemLabel="Entered in Error" itemValue="entered-in-error" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDocumentReferenceLabel_docStatus}" for="docStatus" />
+                        <p:selectOneMenu id="docStatus" value="#{documentReferenceController.selected.docStatus}" title="Status">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Preliminary" itemValue="preliminary" />
+                            <f:selectItem itemLabel="Final" itemValue="final" />
+                            <f:selectItem itemLabel="Amended" itemValue="amended" />
+                            <f:selectItem itemLabel="Entered in Error" itemValue="entered-in-error" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDocumentReferenceLabel_DRType}" for="DRType" />
+                        <p:selectOneMenu id="DRType" value="#{documentReferenceController.selected.DRType}" title="Status">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="Addendum Document" itemValue="55107-7" />
+                            <f:selectItem itemLabel="ADHD action plan" itemValue="74155-3" />
+                            <f:selectItem itemLabel="Administrative note" itemValue="51851-4" />
+                            <f:selectItem itemLabel="Admission evaluation note" itemValue="67851-6" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDocumentReferenceLabel_category}" for="category" />
+                        <p:selectOneMenu id="category" value="#{documentReferenceController.selected.category}" title="Status">
+                            <f:selectItem itemLabel="Select" itemValue="" />
+                            <f:selectItem itemLabel="History of Immunization" itemValue="11369-6" />
+                            <f:selectItem itemLabel="Anesthesia records" itemValue="11485-0" />
+                            <f:selectItem itemLabel="Chemotherapy records" itemValue="11486-6" />
+                            <f:selectItem itemLabel="Consult Note" itemValue="11488-4" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDocumentReferenceLabel_DRDate}" for="DRDate" />
+                        <p:calendar id="DRDate" value="#{documentReferenceController.selected.DRDate}" mode="popup" pattern="yyyy/MM/dd" navigator="true" style="width:100%" title="Date" />
+                        <p:outputLabel value="#{bundle.CreateDocumentReferenceLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{documentReferenceController.selected.description}" title="#{bundle.CreateDocumentReferenceTitle_description}" />
+                        <p:outputLabel value="#{bundle.CreateDocumentReferenceLabel_securityLabel}" for="securityLabel" />
+                        <p:inputText id="securityLabel" value="#{documentReferenceController.selected.securityLabel}" title="#{bundle.CreateDocumentReferenceTitle_securityLabel}" />                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{documentReferenceController.update}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args, 'DocumentReferenceEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DocumentReferenceEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

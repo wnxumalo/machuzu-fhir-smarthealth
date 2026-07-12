@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IPAViewDlg" widgetVar="IPAViewDialog" modal="true" resizable="false" appendTo="@(dialog)" header="#{bundle.ViewIPATitle}" styleClass="ui-fluid">
+            
+            <h:form id="IPAViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{iPAController.selected != null}">
+                        <h:outputText value="UUID"/>
+                        <h:outputText value="#{iPAController.selected.UUID}" title="#{bundle.ViewIPATitle_UUID}"/>
+                        <h:outputText value="Active"/>
+                        <h:outputText value="#{iPAController.selected.active}" title="#{bundle.ViewIPATitle_active}"/>
+                        <h:outputText value="Name"/>
+                        <h:outputText value="#{iPAController.selected.humanName}" title="#{bundle.ViewIPATitle_humanName}"/>
+                        <h:outputText value="Gender"/>
+                        <h:outputText value="#{iPAController.selected.gender}" title="#{bundle.ViewIPATitle_gender}"/>
+                        <h:outputText value="Birth Date"/>
+                        <h:outputText value="#{iPAController.selected.birthDate}" title="#{bundle.ViewIPATitle_birthDate}"/>
+                        <h:outputText value="Telephone"/>
+                        <h:outputText value="#{iPAController.selected.IPATelecoms}" title="#{bundle.ViewIPATitle_IPATelecoms}"/>
+                        <h:outputText value="Address"/>
+                        <h:outputText value="#{iPAController.selected.IPAAddress}" title="#{bundle.ViewIPATitle_IPAAddress}"/>
+                        <h:outputText value="dentifier"/>
+                        <h:outputText value="#{iPAController.selected.identifier}" title="#{bundle.ViewIPATitle_identifier}"/>
+                        <h:outputText value="Deceased"/>
+                        <p:selectBooleanCheckbox value="#{iPAController.selected.deceased}" disabled="true"/>
+                        <h:outputText value="Deceased Date"/>
+                        <h:outputText value="#{iPAController.selected.deceasedDateTime}" title="#{bundle.ViewIPATitle_deceasedDateTime}"/>
+                        <h:outputText value="Address"/>
+                        <h:outputText value="#{iPAController.selected.IPAAddress}" title="#{bundle.ViewIPATitle_address}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="IPAViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
