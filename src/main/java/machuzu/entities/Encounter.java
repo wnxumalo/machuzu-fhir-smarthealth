@@ -4,25 +4,22 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.ScheduleEvent;
 
 @Entity
-@XmlRootElement
+
 public class Encounter implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,17 +37,14 @@ public class Encounter implements Serializable {
     private String eStatus;
     
     @OneToMany(mappedBy="encounter", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<StatusHistory> statusHistory = new ArrayList<>();
 
     private String eClass; //class
     
     @OneToMany(mappedBy="encounter", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<ClassHistory> classHistory = new ArrayList<>();
     
     @OneToMany(mappedBy="encounter", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Allergy> allergies = new ArrayList<>();
     
     @OneToOne
@@ -70,18 +64,15 @@ public class Encounter implements Serializable {
     private String reasonCode;
     
     @OneToMany(mappedBy="encounter", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Illness> condition = new ArrayList<>(); //diagnosis
 
     @OneToMany(mappedBy="encounter", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Procedures> procedure = new ArrayList<>(); 
 
     private String diagnosisUse; //use
     private int diagnosisRank; //rank
 
     @OneToMany(mappedBy="encounter", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Account> account = new ArrayList<>();
 
     private String hospAdmitSource; //admitSource
@@ -92,11 +83,9 @@ public class Encounter implements Serializable {
     private String hospDischargeDisposition; //dischargeDisposition
 
     @OneToMany(mappedBy="encounter", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<MedicationRequest> medicationRequest = new ArrayList<>();
     
     @OneToMany(mappedBy="encounter", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Vitals> vitals = new ArrayList<>();
     
     private String event;
@@ -148,7 +137,6 @@ public class Encounter implements Serializable {
         this.classHistory = classHistory;
     }
 
-    @XmlTransient
     public List<ClassHistory> getClassHistory() {
         return classHistory;
     }
@@ -321,7 +309,6 @@ public class Encounter implements Serializable {
         return hospDischargeDisposition;
     }
     
-    @XmlTransient
     public List<Allergy> getAllergies() {
         return allergies;
     }
@@ -330,7 +317,6 @@ public class Encounter implements Serializable {
         this.allergies = allergies;
     }
     
-    @XmlTransient
     public List<MedicationRequest> getMedicationRequest() {
         return medicationRequest;
     }
@@ -339,7 +325,6 @@ public class Encounter implements Serializable {
         this.medicationRequest = medicationRequest;
     }
     
-    @XmlTransient
     public List<Vitals> getVitals() {
         return vitals;
     }

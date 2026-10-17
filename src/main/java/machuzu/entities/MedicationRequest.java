@@ -4,41 +4,39 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @NamedQueries({  
  @NamedQuery(name="MedicationRequest.fetchRecords", 
- query="SELECT a FROM MedicationRequest a order by id desc")})
-@XmlRootElement
+    query="SELECT a FROM MedicationRequest a order by a.id desc")
+})
 public class MedicationRequest implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MEDICATIONREQUEST_ID")
-    Long id;
+    private Long id;
 
-    @JoinColumn(name="ENCOUNTER_ID", nullable=true)
+    // FIX: Swapped invalid @JoinColumn out for proper standard primitive @Column mappings
+    @Column(name="ENCOUNTER_ID", nullable=true)
     private Long encounter;
     
-    @JoinColumn(name="MEDICATIONADMINISTRATION_ID", nullable=true)
+    @Column(name="MEDICATIONADMINISTRATION_ID", nullable=true)
     private Long medicationadministration;
 
     private String medStatus;
@@ -51,15 +49,15 @@ public class MedicationRequest implements Serializable {
     @OneToOne(fetch=FetchType.EAGER)
     private Medication medication;
 
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Date authoredOn;
     private String performerType;    
     private String reasonCode;        
     private String courseOfTherapyType;
     private String note;    
     
-    @OneToMany(mappedBy="medicationrequest", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)
+    // FIX: Removed unsupported Hibernate LazyCollection annotation for clean standard JPA fetch elements
+    @OneToMany(mappedBy="medicationrequest", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     private List<Medication> medications = new ArrayList<>();
     
     @OneToOne(fetch=FetchType.LAZY)
@@ -184,13 +182,12 @@ public class MedicationRequest implements Serializable {
         this.medications = medications;
     }
     
-    @XmlTransient
     public List<Medication> getMedications() {
         return medications;
     }
     
     public Long getMedicationDosage() {        
-        return this.medications.get(0).getId();        
+        return (this.medications != null && !this.medications.isEmpty()) ? this.medications.get(0).getId() : null;        
     }
 
     public void setDispenseRequest(DispenseRequest dispenseRequest) {
@@ -218,11 +215,11 @@ public class MedicationRequest implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Medication)) {
+        // FIX: Corrected class type matching from Medication to MedicationRequest
+        if (!(object instanceof MedicationRequest)) {
             return false;
         }
-        Medication other = (Medication) object;
+        MedicationRequest other = (MedicationRequest) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -231,7 +228,7 @@ public class MedicationRequest implements Serializable {
 
     @Override
     public String toString() {
-        return "machuzu.entities.Medication[ id=" + id + " ]";
+        // FIX: Corrected class target output reference
+        return "machuzu.entities.MedicationRequest[ id=" + id + " ]";
     }
-
 }

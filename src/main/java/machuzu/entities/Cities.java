@@ -1,27 +1,30 @@
 package machuzu.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
 
 @Entity
 @NamedQueries({  
  @NamedQuery(name="Cities.getCountries", 
- query="SELECT distinct a FROM Cities a"),
-@NamedQuery(name="Cities.getCities", 
- query="SELECT a FROM Cities a WHERE a.country = :country")})
-@XmlRootElement
+    query="SELECT distinct a FROM Cities a"),
+ @NamedQuery(name="Cities.getCities", 
+    query="SELECT a FROM Cities a WHERE a.country = :country")
+})
 public class Cities implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String city;
     private String cityAscii;
@@ -35,8 +38,8 @@ public class Cities implements Serializable {
     private String population;
     private String cityId;
 
-    @OneToMany(mappedBy = "cities")
-    private List<Address> address;
+    @OneToMany(mappedBy = "cities", cascade = CascadeType.ALL)
+    private List<Address> address = new ArrayList<>();
 
     public Cities() {
     }
@@ -136,6 +139,14 @@ public class Cities implements Serializable {
     public void setCityId(String cityId) {
         this.cityId = cityId;
     }
+
+    public List<Address> getAddress() {
+        return address;
+    }
+
+    public void setAddress(List<Address> address) {
+        this.address = address;
+    }
         
     @Override
     public int hashCode() {
@@ -146,7 +157,6 @@ public class Cities implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Cities)) {
             return false;
         }
@@ -161,5 +171,4 @@ public class Cities implements Serializable {
     public String toString() {
         return "machuzu.entities.Cities[ id=" + id + " ]";
     }
-    
 }

@@ -4,38 +4,35 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.faces.context.FacesContext;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.servlet.http.HttpSession;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @NamedQueries({  
  @NamedQuery(name="Medication.fetchRecords", 
- query="SELECT a FROM Medication a order by id desc")})
-@XmlRootElement
+    query="SELECT a FROM Medication a order by a.id desc") // Updated to explicit a.id
+})
 public class Medication implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MEDICATION_ID")
-    Long id;
+    private Long id;
 
-    @JoinColumn(name="MEDICATIONREQUEST_ID", nullable=true)
+    // FIX: Changed from invalid @JoinColumn to standard @Column since it maps a plain Long ID
+    @Column(name="MEDICATIONREQUEST_ID", nullable=true)
     private Long medicationrequest;
 
     private String mCode;
@@ -44,9 +41,11 @@ public class Medication implements Serializable {
     private String mForm;
     private String amount;
     private String batchLotNumber;
+    
+    @Temporal(TemporalType.DATE)
     private Date batchExpirationDate;
     
-    @OneToMany(mappedBy="medication", cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="medication", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     private List<Dosage> dosages = new ArrayList<>();
 
     public Medication() {
@@ -120,7 +119,6 @@ public class Medication implements Serializable {
         this.dosages = dosages;                         
     }
 
-    @XmlTransient
     public List<Dosage> getDosages() {        
         return dosages;
     }
@@ -134,7 +132,6 @@ public class Medication implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Medication)) {
             return false;
         }
@@ -149,5 +146,4 @@ public class Medication implements Serializable {
     public String toString() {
         return "machuzu.entities.Medication[ id=" + id + " ]";
     }
-    
 }

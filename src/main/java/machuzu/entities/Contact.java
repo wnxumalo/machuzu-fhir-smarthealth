@@ -3,21 +3,18 @@ package machuzu.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlRootElement;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 
 @Entity
-@XmlRootElement
+
 public class Contact implements Serializable {
 
     @Id
@@ -31,11 +28,9 @@ public class Contact implements Serializable {
     private List<HumanName> humanNames = new ArrayList<>();   
     
     @OneToMany(mappedBy="contact", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)    
     private List<ContactPoint> contactPoints = new ArrayList<>();   
     
     @OneToMany(mappedBy="contact", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)    
     private List<Address> addresses = new ArrayList<>();   
     
     private String gender;

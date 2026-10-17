@@ -4,22 +4,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 
 @Entity
-@XmlRootElement
 public class Problems implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,11 +48,9 @@ public class Problems implements Serializable {
     private String note;
 
     @OneToMany(mappedBy="problems", cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<ConditionStage> stage = new ArrayList<>();
     
     @OneToMany(mappedBy="problems", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Evidence> evidence = new ArrayList<>();
 
     public Problems() {
@@ -243,7 +236,6 @@ public class Problems implements Serializable {
         this.stage = stage;
     }
 
-    @XmlTransient
     public List<ConditionStage> getStage() {
         return stage;
     }
@@ -252,7 +244,6 @@ public class Problems implements Serializable {
         this.evidence = evidence;
     }
 
-    @XmlTransient
     public List<Evidence> getEvidence() {
         return evidence;
     }

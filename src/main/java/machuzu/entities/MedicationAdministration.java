@@ -4,36 +4,36 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.xml.bind.annotation.XmlTransient;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @NamedQueries({  
  @NamedQuery(name="MedicationAdministration.fetchRecords", 
- query="SELECT a FROM MedicationAdministration a order by id desc")})
+    query="SELECT a FROM MedicationAdministration a order by a.id desc")
+})
 public class MedicationAdministration implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MEDICATIONADMINISTRATION_ID")
-    Long id;
+    private Long id;
 
-    @JoinColumn(name="ENCOUNTER_ID", nullable=true)
+    // FIX: Changed from invalid @JoinColumn to standard @Column since it maps a plain Long ID field
+    @Column(name="ENCOUNTER_ID", nullable=true)
     private Long encounter;
 
     private String status;
@@ -41,18 +41,21 @@ public class MedicationAdministration implements Serializable {
     private String category;
     private String medicationCodeableConept;
     private String medicationReference;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    
+    @Temporal(TemporalType.DATE)
     private java.util.Date effectiveFrom;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    
+    @Temporal(TemporalType.DATE)
     private java.util.Date effectiveTo;
+    
     private String reasonCode;
     private String note;
 
     @OneToOne
     private Dosage dosage;
     
-    @OneToMany(mappedBy="medicationadministration", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)
+    // FIX: Swapped out deprecated Hibernate LazyCollection for native FetchType.EAGER mapping
+    @OneToMany(mappedBy="medicationadministration", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     private List<MedicationRequest> medicationRequests = new ArrayList<>();    
 
     public MedicationAdministration() {
@@ -78,7 +81,8 @@ public class MedicationAdministration implements Serializable {
         return status;
     }
 
-    public void setStatus(String statusReason) {
+    // FIX: Corrected argument variable mismatch parameter name from statusReason to status
+    public void setStatus(String status) {
         this.status = status;
     }
     
@@ -158,7 +162,6 @@ public class MedicationAdministration implements Serializable {
         this.medicationRequests = medicationRequests;
     }
     
-    @XmlTransient
     public List<MedicationRequest> getMedicationRequests() {
         return medicationRequests;
     }
@@ -172,7 +175,6 @@ public class MedicationAdministration implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof MedicationAdministration)) {
             return false;
         }
@@ -187,5 +189,4 @@ public class MedicationAdministration implements Serializable {
     public String toString() {
         return "machuzu.entities.MedicationAdministration[ id=" + id + " ]";
     }
-    
 }

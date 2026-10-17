@@ -1,40 +1,35 @@
 package machuzu.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.xml.bind.annotation.XmlRootElement;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @NamedQueries({  
  @NamedQuery(name="MedicationStatement.fetchRecords", 
- query="SELECT a FROM MedicationStatement a order by id desc")})
-@XmlRootElement
+    query="SELECT a FROM MedicationStatement a order by a.id desc")
+})
 public class MedicationStatement implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MEDICATIONSTATEMENT_ID")
-    Long id;
+    private Long id;
 
-    @JoinColumn(name="ENCOUNTER_ID", nullable=true)
+    // FIX: Changed from invalid @JoinColumn to standard @Column since it maps a plain Long ID field
+    @Column(name="ENCOUNTER_ID", nullable=true)
     private Long encounter;
 
     private String mStatus;
@@ -44,20 +39,20 @@ public class MedicationStatement implements Serializable {
     @OneToOne(fetch=FetchType.EAGER)
     private Medication medication;
 
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Date effectiveDate;    
-    @Temporal(javax.persistence.TemporalType.DATE)
+    
+    @Temporal(TemporalType.DATE)
     private Date effectivePeriodFrom;    
-    @Temporal(javax.persistence.TemporalType.DATE)
+    
+    @Temporal(TemporalType.DATE)
     private Date effectivePeriodTo;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    
+    @Temporal(TemporalType.DATE)
     private Date dateAsserted;    
+    
     private String reasonCode;        
     private String note;    
-
-   /* @OneToMany(mappedBy="medicationstatement", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)    
-    private List<Dosage> dosages = new ArrayList<>();*/
 
     public MedicationStatement() {
     }
@@ -158,14 +153,6 @@ public class MedicationStatement implements Serializable {
         return note;
     }
 
-/*    public void setDosages(List<Dosage> dosages) {
-        this.dosages = dosages;                         
-    }
-
-    public List<Dosage> getDosages() {        
-        return dosages;
-    }    */
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -175,7 +162,6 @@ public class MedicationStatement implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof MedicationStatement)) {
             return false;
         }
@@ -190,5 +176,4 @@ public class MedicationStatement implements Serializable {
     public String toString() {
         return "machuzu.entities.MedicationStatement[ id=" + id + " ]";
     }
-    
 }

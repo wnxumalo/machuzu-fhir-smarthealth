@@ -9,24 +9,20 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
-@XmlRootElement
+
 public class IPAReceptionEncounterInitialise implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,11 +38,9 @@ public class IPAReceptionEncounterInitialise implements Serializable {
     private boolean active;
     
     @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)    
     private List<HumanName> humanNames = new ArrayList<>();   
     
     @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)    
     private List<Contact> contact = new ArrayList<>();   
 
     private String gender;
@@ -55,15 +49,12 @@ public class IPAReceptionEncounterInitialise implements Serializable {
     private String deceasedDateTime;
 
     @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)    
     private List<ContactPoint> ipaTelecoms = new ArrayList<>();   
     
     @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)    
     private List<Address> ipaAddress = new ArrayList<>();
 
-    @OneToOne(mappedBy="ipa",fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)    
+    //@OneToOne(mappedBy="ipa", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
     private Organisation organisation;
 
     private String maritalStatus;
@@ -71,15 +62,12 @@ public class IPAReceptionEncounterInitialise implements Serializable {
     private int multipleBirthQty;
 
     @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Practitioner> practitioner = new ArrayList<>();   
     
     @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Encounter> encounters = new ArrayList<>();       
     
     @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Vitals> vitals = new ArrayList<>();       
         
     private String email;
@@ -164,7 +152,6 @@ public class IPAReceptionEncounterInitialise implements Serializable {
         this.contact = contact;
     }
     
-    @XmlTransient
     public List<Contact> getContact() {
         return contact;
     }
@@ -233,7 +220,6 @@ public class IPAReceptionEncounterInitialise implements Serializable {
         return organisation;
     }
     
-    @XmlTransient
     public List<Practitioner> getPractitioner() {
         return practitioner;
     }
@@ -272,7 +258,7 @@ public class IPAReceptionEncounterInitialise implements Serializable {
             return false;
         }
         IPA other = (IPA) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.id == null && other.getId() != null) || (this.id != null && !this.id.equals(other.getId()))) {
             return false;
         }
         return true;

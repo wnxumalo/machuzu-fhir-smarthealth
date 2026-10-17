@@ -1,17 +1,17 @@
 package machuzu.entities;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+
 
 @Entity
-@XmlRootElement
+
 public class IPACommunication implements Serializable {
 
     @Id
@@ -73,7 +73,7 @@ public class IPACommunication implements Serializable {
             return false;
         }
         IPA other = (IPA) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.id == null && other.getId() != null) || (this.id != null && !this.id.equals(other.getId()))) {
             return false;
         }
         return true;

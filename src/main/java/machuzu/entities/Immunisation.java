@@ -2,17 +2,17 @@ package machuzu.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Temporal;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Temporal;
+
 
 @Entity
-@XmlRootElement
+
 public class Immunisation implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,15 +27,15 @@ public class Immunisation implements Serializable {
     private String iStatus;
     private String statusReason;
     private String vaccineCode;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(jakarta.persistence.TemporalType.DATE)
     private Date occurenceDate;
     private String occurenceString;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(jakarta.persistence.TemporalType.DATE)
     private Date recorded;
     private boolean primarySource;
     private String reportOrigin;
     private String lotNumber;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(jakarta.persistence.TemporalType.DATE)
     private Date expirationDate;
     private String site;
     private String route;
@@ -46,7 +46,7 @@ public class Immunisation implements Serializable {
     private String subpotentReason;
     private String programEligibility;
     private String fundingSource;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(jakarta.persistence.TemporalType.DATE)
     private Date reactionDate;
     private String reactionDetail;
     private boolean reactionReported;

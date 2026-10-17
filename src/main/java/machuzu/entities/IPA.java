@@ -1,87 +1,82 @@
 package machuzu.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import java.util.Set;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @NamedQueries({  
  @NamedQuery(name="IPA.loginUser", 
- query="SELECT a FROM IPA a WHERE a.email = :email and a.password = :password"),
+    query="SELECT a FROM IPA a WHERE a.email = :email and a.password = :password"),
  @NamedQuery(name="IPA.searchPatient", 
     query="SELECT i FROM IPA i WHERE i.email = :email")
 })
-@XmlRootElement
 public class IPA implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Matches modern WildFly/MySQL strategies
     @Column(name = "IPA_ID")
-    Long id;
+    private Long id;
 
     private String uuid;
     
-    @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL,fetch=FetchType.EAGER)    
-    private List<Identifier> identifiers = new ArrayList<>();   
+    // Using Set instead of List avoids MultipleBagFetchExceptions when using EAGER fetching
+    @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL, fetch=FetchType.EAGER)    
+    private Set<Identifier> identifiers = new HashSet<>();   
+    
     private boolean active;
     
-    @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)    
-    private List<HumanName> humanNames = new ArrayList<>();   
+    @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    private Set<HumanName> humanNames = new HashSet<>();   
     
-    @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)    
-    private List<Contact> contact = new ArrayList<>();   
+    @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    private Set<Contact> contact = new HashSet<>();   
 
     private String gender;
+    
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
+    
     private boolean deceased;
     private String deceasedDateTime;
 
-    @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)    
-    private List<ContactPoint> ipaTelecoms = new ArrayList<>();   
+    @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    private Set<ContactPoint> ipaTelecoms = new HashSet<>();   
     
-    @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)    
-    private List<Address> ipaAddress = new ArrayList<>();
+    @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    private Set<Address> ipaAddress = new HashSet<>();
 
-    @OneToOne(mappedBy="ipa",fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)    
+    @OneToOne(mappedBy="ipa", fetch=FetchType.EAGER)
     private Organisation organisation;
 
     private String maritalStatus;
     private boolean multipleBirth;
     private int multipleBirthQty;
 
-    @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Practitioner> practitioner = new ArrayList<>();   
+    @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    private Set<Practitioner> practitioner = new HashSet<>();   
     
-    @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Encounter> encounters = new ArrayList<>();       
+    @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    private Set<Encounter> encounters = new HashSet<>();       
     
-    @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Vitals> vitals = new ArrayList<>();       
+    @OneToMany(mappedBy="ipa", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    private Set<Vitals> vitals = new HashSet<>();       
         
     private String email;
     private String password;
@@ -113,11 +108,11 @@ public class IPA implements Serializable {
         this.active = active;
     }
 
-    public List<HumanName> getHumanName() {
+    public Set<HumanName> getHumanName() {
         return humanNames;
     }
 
-    public void setHumanName(List<HumanName> humanNames) {
+    public void setHumanName(Set<HumanName> humanNames) {
         this.humanNames = humanNames;
     }
     
@@ -137,36 +132,35 @@ public class IPA implements Serializable {
         this.birthDate = birthDate;
     }
     
-    public List<ContactPoint> getIPATelecoms() {
+    public Set<ContactPoint> getIPATelecoms() {
         return ipaTelecoms;
     }
 
-    public void setIPATelecoms(List<ContactPoint> ipaTelecoms) {
+    public void setIPATelecoms(Set<ContactPoint> ipaTelecoms) {
         this.ipaTelecoms = ipaTelecoms;
     }
     
-    public List<Address> getIPAAddress() {
+    public Set<Address> getIPAAddress() {
         return ipaAddress;
     }
 
-    public void setIPAAddress(List<Address> ipaAddress) {
+    public void setIPAAddress(Set<Address> ipaAddress) {
         this.ipaAddress = ipaAddress;
     }
     
-    public void setIdentifier(List<Identifier> identifiers) {
+    public void setIdentifier(Set<Identifier> identifiers) {
         this.identifiers = identifiers;
     }
     
-    public List<Identifier> getIdentifier() {
+    public Set<Identifier> getIdentifier() {
         return identifiers;
     }
 
-    public void setContact(List<Contact> contact) {
+    public void setContact(Set<Contact> contact) {
         this.contact = contact;
     }
     
-    @XmlTransient
-    public List<Contact> getContact() {
+    public Set<Contact> getContact() {
         return contact;
     }
 
@@ -234,28 +228,27 @@ public class IPA implements Serializable {
         return organisation;
     }
     
-    @XmlTransient
-    public List<Practitioner> getPractitioner() {
+    public Set<Practitioner> getPractitioner() {
         return practitioner;
     }
 
-    public void setPractitioner(List<Practitioner> practitioner) {
+    public void setPractitioner(Set<Practitioner> practitioner) {
         this.practitioner = practitioner;
     }
     
-    public List<Encounter> getEncounters() {
+    public Set<Encounter> getEncounters() {
         return encounters;
     }
 
-    public void setEncounters(List<Encounter> encounters) {
+    public void setEncounters(Set<Encounter> encounters) {
         this.encounters = encounters;
     }
     
-    public List<Vitals> getVitals() {
+    public Set<Vitals> getVitals() {
         return vitals;
     }
 
-    public void setVitals(List<Vitals> vitals) {
+    public void setVitals(Set<Vitals> vitals) {
         this.vitals = vitals;
     }
 
@@ -268,7 +261,6 @@ public class IPA implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof IPA)) {
             return false;
         }
@@ -283,5 +275,4 @@ public class IPA implements Serializable {
     public String toString() {
         return "machuzu.entities.IPA[ id=" + id + " ]";
     }
-    
 }

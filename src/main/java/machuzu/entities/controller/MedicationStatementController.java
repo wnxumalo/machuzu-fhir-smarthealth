@@ -10,18 +10,18 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.EJB;
-import javax.ejb.EJBException;
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.convert.Converter;
-import javax.faces.convert.FacesConverter;
+import jakarta.ejb.EJB;
+import jakarta.ejb.EJBException;
+
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.convert.Converter;
+import jakarta.faces.convert.FacesConverter;
+import jakarta.inject.Named;
 import machuzu.entities.Dosage;
 import machuzu.entities.jpa.MedicationStatementFacade;
-import org.hibernate.Hibernate;
 import org.primefaces.PrimeFaces;
 
 @Named("medicationStatementController")
@@ -65,7 +65,7 @@ public class MedicationStatementController implements Serializable {
         //selected.setDosages(dosage);
         //selected.setDosages(selected.getDosages());
                         
-        Hibernate.initialize(selected);
+     //   Hibernate.initialize(selected);
 
     }
 

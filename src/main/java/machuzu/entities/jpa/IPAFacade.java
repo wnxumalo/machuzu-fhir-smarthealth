@@ -7,11 +7,11 @@ package machuzu.entities.jpa;
 
 import java.util.HashMap;
 import java.util.Map;
-import javax.ejb.Stateless;
-import javax.persistence.EntityGraph;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Subgraph;
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityGraph;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Subgraph;
 import machuzu.entities.IPA;
 import machuzu.entities.Organisation;
 
@@ -58,7 +58,7 @@ public class IPAFacade extends AbstractFacade<IPA> {
         Subgraph itemGraph = graph.addSubgraph("ipa");
 
         Map hints = new HashMap();
-        hints.put("javax.persistence.loadgraph", graph);
+        hints.put("jakarta.persistence.loadgraph", graph);
 
         Organisation org = this.em.find(Organisation.class, ipaa, hints);
 

@@ -1,6 +1,6 @@
 package machuzu.entities.controller.util;
 
-import javax.faces.model.DataModel;
+import jakarta.faces.model.DataModel;
 
 public abstract class PaginationHelper {
 

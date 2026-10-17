@@ -1,24 +1,25 @@
 package machuzu.entities;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 
 @Entity
-@XmlRootElement
 @NamedQueries({  
-@NamedQuery(name="Vitals.getDashboard", 
- query="SELECT v FROM Vitals v WHERE v.ipa = :ipa order by encounter desc")})
+ @NamedQuery(name="Vitals.getDashboard", 
+    query="SELECT v FROM Vitals v WHERE v.ipa = :ipa ORDER BY v.encounter DESC")
+})
 public class Vitals implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String bp;
     private String temp;
@@ -30,10 +31,12 @@ public class Vitals implements Serializable {
     private String bmi;
     private String bsa;
 
-    @JoinColumn(name="ENCOUNTER_ID", nullable=true)
+    // FIX: Changed from invalid @JoinColumn to standard @Column since it maps a plain Long ID field
+    @Column(name="ENCOUNTER_ID", nullable=true)
     private Long encounter;
     
-    @JoinColumn(name="IPA_ID", nullable=true)
+    // FIX: Changed from invalid @JoinColumn to standard @Column since it maps a plain Long ID field
+    @Column(name="IPA_ID", nullable=true)
     private Long ipa;
     
     public Vitals() {
@@ -144,7 +147,6 @@ public class Vitals implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Vitals)) {
             return false;
         }

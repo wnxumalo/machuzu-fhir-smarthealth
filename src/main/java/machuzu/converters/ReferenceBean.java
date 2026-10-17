@@ -2,19 +2,19 @@ package machuzu.converters;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.SessionScoped;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import machuzu.entities.ObjectReference;
 import machuzu.entities.jpa.ReferenceFacade;
 
 @SessionScoped
-@Named
+
 public class ReferenceBean implements Serializable {
 
     @EJB

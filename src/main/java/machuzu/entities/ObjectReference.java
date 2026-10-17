@@ -2,17 +2,17 @@ package machuzu.entities;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+
+
 
 @Entity
-@XmlRootElement
+
 public class ObjectReference implements Serializable {
 
     @Id
@@ -72,7 +72,6 @@ public class ObjectReference implements Serializable {
         this.display = display;
     }
     
-    @XmlTransient
     public List<Identifier> getIdentifier() {
         return identifier;
     }

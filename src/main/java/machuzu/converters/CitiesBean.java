@@ -2,14 +2,14 @@ package machuzu.converters;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.SessionScoped;
+
 import machuzu.entities.Cities;
 import machuzu.entities.jpa.CitiesFacade;
 
 @SessionScoped
-@Named
+
 public class CitiesBean implements Serializable {
 
     @EJB

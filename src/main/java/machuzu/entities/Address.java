@@ -2,15 +2,15 @@ package machuzu.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+//
 
 @Entity
-@XmlRootElement
+
 public class Address implements Serializable {
 
     @Id
@@ -175,7 +175,7 @@ public class Address implements Serializable {
             return false;
         }
         IPA other = (IPA) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.id == null && other.getId() != null) || (this.id != null && !this.id.equals(other.getId()))) {
             return false;
         }
         return true;

@@ -4,18 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.xml.bind.annotation.XmlTransient;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Temporal;
 
 @Entity
 
@@ -44,15 +41,14 @@ public class Diagnosis implements Serializable {
     private String Age_Range;
     private String Gender;
     private String Status_ADM;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(jakarta.persistence.TemporalType.DATE)
     private Date Start_Date;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(jakarta.persistence.TemporalType.DATE)
     private Date End_Date;
     private String Comment;
 
     
     @OneToMany(mappedBy="diagnosis", cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Observation> observation = new ArrayList<>();
     
     public Diagnosis() {
@@ -230,7 +226,6 @@ public class Diagnosis implements Serializable {
         this.observation = observation;
     }
 
-    @XmlTransient
     public List<Observation> getObservation() {
         return observation;
     }

@@ -2,14 +2,15 @@ package machuzu.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Temporal;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @NamedQueries({  
@@ -19,22 +20,27 @@ import javax.persistence.Temporal;
 public class Administration implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Better for MySQL/WildFly native integration
     @Column(name = "ADMINISTRATION_ID")
-    Long id;
+    private Long id;
 
     private String employeeNo;
     private String idNumber;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    
+    @Temporal(TemporalType.DATE)
     private Date employmentDate;    
     private String name;
     private String surname;    
     private String gender;    
-    @Temporal(javax.persistence.TemporalType.DATE)
+    
+    @Temporal(TemporalType.DATE)
     private Date startDay;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    
+    @Temporal(TemporalType.DATE)
     private Date lastDay;
+    
     private String designation;
     private String contact;
     private String department;
@@ -202,7 +208,6 @@ public class Administration implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Administration)) {
             return false;
         }
@@ -217,5 +222,4 @@ public class Administration implements Serializable {
     public String toString() {
         return "machuzu.entities.Administration[ id=" + id + " ]";
     }
-    
 }

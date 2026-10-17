@@ -2,43 +2,36 @@ package machuzu.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 @NamedQueries({  
  @NamedQuery(name="Dosage.fetchRecords", 
- query="SELECT a FROM Dosage a order by id desc")})
-@XmlRootElement
+    query="SELECT a FROM Dosage a order by a.id desc") // Updated to explicit 'a.id'
+})
 public class Dosage implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DOSAGE_ID")
-    Long id;
+    private Long id;
 
-    @JoinColumn(name="MEDICATION_ID", nullable=true)
+    // FIX: Replaced invalid @JoinColumn with standard @Column since it maps a plain Long ID
+    @Column(name="MEDICATION_ID", nullable=true)
     private Long medication;
-
-    //@JoinColumn(name="MEDICATIONSTATEMENT_ID", nullable=true)
-    //private Long medicationstatement;
 
     private String dSequence;
     private String text;
@@ -54,18 +47,18 @@ public class Dosage implements Serializable {
     private String route;
     private String method;
 
-    @OneToMany(mappedBy="dosage", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)
+    // FIX: Native EAGER fetching avoids the deprecated Hibernate LazyCollection annotation
+    @OneToMany(mappedBy="dosage", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     private List<DoseAndRate> doseAndRates = new ArrayList<>();
 
     private int maxDosePerPeriodNumerator;
     private int maxDosePerPeriodDenominator;
     private int maxDosePerLifetime;
     
-    @JoinColumn(name="MEDICATIONADMINISTRATION_ID", nullable=true)
+    // FIX: Replaced invalid @JoinColumn with standard @Column since it maps a plain Long ID
+    @Column(name="MEDICATIONADMINISTRATION_ID", nullable=true)
     private Long medicationAdministration;
 
-    
     public Dosage() {
     }
 
@@ -84,14 +77,6 @@ public class Dosage implements Serializable {
     public void setMedication(Long medication) {
         this.medication = medication;
     }
-    
-/*    public Long getMedicationStatement() {
-        return medicationstatement;
-    }
-
-    public void setMedicationStatement(Long medicationstatement) {
-        this.medicationstatement = medicationstatement;
-    }*/
 
     public String getSequence() {
         return dSequence;
@@ -169,7 +154,6 @@ public class Dosage implements Serializable {
         this.doseAndRates = doseAndRates;
     }
 
-    @XmlTransient
     public List<DoseAndRate> getDoseAndRates() {
         return doseAndRates;
     }
@@ -215,7 +199,6 @@ public class Dosage implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Dosage)) {
             return false;
         }
@@ -230,5 +213,4 @@ public class Dosage implements Serializable {
     public String toString() {
         return "machuzu.entities.Dosage[ id=" + id + " ]";
     }
-    
 }

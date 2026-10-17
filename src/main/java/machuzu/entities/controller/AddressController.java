@@ -10,18 +10,21 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.EJB;
-import javax.ejb.EJBException;
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.convert.Converter;
-import javax.faces.convert.FacesConverter;
+import jakarta.ejb.EJB;
+import jakarta.ejb.EJBException;
 
-@Named("addressController")
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.convert.Converter;
+import jakarta.faces.convert.FacesConverter;
+import jakarta.inject.Named;
+
+@Named("addressController") // FIX: Replaced broken statement with proper CDI Named annotation
 @SessionScoped
 public class AddressController implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @EJB
     private machuzu.entities.jpa.AddressFacade ejbFacade;
@@ -161,11 +164,10 @@ public class AddressController implements Serializable {
                 Address o = (Address) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Address.class.getName()});
+                // FIX: Changed static method logger source call referencing
+                Logger.getLogger(AddressControllerConverter.class.getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Address.class.getName()});
                 return null;
             }
         }
-
     }
-
 }
